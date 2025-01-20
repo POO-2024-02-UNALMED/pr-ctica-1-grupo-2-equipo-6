@@ -68,7 +68,6 @@ public abstract class Persona {
 	
 	//---> Metodo ToString <---
 	public String toString() {
-		return "Nombre: " + getNombre() + "\nEdad: "+ getEdad()+ "\nCÃ©dula: " + getCedula() +"\nTelefono: " 
-				+ getTelefono() + "\nDirecciÃ³n "+ getDireccion() + "\n";
+		return "Nombre: " + getNombre() + "\nEdad: "+ getEdad()+ "\nCedula: " + getCedula() +"\nTelefono: " + getTelefono() + "\nDirección "+ getDireccion() + "\n";
 	}	
 }

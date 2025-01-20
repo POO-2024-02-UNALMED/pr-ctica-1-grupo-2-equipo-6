@@ -44,8 +44,7 @@ public class Main {
             		System.out.println("Opción no válidad. Por favor, intente de nuevo.\n");
             }
             
-            sc.close();
 		}
-		
+		sc.close();
 	}
 }

@@ -22,6 +22,7 @@ public class Mascota {
 	private int edad;
 	private String sexo;
 	private EstadoSalud estadoSalud;
+	private Empleado veterinario;
 
 	//CONSTRUCTOR
 	
@@ -80,6 +81,14 @@ public class Mascota {
 	
 	public EstadoSalud getEstadoSalud() {
 		return estadoSalud;
+	}
+	
+	public void setVeterinario(Empleado veterinario) {
+		this.veterinario = veterinario;
+	}
+	
+	public Empleado getVeterinario() {
+		return veterinario;
 	}
 	
 	

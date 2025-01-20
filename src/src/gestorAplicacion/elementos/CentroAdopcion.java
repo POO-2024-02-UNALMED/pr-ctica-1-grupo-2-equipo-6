@@ -1,6 +1,9 @@
 package gestorAplicacion.elementos;
 
 import java.util.List;
+
+import gestorAplicacion.elementos.Mascota.EstadoSalud;
+
 import java.util.ArrayList;
 
 public class CentroAdopcion {
@@ -104,6 +107,56 @@ public class CentroAdopcion {
 	
 	public void agregarHospitalizado(Mascota mascota) {
 		animalesHospitalizados.add(mascota);
+	}
+	
+	public void mostrarOpcionesPago() {
+        System.out.println("Opciones de pago disponibles: ");
+        System.out.println("1. Tarjeta de crédito/débito");
+        System.out.println("2. Efectivo");
+        System.out.println("3. Puntos acumulados.");
+    }
+	
+	public boolean procesarPago(int metodo, Cliente cliente, int monto) {
+        switch (metodo) {
+            case 1:
+                System.out.println("Pago procesado con tarjeta por un monto de: $" + monto);
+                return true;
+            case 2:
+                System.out.println("Pago procesado en efectivo por un monto de: $" + monto);
+                return true;
+            case 3:
+                if (cliente != null && monto <= cliente.getPuntos()) {
+                	cliente.disminuirPuntos(monto);
+                    System.out.println("Pago procesado con puntos acumulados.");
+                    return true;
+                } else {
+                    System.out.println("No tiene suficientes puntos.");
+                    return false;
+                }
+            default:
+                System.out.println("Método de pago no válido.");
+                return false;
+        }
+    }
+	
+	public void generarFactura(Cliente cliente, Mascota mascota, int monto) {
+        System.out.println("\n--- Factura ---");
+        System.out.println("Cliente: " + (cliente != null ? cliente : "No registrado"));
+        System.out.println("Animal: " + mascota);
+        System.out.println("Monto total: $" + monto);
+        System.out.println("-----------------\n");
+    }
+	
+	public void asignarVeterinario(Mascota mascota, Empleado veterinario) {
+		mascota.setVeterinario(veterinario);
+		veterinario.setMascota(mascota);
+	}
+	
+	public void registrarAlta(Mascota mascota) {
+		mascota.setEstadoSalud(EstadoSalud.SANO);
+		animalesHospitalizados.remove(mascota);
+		mascota.getVeterinario().setMascota(null);
+		mascota.setVeterinario(null);
 	}
 	
 }

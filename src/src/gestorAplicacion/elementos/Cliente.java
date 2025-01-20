@@ -45,11 +45,11 @@ public class Cliente extends Persona {
 		
 	}
 	
-	public void agregar_puntos(int puntos) {
+	public void agregarPuntos(int puntos) {
 		this.puntos+=puntos;
 	}
 	
-	public void disminuir_puntos(int puntos) {
+	public void disminuirPuntos(int puntos) {
 		this.puntos-=puntos;
 	}
 	
@@ -58,11 +58,11 @@ public class Cliente extends Persona {
 	}
 	
 	
-	public void setMascota(Animal mascota){
+	public void setMascota(Mascota mascota){
 		this.mascota=mascota;
 	}
 	
-	public Animal getMascota() { 
+	public Mascota getMascota() { 
 		return mascota;
 	}
 	

@@ -16,6 +16,7 @@ public class Empleado extends Persona {
     }
 	
 	//---> Atributos <---
+    private Mascota mascota;
     private Especialidad profesion; 
     ArrayList<ArrayList<Cupo>> agenda_dias = new ArrayList<>();
     
@@ -217,6 +218,14 @@ public class Empleado extends Persona {
         public ArrayList<ArrayList<Cupo>> getCupo(){
     		return agenda_dias;
     	}
+        
+        public void setMascota(Mascota mascota) {
+        	this.mascota = mascota;
+        }
+        
+        public Mascota getMascota() {
+        	return mascota;
+        }
 
         
     //---> Metodo ToString <---    

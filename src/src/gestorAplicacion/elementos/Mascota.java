@@ -94,4 +94,12 @@ public class Mascota {
 			
 		}
 	}
+	
+	public boolean esCompatible(Mascota mascota) {
+		if (this.tipo != mascota.tipo && this.estadoSalud != mascota.estadoSalud) {
+			return false;
+		}
+		return true;
+	}
+	
 }

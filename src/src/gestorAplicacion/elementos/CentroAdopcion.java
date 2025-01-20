@@ -16,7 +16,7 @@ public class CentroAdopcion {
 	private List<Mascota> animalesHospitalizados;
 	private List<Empleado> veterinarios;
 	private List<Cliente> clientes;
-	private Sedes sede;
+	private String sede;
 	
 	public CentroAdopcion(String nombre) {
 		this.nombre = nombre;
@@ -59,11 +59,11 @@ public class CentroAdopcion {
 		return clientes;
 	}
 	
-	public void setSede(Sedes sede) {
+	public void setSede(String sede) {
 		this.sede = sede;
 	}
 	
-	public Sedes getSede() {
+	public String getSede() {
 		return sede;
 	}
 	
@@ -79,13 +79,13 @@ public class CentroAdopcion {
 	}
 	
 	public void mostrarSedes() {
-		for (Sedes sede : Sedes.values()) {
-			System.out.println(sede);
+		for (int i = 0 ; i < Sedes.values().length ; i++) {
+			System.out.println(i+1 + "" + Sedes.values()[i]);
 		}
 	}
 	
 	public boolean verificarHospitalizacion(Mascota mascota) {
-		if (animalesHospitalizados.size() >= 10) {
+		if (!hayCapacidad()) {
 			return false;
 		}
 		for (Mascota hospitalizado : animalesHospitalizados) {
@@ -157,6 +157,13 @@ public class CentroAdopcion {
 		animalesHospitalizados.remove(mascota);
 		mascota.getVeterinario().setMascota(null);
 		mascota.setVeterinario(null);
+	}
+	
+	public boolean hayCapacidad() {
+		if (animalesHospitalizados.size() >= 10) {
+			return false;
+		}
+		return true;
 	}
 	
 }

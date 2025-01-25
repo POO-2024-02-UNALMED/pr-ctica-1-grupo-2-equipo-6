@@ -115,11 +115,13 @@ public class CentroAdopcion {
 		animalesHospitalizados.add(mascota);
 	}
 	
-	public void mostrarOpcionesPago() {
-        System.out.println("Opciones de pago disponibles: ");
+	public String[] mostrarOpcionesPago() {
+        /*System.out.println("Opciones de pago disponibles: ");
         System.out.println("1. Tarjeta de crédito/débito");
         System.out.println("2. Efectivo");
-        System.out.println("3. Puntos acumulados.");
+        System.out.println("3. Puntos acumulados.");*/
+		String[] opciones = {"Tarjeta de crédito", "Efectivo", "Puntos acumulados"};
+		return opciones;
     }
 	
 	public boolean procesarPago(int metodo, Cliente cliente, int monto) {

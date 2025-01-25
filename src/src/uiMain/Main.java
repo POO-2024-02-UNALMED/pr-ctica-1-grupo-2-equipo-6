@@ -177,6 +177,33 @@ public class Main {
 				String nombreSede2  = centro.getSede(); 
 				nombreSede2 = nombreSede2.substring(0,1).toUpperCase() + nombreSede2.substring(1).toLowerCase();
 				System.out.println("Su mascota ha sido hospitalizada en la sede: " + nombreSede2);
+				
+				System.out.println("Gestionando pago. Seleccione el método de pago:");
+				for(int i = 0; i < centro.mostrarOpcionesPago().length; i++){
+					System.out.println(i+1 + ". " + centro.mostrarOpcionesPago()[i]);
+				}
+				
+				int pago = sc.nextInt();
+				sc.nextLine();
+				
+				while(opcion < 1 || opcion > centro.mostrarOpcionesPago().length) {
+					System.out.println("Entrada inválida. Por favor, ingrese un número entre 1 y " + centro.mostrarOpcionesPago().length + ":");
+					opcion = sc.nextInt();
+					sc.nextLine();
+				}
+				
+				switch (pago) {
+					case 1:
+						break;
+					case 2:
+						break;
+					case 3:
+						//cliente.descontarPuntos();
+						break;
+					default:
+						break;
+				}
+				
 			}
 			else {
 				System.out.println("No hay veterinarios dispobibles en esta sede.");
@@ -190,6 +217,7 @@ public class Main {
 			//planificacionDieta();
 		}
 		
+		sc.close();
 	}
 		
 }

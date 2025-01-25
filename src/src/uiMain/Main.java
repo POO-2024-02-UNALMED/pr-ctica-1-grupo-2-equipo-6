@@ -69,9 +69,12 @@ public class Main {
 	
 	public static void emergenciaVeterinaria() {
 		
+		//Veterinarios en en centro de adopción. Agregar más
 		centro.agregarVeterinario(new Empleado("Alberto", 27, 125734625, 321215589, null, Especialidad.VETERINARIO));
 		centro.agregarVeterinario(new Empleado("Ricardo", 38, 125846225, 321765589, null, Especialidad.VETERINARIO));
+		//---------------------------------------------------
 		
+		//Pedir datos de la mascota al usuario
 		System.out.println("Ingrese los datos de su mascota:");
 		System.out.println("Nombre:");
 		String nombre = sc.nextLine();
@@ -89,9 +92,13 @@ public class Main {
 		System.out.println("Síntomas:");
 		String sintomas = sc.nextLine();
 		String[] listaSintomas = sintomas.split(" ");
+		//---------------------------------------------------
 		
+		//Crear instancia de Mascota con los datos que ingresó el usuario
 		Mascota mascota = new Mascota(nombre, tipo, edad, sexo, EstadoSalud.ENFERMO);
+		//---------------------------------------------------
 		
+		//Pedirle al usuario que elija la sede y asignarla a la instancia de centro de adopción
 		System.out.println("¿En dónde desea que su mascota sea atendida? Ingrese el número:");
 		centro.mostrarSedes();
 		int sede = sc.nextInt();
@@ -106,19 +113,15 @@ public class Main {
 		String nombreSede  = Sedes.values()[sede-1].toString(); 
 		nombreSede = nombreSede.substring(0,1).toUpperCase() + nombreSede.substring(1).toLowerCase();
 		System.out.println("La sede seleccionada es: " + nombreSede);
+		//---------------------------------------------------
 		
+		//Verificar si la mascota debe ser hospitalizada
 		if (centro.verificarHospitalizacion(mascota)) {
-			//int opcion;
 			
-			//System.out.println("Su mascota puede ser hospitalizada.");
-			//System.out.println("Elija uno de los siguientes veterinarios disponibles:");
-			
-			/*for (Empleado veterinario : centro.gestionarVeterinario()) {
-				System.out.println(veterinario);
-			}*/
 			int gravedad = 0;
 			int compatibilidad = 0;
 			
+			//Asignar valores de gravedad y compatibilidad a los síntomas
 			for (String sintoma : listaSintomas) {
 	            switch (sintoma.toLowerCase()) {
 	                case "fiebre":
@@ -151,7 +154,9 @@ public class Main {
 	                    break;
 	            }
 	        }
+			//---------------------------------------------------
 			
+			//Verificar que el Índice de Emergencia de la mascota sea mayor a 7.0 para confirmar hospitalización
 			if (!centro.gestionarVeterinario().isEmpty() && mascota.indiceEmergencia(gravedad, compatibilidad) >= 7.0) {
 				
 				System.out.println("Su mascota puede ser hospitalizada.");
@@ -164,15 +169,17 @@ public class Main {
 				int opcion = sc.nextInt();
 				sc.nextLine();
 				
+				//Verificar que el usuario ingrese un número en el rango correcto
 				while(opcion < 1 || opcion > centro.gestionarVeterinario().size()) {
 					System.out.println("Entrada inválida. Por favor, ingrese un número entre 1 y " + centro.gestionarVeterinario().size() + ":");
 					opcion = sc.nextInt();
 					sc.nextLine();
 				}
+				//---------------------------------------------------
 				
 				System.out.println("Su veterinario asignado es\n" + centro.gestionarVeterinario().get(opcion-1));
-				mascota.setVeterinario(centro.gestionarVeterinario().get(opcion-1));
-				centro.gestionarVeterinario().get(opcion-1).setMascota(mascota);
+				mascota.setVeterinario(centro.gestionarVeterinario().get(opcion-1));	//Asignar veterinario a la mascota
+				centro.gestionarVeterinario().get(opcion-1).setMascota(mascota);	//Asignar mascota al veterinario
 				
 				String nombreSede2  = centro.getSede(); 
 				nombreSede2 = nombreSede2.substring(0,1).toUpperCase() + nombreSede2.substring(1).toLowerCase();
@@ -186,18 +193,29 @@ public class Main {
 				int pago = sc.nextInt();
 				sc.nextLine();
 				
+				//Verificar que el usuario ingrese un número en el rango correcto
 				while(opcion < 1 || opcion > centro.mostrarOpcionesPago().length) {
 					System.out.println("Entrada inválida. Por favor, ingrese un número entre 1 y " + centro.mostrarOpcionesPago().length + ":");
 					opcion = sc.nextInt();
 					sc.nextLine();
 				}
+				//---------------------------------------------------
+				
+				//sc.close();
 				
 				switch (pago) {
 					case 1:
+						centro.procesarPago(1, null, 20000);
+						centro.generarFactura(null, mascota, 20000);
+						System.out.println("\nSaliendo de Emergencia Veterinaria");
 						break;
 					case 2:
+						centro.procesarPago(1, null, 32000);
+						centro.generarFactura(null, mascota, 32000);
+						System.out.println("\nSaliendo de Emergencia Veterinaria");
 						break;
 					case 3:
+						System.out.println("\nSaliendo de Emergencia Veterinaria");
 						//cliente.descontarPuntos();
 						break;
 					default:
@@ -217,7 +235,7 @@ public class Main {
 			//planificacionDieta();
 		}
 		
-		sc.close();
+		//sc.close();
 	}
 		
 }

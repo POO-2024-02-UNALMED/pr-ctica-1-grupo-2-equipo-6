@@ -79,8 +79,11 @@ public class CentroAdopcion {
 	}
 	
 	public void mostrarSedes() {
+		System.out.println("Sedes:\n");
 		for (int i = 0 ; i < Sedes.values().length ; i++) {
-			System.out.println(i+1 + "" + Sedes.values()[i]);
+			String nombreSede  = Sedes.values()[i].toString(); 
+			nombreSede = nombreSede.substring(0,1).toUpperCase() + nombreSede.substring(1).toLowerCase();
+			System.out.println(i+1 + ". " + nombreSede);
 		}
 	}
 	
@@ -88,6 +91,7 @@ public class CentroAdopcion {
 		if (!hayCapacidad()) {
 			return false;
 		}
+		
 		for (Mascota hospitalizado : animalesHospitalizados) {
 			if (!mascota.esCompatible(hospitalizado)) {
 				return false;
@@ -96,10 +100,12 @@ public class CentroAdopcion {
 		return true;
 	}
 	
-	public Empleado gestionarVeterinario() {
+	public List<Empleado> gestionarVeterinario() {
+		List <Empleado> disponibles = new ArrayList<>();
         for (Empleado veterinario : veterinarios) {
             if (veterinario.tieneCupos()) {
-                return veterinario;
+                disponibles.add(veterinario);
+            	return disponibles;
             }
         }
         return null;
@@ -165,5 +171,7 @@ public class CentroAdopcion {
 		}
 		return true;
 	}
+	
+	
 	
 }

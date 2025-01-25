@@ -111,4 +111,11 @@ public class Mascota {
 		return true;
 	}
 	
+	public double indiceEmergencia(int gravedad, int compatibilidad) {
+		double vulnerabilidad = 10/(1+Math.abs(edad-4));
+		double ie = (gravedad*0.7) + (vulnerabilidad*0.3) + (compatibilidad*0.1);
+		
+		return ie;
+	}
+	
 }

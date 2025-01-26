@@ -42,7 +42,6 @@ public class Mascota {
 		this(nombre, tipo, edad, sexo, null, 3, 5.0);
 	}
 	
-
 	
 	//MÉTODOS SETTER Y GETTER
 	
@@ -126,10 +125,10 @@ public class Mascota {
 	@Override
 	public String toString() {
 		if (estadoSalud!=null) {
-		return "Nombre: " + getNombre() + ", Especie: " + getEspecie() + ", Edad (meses): " + getEdad() + ", Sexo: " + getSexo() + ", Estado de salud: " + getEstadoSalud() + ", Tamaño: " + getTamanoString() + ", Peso: " + getPeso() + "kg";
+		return "Nombre: " + getNombre() + ", Especie: " + getEspecie() + ", Edad: " + getEdad() + ", Sexo: " + getSexo() + ", Estado de salud: " + getEstadoSalud() + ", Tamaño: " + getTamanoString() + ", Peso: " + getPeso() + "kg";
 		}
 		else {
-			return "Nombre: " + getNombre() + ", Especie: " + getEspecie() + ", Edad (meses): " + getEdad() + ", Sexo: " + getSexo() + ", Tamaño: " + getTamanoString() + ", Peso: " + getPeso() + "kg";
+			return "Nombre: " + getNombre() + ", Especie: " + getEspecie() + ", Edad: " + getEdad() + ", Sexo: " + getSexo() + ", Tamaño: " + getTamanoString() + ", Peso: " + getPeso() + "kg";
 			
 		}
 	}

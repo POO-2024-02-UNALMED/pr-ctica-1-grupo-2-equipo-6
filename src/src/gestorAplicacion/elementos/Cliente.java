@@ -68,7 +68,7 @@ public class Cliente extends Persona {
 	public String toString() {
 		
 		return "Nombre: " + getNombre() + ", Edad: "+ getEdad()+ ", Cedula: " + getCedula() +", Telefono: " 
-				+ getTelefono() + ", Direccion "+ getDireccion() + "\n";	
+				+ getTelefono() + ", Direccion "+ getDireccion();	
 	}
 	
 }

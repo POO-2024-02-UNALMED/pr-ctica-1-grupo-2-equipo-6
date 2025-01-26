@@ -79,7 +79,7 @@ public class CentroAdopcion {
 	}
 	
 	public void mostrarSedes() {
-		System.out.println("Sedes:\n");
+		System.out.println("\nSedes:");
 		for (int i = 0 ; i < Sedes.values().length ; i++) {
 			String nombreSede  = Sedes.values()[i].toString(); 
 			nombreSede = nombreSede.substring(0,1).toUpperCase() + nombreSede.substring(1).toLowerCase();
@@ -127,32 +127,32 @@ public class CentroAdopcion {
 	public boolean procesarPago(int metodo, Cliente cliente, int monto) {
         switch (metodo) {
             case 1:
-                System.out.println("Pago procesado con tarjeta por un monto de: $" + monto);
+                System.out.println("\nPago procesado con tarjeta por un monto de: $" + monto);
                 return true;
             case 2:
-                System.out.println("Pago procesado en efectivo por un monto de: $" + monto);
+                System.out.println("\nPago procesado en efectivo por un monto de: $" + monto);
                 return true;
             case 3:
                 if (cliente != null && monto <= cliente.getPuntos()) {
                 	cliente.disminuirPuntos(monto);
-                    System.out.println("Pago procesado con puntos acumulados.");
+                    System.out.println("\nPago procesado con puntos acumulados.");
                     return true;
                 } else {
-                    System.out.println("No tiene suficientes puntos.");
+                    System.out.println("\nNo tiene suficientes puntos.");
                     return false;
                 }
             default:
-                System.out.println("Método de pago no válido.");
+                System.out.println("\nMétodo de pago no válido.");
                 return false;
         }
     }
 	
 	public void generarFactura(Cliente cliente, Mascota mascota, int monto) {
-        System.out.println("\n--- Factura ---");
+        System.out.println("\n--------- Factura ---------");
         System.out.println("Cliente: " + (cliente != null ? cliente : "No registrado"));
         System.out.println("Animal: " + mascota);
         System.out.println("Monto total: $" + monto);
-        System.out.println("-----------------\n");
+        System.out.println("-----------------------------\n");
     }
 	
 	public void asignarVeterinario(Mascota mascota, Empleado veterinario) {

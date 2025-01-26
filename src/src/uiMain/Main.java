@@ -31,10 +31,23 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		int opcion = 0;
 		
+		System.out.println("Bienvenido a la veterinaria virtual.");
+		System.out.println("\nIngrese sus datos");
+		System.out.println("\nNombre:");
+		String nombre = sc.nextLine();
+		System.out.println("Edad:");
+		int edad = sc.nextInt(); 
+		sc.nextLine();
+		System.out.println("Cédula:");
+		long cedula = sc.nextLong();
+		
+		Cliente cliente = new Cliente(nombre, edad, cedula);
+		cliente.agregarPuntos(50000);
+		
 		while (opcion != 6) {
-			System.out.println("Bienvenido a la veterinaria virtual.");
+			
             System.out.println("\n¿Qué desea hacer?");
-            System.out.println("\n1. (Funcionalidad 1)");
+            System.out.println("\n1. Emergencia Veterinaria");
             System.out.println("2. (Funcionalidad 2)");
             System.out.println("3. (Funcionalidad 3)");
             System.out.println("4. (Funcionalidad 4)");
@@ -52,12 +65,12 @@ public class Main {
             
             switch (opcion) {
             	case 1:
-            		System.out.println("Bienvenido a la funcionalidad 1.");
-            		emergenciaVeterinaria();
+            		System.out.println("\nBienvenido a Emergencia Veterinaria.");
+            		emergenciaVeterinaria(cliente);
             		break;
             	case 2:
             		System.out.println("Bienvenido a la funcionalidad 2.");
-					agendarServicio();
+					//agendarServicio();
             		break;
             	case 3:
             		System.out.println("Bienvenido a la funcionalidad 3.");
@@ -104,7 +117,9 @@ public static long leerEnteroLargo() {
 		return scanner.nextLine();
 	}
 
-	public static void emergenciaVeterinaria() {
+	public static void emergenciaVeterinaria(Cliente cliente) {
+		
+		
 		
 		//Veterinarios en en centro de adopción. Agregar más
 		centro.agregarVeterinario(new Empleado("Alberto", 27, 125734625, 321215589, null, Especialidad.VETERINARIO));
@@ -112,7 +127,7 @@ public static long leerEnteroLargo() {
 		//---------------------------------------------------
 		
 		//Pedir datos de la mascota al usuario
-		System.out.println("Ingrese los datos de su mascota:");
+		System.out.println("\nIngrese los datos de su mascota:");
 		System.out.println("Nombre:");
 		String nombre = sc.nextLine();
 		
@@ -123,8 +138,16 @@ public static long leerEnteroLargo() {
 		int edad = sc.nextInt();
 		sc.nextLine();
 		
-		System.out.println("Sexo:");
+		System.out.println("Sexo (M/F):");
 		String sexo = sc.nextLine();
+		
+		System.out.println("Tamaño (1-4): \n1. Miniatura \n2. Pequeño \n3. Mediano \n4. Grande");
+		int tamano = sc.nextInt();
+		sc.nextLine();
+		
+		System.out.println("Peso en kg:");
+		double peso = sc.nextDouble();
+		sc.nextLine();
 		
 		System.out.println("Síntomas:");
 		String sintomas = sc.nextLine();
@@ -132,11 +155,12 @@ public static long leerEnteroLargo() {
 		//---------------------------------------------------
 		
 		//Crear instancia de Mascota con los datos que ingresó el usuario
-		Mascota mascota = new Mascota(nombre, tipo, edad, sexo, EstadoSalud.ENFERMO);
+		Mascota mascota = new Mascota(nombre, tipo, edad, sexo, EstadoSalud.ENFERMO, tamano, peso);
+		centro.agregarHospitalizado(mascota);
 		//---------------------------------------------------
 		
 		//Pedirle al usuario que elija la sede y asignarla a la instancia de centro de adopción
-		System.out.println("¿En dónde desea que su mascota sea atendida? Ingrese el número:");
+		System.out.println("\n¿En dónde desea que su mascota sea atendida? Ingrese el número:");
 		centro.mostrarSedes();
 		int sede = sc.nextInt();
 		sc.nextLine();
@@ -149,7 +173,7 @@ public static long leerEnteroLargo() {
 		centro.setSede(Sedes.values()[sede-1].name());
 		String nombreSede  = Sedes.values()[sede-1].toString(); 
 		nombreSede = nombreSede.substring(0,1).toUpperCase() + nombreSede.substring(1).toLowerCase();
-		System.out.println("La sede seleccionada es: " + nombreSede);
+		System.out.println("\nLa sede seleccionada es: " + nombreSede);
 		//---------------------------------------------------
 		
 		//Verificar si la mascota debe ser hospitalizada
@@ -187,7 +211,7 @@ public static long leerEnteroLargo() {
 	                case "y":
 	                	break;
 	                default:
-	                    System.out.println("Sintoma desconocido: " + sintoma);
+	                    System.out.println("\nSintoma desconocido: " + sintoma);
 	                    break;
 	            }
 	        }
@@ -196,8 +220,8 @@ public static long leerEnteroLargo() {
 			//Verificar que el Índice de Emergencia de la mascota sea mayor a 7.0 para confirmar hospitalización
 			if (!centro.gestionarVeterinario().isEmpty() && mascota.indiceEmergencia(gravedad, compatibilidad) >= 7.0) {
 				
-				System.out.println("Su mascota puede ser hospitalizada.");
-				System.out.println("Elija uno de los siguientes veterinarios disponibles:");
+				System.out.println("\nSu mascota puede ser hospitalizada.");
+				System.out.println("\nElija uno de los siguientes veterinarios disponibles:\n");
 				
 				for (int i = 0 ; i < centro.gestionarVeterinario().size() ; i++) {
 					System.out.println(i+1 + ". " + centro.gestionarVeterinario().get(i));
@@ -208,21 +232,22 @@ public static long leerEnteroLargo() {
 				
 				//Verificar que el usuario ingrese un número en el rango correcto
 				while(opcion < 1 || opcion > centro.gestionarVeterinario().size()) {
-					System.out.println("Entrada inválida. Por favor, ingrese un número entre 1 y " + centro.gestionarVeterinario().size() + ":");
+					System.out.println("\nEntrada inválida. Por favor, ingrese un número entre 1 y " + centro.gestionarVeterinario().size() + ":");
 					opcion = sc.nextInt();
 					sc.nextLine();
 				}
 				//---------------------------------------------------
 				
-				System.out.println("Su veterinario asignado es\n" + centro.gestionarVeterinario().get(opcion-1));
-				mascota.setVeterinario(centro.gestionarVeterinario().get(opcion-1));	//Asignar veterinario a la mascota
-				centro.gestionarVeterinario().get(opcion-1).setMascota(mascota);	//Asignar mascota al veterinario
+				System.out.println("\nSu veterinario asignado es\n" + centro.gestionarVeterinario().get(opcion-1));
+				centro.asignarVeterinario(mascota, centro.gestionarVeterinario().get(opcion-1));
+				//mascota.setVeterinario(centro.gestionarVeterinario().get(opcion-1));	//Asignar veterinario a la mascota
+				//centro.gestionarVeterinario().get(opcion-1).setMascota(mascota);	//Asignar mascota al veterinario
 				
 				String nombreSede2  = centro.getSede(); 
 				nombreSede2 = nombreSede2.substring(0,1).toUpperCase() + nombreSede2.substring(1).toLowerCase();
-				System.out.println("Su mascota ha sido hospitalizada en la sede: " + nombreSede2);
+				System.out.println("\nSu mascota ha sido hospitalizada en la sede: " + nombreSede2);
 				
-				System.out.println("Gestionando pago. Seleccione el método de pago:");
+				System.out.println("\nGestionando pago. Seleccione el método de pago:\n");
 				for(int i = 0; i < centro.mostrarOpcionesPago().length; i++){
 					System.out.println(i+1 + ". " + centro.mostrarOpcionesPago()[i]);
 				}
@@ -242,46 +267,65 @@ public static long leerEnteroLargo() {
 				
 				switch (pago) {
 					case 1:
-						centro.procesarPago(1, null, 20000);
-						centro.generarFactura(null, mascota, 20000);
-						System.out.println("\nSaliendo de Emergencia Veterinaria");
+						centro.procesarPago(1, cliente, 20000);
+						centro.generarFactura(cliente, mascota, 20000);
+						//System.out.println("Saliendo de Emergencia Veterinaria");
 						break;
 					case 2:
-						centro.procesarPago(1, null, 32000);
-						centro.generarFactura(null, mascota, 32000);
-						System.out.println("\nSaliendo de Emergencia Veterinaria");
+						centro.procesarPago(2, cliente, 32000);
+						centro.generarFactura(cliente, mascota, 32000);
+						//System.out.println("Saliendo de Emergencia Veterinaria");
 						break;
 					case 3:
-						System.out.println("\nSaliendo de Emergencia Veterinaria");
-						//cliente.descontarPuntos();
+						centro.procesarPago(3, cliente, 20000);
+						centro.generarFactura(cliente, mascota, 20000);
+						//System.out.println("Saliendo de Emergencia Veterinaria");
 						break;
 					default:
 						break;
 				}
 				
+				System.out.println("\nEs posible dar de alta a su mascota. ¿Desea hacerlo? (1-2) \n1. Sí \n2. No");
+				int alta = sc.nextInt();
+				sc.nextLine();
+				
+				switch (alta) {
+					case 1:
+						System.out.println("\nSe ha registrato el alta de su mascota " + mascota.getNombre() + ".");
+						centro.registrarAlta(mascota);
+						System.out.println("Saliendo de Emergencia Veterinaria");
+						break;
+					case 2:
+						System.out.println("\nSu mascota " + mascota.getNombre() + " sigue hospitalizada.");
+						System.out.println("Saliendo de Emergencia Veterinaria");
+						break;
+					default:
+						break;
+				}
+				
+				
 			}
 			else {
-				System.out.println("No hay veterinarios dispobibles en esta sede.");
-				centro.mostrarSedes();
+				System.out.println("Su mascota no requiere hospitalización. Redirigiendo a Planificación de Dieta.");
+				//planificacionDieta();
 			}
 			
 		}
 		
 		else {
-			System.out.println("Su mascota no requiere hospitalización. Redirigiendo a Planificación de Dieta.");
-			//planificacionDieta();
+			System.out.println("No hay veterinarios dispobibles en esta sede.");
 		}
 		//sc.close();
 	}
 
-
+}
 
 
 
 	//>>-----------------------------------------------------------------------------------------------------------------<<
 
 			
-		// función para agendar un servicio
+	/*	// función para agendar un servicio
 	static void agendarServicio(){
 		ArrayList<Cita> citasAgendadas = new ArrayList<>();
 		System.out.println("\n\n🐾 ¡Bienvenido a PetTraining! 🐾");
@@ -665,3 +709,4 @@ public static long leerEnteroLargo() {
 				return cliente;
 			}
 		}
+*/

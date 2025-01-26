@@ -79,7 +79,6 @@ public class CentroAdopcion {
 	}
 	
 	public void mostrarSedes() {
-		System.out.println("\nSedes:");
 		for (int i = 0 ; i < Sedes.values().length ; i++) {
 			String nombreSede  = Sedes.values()[i].toString(); 
 			nombreSede = nombreSede.substring(0,1).toUpperCase() + nombreSede.substring(1).toLowerCase();
@@ -149,9 +148,9 @@ public class CentroAdopcion {
 	
 	public void generarFactura(Cliente cliente, Mascota mascota, int monto) {
         System.out.println("\n--------- Factura ---------");
-        System.out.println("Cliente: " + (cliente != null ? cliente : "No registrado"));
-        System.out.println("Animal: " + mascota);
-        System.out.println("Monto total: $" + monto);
+        System.out.println("*|* Cliente     *|* " + (cliente != null ? cliente : "No registrado"));
+        System.out.println("*|* Animal      *|* " + mascota);
+        System.out.println("*|* Monto total *|*" + monto);
         System.out.println("-----------------------------\n");
     }
 	

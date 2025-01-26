@@ -131,7 +131,7 @@ public static long leerEnteroLargo() {
 		System.out.println("Nombre:");
 		String nombre = sc.nextLine();
 		
-		System.out.println("Tipo:");
+		System.out.println("Especie:");
 		String tipo = sc.nextLine();
 		
 		System.out.println("Edad:");
@@ -149,7 +149,7 @@ public static long leerEnteroLargo() {
 		double peso = sc.nextDouble();
 		sc.nextLine();
 		
-		System.out.println("Síntomas:");
+		System.out.println("Síntomas (sin comas):");
 		String sintomas = sc.nextLine();
 		String[] listaSintomas = sintomas.split(" ");
 		//---------------------------------------------------
@@ -160,7 +160,7 @@ public static long leerEnteroLargo() {
 		//---------------------------------------------------
 		
 		//Pedirle al usuario que elija la sede y asignarla a la instancia de centro de adopción
-		System.out.println("\n¿En dónde desea que su mascota sea atendida? Ingrese el número:");
+		System.out.println("\n¿En dónde desea que su mascota sea atendida? (1-4):");
 		centro.mostrarSedes();
 		int sede = sc.nextInt();
 		sc.nextLine();
@@ -247,7 +247,7 @@ public static long leerEnteroLargo() {
 				nombreSede2 = nombreSede2.substring(0,1).toUpperCase() + nombreSede2.substring(1).toLowerCase();
 				System.out.println("\nSu mascota ha sido hospitalizada en la sede: " + nombreSede2);
 				
-				System.out.println("\nGestionando pago. Seleccione el método de pago:\n");
+				System.out.println("\nGestionando pago. Seleccione el método de pago (1-3):\n");
 				for(int i = 0; i < centro.mostrarOpcionesPago().length; i++){
 					System.out.println(i+1 + ". " + centro.mostrarOpcionesPago()[i]);
 				}
@@ -293,11 +293,11 @@ public static long leerEnteroLargo() {
 					case 1:
 						System.out.println("\nSe ha registrato el alta de su mascota " + mascota.getNombre() + ".");
 						centro.registrarAlta(mascota);
-						System.out.println("Saliendo de Emergencia Veterinaria");
+						System.out.println("\nSaliendo de Emergencia Veterinaria");
 						break;
 					case 2:
 						System.out.println("\nSu mascota " + mascota.getNombre() + " sigue hospitalizada.");
-						System.out.println("Saliendo de Emergencia Veterinaria");
+						System.out.println("\nSaliendo de Emergencia Veterinaria");
 						break;
 					default:
 						break;

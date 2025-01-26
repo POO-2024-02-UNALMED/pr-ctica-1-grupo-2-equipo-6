@@ -23,19 +23,23 @@ public class Mascota {
 	private String sexo;
 	private EstadoSalud estadoSalud;
 	private Empleado veterinario;
+	private int tamano;
+	private double peso;
 
 	//CONSTRUCTOR
 	
-	public Mascota(String nombre, String tipo, int edad, String sexo, EstadoSalud estadoSalud) {
+	public Mascota(String nombre, String tipo, int edad, String sexo, EstadoSalud estadoSalud, int tamano, double peso) {
 		this.nombre = nombre;
 		this.tipo = tipo;
 		this.edad = edad;
 		this.sexo = sexo;
 		this.estadoSalud = estadoSalud;
+		this.tamano = tamano;
+		this.peso = peso;
 	}
 	
 	public Mascota(String nombre, String tipo, int edad, String sexo) {
-		this(nombre, tipo, edad, sexo, null);
+		this(nombre, tipo, edad, sexo, null, 3, 5.0);
 	}
 	
 
@@ -90,16 +94,42 @@ public class Mascota {
 	public Empleado getVeterinario() {
 		return veterinario;
 	}
+
+	public void setTamano(int tamano) {
+		this.tamano = tamano;
+	}
+
+	public int getTamano(){
+		return tamano;
+	}
+
+	public String getTamanoString(){ 
+		return switch (tamano) {
+			case 1 -> "Miniatura";
+			case 2 -> "Pequeño";
+			case 3 -> "Mediano";
+			case 4 -> "Grande";
+			default -> "Mediano";
+		};
+	}
+
+	public void setPeso(double peso){
+		this.peso = peso;
+	}
+
+	public double getPeso(){
+		return peso;
+	}
 	
 	
 	//OTROS MÉTODOS
-	
+	@Override
 	public String toString() {
 		if (estadoSalud!=null) {
-		return "Nombre: " + getNombre() + ", Especie: " + getEspecie() + ", Edad (meses): " + getEdad() + ", Sexo: " + getSexo() + ", Estado de salud: " + getEstadoSalud();
+		return "Nombre: " + getNombre() + ", Especie: " + getEspecie() + ", Edad (meses): " + getEdad() + ", Sexo: " + getSexo() + ", Estado de salud: " + getEstadoSalud() + ", Tamaño: " + getTamanoString() + ", Peso: " + getPeso() + "kg";
 		}
 		else {
-			return "Nombre: " + getNombre() + ", Especie: " + getEspecie() + ", Edad (meses): " + getEdad() + ", Sexo: " + getSexo();
+			return "Nombre: " + getNombre() + ", Especie: " + getEspecie() + ", Edad (meses): " + getEdad() + ", Sexo: " + getSexo() + ", Tamaño: " + getTamanoString() + ", Peso: " + getPeso() + "kg";
 			
 		}
 	}

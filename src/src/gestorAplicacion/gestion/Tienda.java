@@ -3,9 +3,9 @@ package gestorAplicacion.gestion;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import gestorAplicacion.elementos.Producto;
 import gestorAplicacion.elementos.Cliente;
 import gestorAplicacion.elementos.Empleado;
-import gestorAplicacion.elementos.Producto;
 
 public class Tienda implements Serializable{
 	

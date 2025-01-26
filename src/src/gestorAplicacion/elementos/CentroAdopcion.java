@@ -150,7 +150,7 @@ public class CentroAdopcion {
         System.out.println("\n--------- Factura ---------");
         System.out.println("*|* Cliente     *|* " + (cliente != null ? cliente : "No registrado"));
         System.out.println("*|* Animal      *|* " + mascota);
-        System.out.println("*|* Monto total *|*" + monto);
+        System.out.println("*|* Monto total *|* " + monto);
         System.out.println("-----------------------------\n");
     }
 	

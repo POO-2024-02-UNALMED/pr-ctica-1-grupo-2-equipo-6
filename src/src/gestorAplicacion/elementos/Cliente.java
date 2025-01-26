@@ -1,5 +1,4 @@
 package gestorAplicacion.elementos;
-
 import gestorAplicacion.elementos.Mascota;
 
     //import java.io.Serializable;

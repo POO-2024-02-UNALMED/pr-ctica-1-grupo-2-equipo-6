@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Empleado extends Persona {
 	
     public static enum Especialidad {
-        VETERINARIO,PELUQUERO,CUIDADOR,VENDEDOR;
+        VETERINARIO,PELUQUERO,ENTRENADOR,VENDEDOR;
     }
 	
 	//---> Atributos <---

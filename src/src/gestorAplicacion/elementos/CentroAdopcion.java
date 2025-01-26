@@ -15,7 +15,7 @@ public class CentroAdopcion {
 	private String nombre;
 	private List<Mascota> animalesHospitalizados;
 	private List<Empleado> veterinarios;
-	private List<Cliente> clientes;
+	private static List<Cliente> clientes;
 	private String sede;
 	
 	public CentroAdopcion(String nombre) {
@@ -174,6 +174,32 @@ public class CentroAdopcion {
 		return true;
 	}
 	
-	
+//Metodo para verificar si es un cliente nuevo o ya esta registrado.
+	public static Cliente EsCliente(Cliente cliente){
+		
+		Cliente clienteNuevo = null; 
+		
+		for (Cliente  existe : clientes) {
+			if (existe!=null) {
+				if (existe.getCedula()== cliente.getCedula()) { //Se comprueba si ya existe.
+					clienteNuevo = existe;
+					break;
+					}
+				}
+			}
+		
+		if (cliente == null) {	
+			
+			//Si no existe se agrega como nuevo cliente.
+			cliente = clienteNuevo;
+			clientes.add(clienteNuevo);
+		}
+		else {
+			//Si existe, entonces se actualizan los datos.
+			clienteNuevo.actualizar_datos(cliente.getEdad(),cliente.getTelefono(), cliente.getDireccion());	
+		}
+		
+		return clienteNuevo;
+	}
 	
 }

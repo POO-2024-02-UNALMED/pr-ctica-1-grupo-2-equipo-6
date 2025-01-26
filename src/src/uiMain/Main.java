@@ -14,6 +14,7 @@ import gestorAplicacion.elementos.Cliente;
 import gestorAplicacion.elementos.Cupo;
 import gestorAplicacion.elementos.Mascota.EstadoSalud;
 import gestorAplicacion.gestion.Cita;
+import gestorAplicacion.gestion.Tienda;
 
 
 		
@@ -91,6 +92,43 @@ public class Main {
 		}
 		sc.close();
 	}
+
+	//MÉTODOS NECESARIOS	
+	//ENTRADAS DE DATOS POR TIPO
+	static byte readByte() {
+		return entrada.nextByte();
+	}
+	
+	static int readInt() {
+		return entrada.nextInt();
+	}
+	
+	static String readString() {	
+		String string = entrada.nextLine();
+		return string;
+	}
+	
+	static long readLong() {
+		return entrada.nextLong();
+	}
+	
+	static boolean readBoolean() {
+		boolean x=entrada.nextBoolean();
+		return x;
+	}
+	
+	static double nextDouble() {
+		return entrada.nextDouble();
+	}
+	
+	static void println(Object obj) {
+		System.out.println(obj);
+	}
+	
+	static void print(Object obj) {
+		System.out.print(obj);
+	}
+
 	//Para leer un entero desde la entrada.
 	public static int leerEntero() {
 		while (true) {
@@ -325,7 +363,7 @@ public static long leerEnteroLargo() {
 	//>>-----------------------------------------------------------------------------------------------------------------<<
 
 			
-	/*	// función para agendar un servicio
+/*	// función para agendar un servicio
 	static void agendarServicio(){
 		ArrayList<Cita> citasAgendadas = new ArrayList<>();
 		System.out.println("\n\n🐾 ¡Bienvenido a PetTraining! 🐾");
@@ -710,3 +748,211 @@ public static long leerEnteroLargo() {
 			}
 		}
 */
+
+public static void tienda() {
+		
+
+		
+	//CREAMOS UN EMPLEADO PARA QUE ATIENDA LA TIENDA
+	Empleado empliado = new Empleado("Albert", 22, 555, 1323, "West Elm", Empleado.Rol.TENDERO);
+	
+	// CREACIÓN DE TIENDA
+	//t1 = new Tienda(empliado, sede1);
+	Tienda t1 = new Tienda(empliado,sede1);
+	
+	// BUCLE QUE MANTIENE LA OPERACION DE LA TIENDA, DE ROMPERSE, SE TERMINA LA FUNCIONALIDAD
+	
+	boolean bucle = true; // VARIABLE PARA EL SEGUNDO MENÚ
+	
+	println("\n🐾🐕¡Bienvenido a la tienda de mascotas del Centro de cuidado Animal: UNamascota!🐾🐈"+"\n Aquí encontrarás los mejores productos para el cuidado y la diversión de tu compañero peludo."+"\n");
+	
+	while (true) { 
+	
+		println("¿Qué te trae por estos lares?");
+		println("1. Ir de compras");
+		println("2. Salir\n");
+		println("Ingrese el número de la opción que desea [1-2]: ");
+		
+		int menu = 0; // ENTERO QUE EL USUARIO VA A INGREASAR, PARA ESCOGER OPCION 
+		while (menu==0) { //MIENTRAS EL ENTERO SEA CERO (PARA CONTROLAR QUE EL USUARIO LE DÉ UN VALOR)
+			try {//CONTROL DE ERRORES 
+				menu = readInt(); //SE LEE EL ENTERO 
+				if (menu>0 && menu<=2) { //SI ESTÁ ENTRE 1 Y 2 TERMINA 
+					break;
+				}
+				else {
+					println("🚫¡Oh no!, Ingrese un número válido por favor🚫");
+					menu = 0;
+					continue;
+				}
+			}
+			catch(InputMismatchException e) {
+				println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
+			}
+			finally {
+					entrada.nextLine();//SALTO DE LINEA
+				}
+		}
+		
+	if (menu==1) {	// OPCION 1 DEL PRIMER MENÚ, ADQUIRIR PRODCUTO.		
+		while (bucle==true) { //UTILIZAMOS LA VARIABLE BUCLE INICIADA ANTES DEL PRIMER WHILE
+			
+			println("\n--------------------------------------------------------");
+			println("\n🐾🐕¿Cómo desea que se le muestren los productos?🐾🐈");
+			println("1. Mostrar todo");
+			println("2. Filtrar por tipo\n");
+			print("Ingrese el número de la opción que desea [1-2]: \n");
+			println("\n--------------------------------------------------------");
+				
+			int menuTienda = 0; // VOLVEMOS A RECIBIR UNA ENTRADA, ESTA VEZ PARA DECIDIR COMO FILTRAR LOS PRODUCTOS
+			while (menuTienda==0) {
+				try {
+					menuTienda = readInt();
+					if (menuTienda>0 && menuTienda<=2) { // SE CONTROLA QUE ESTÉ DENTRO DEL RANGO 
+						break;
+					}
+					else {
+						println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
+						menuTienda = 0;
+						continue;
+					}
+				}
+				catch(InputMismatchException e) {
+					println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
+				}
+				finally {
+					entrada.nextLine();//SALTO DE LINEA
+				}
+			}
+			
+			if (menuTienda==1) { //EN CASO DE QUE SE QUIERA VISUALIZAR TODOO	
+				println("\nProductos disponibles:");
+				println(t1.inventario()); // SE LLAMA AL MÉTODO INVENTARIO DE TIENDA, PARA QUE DEVULVA TODOS LOS PRODUCTOS SIN MÁS
+			}
+			else { // DE LO CONTRARIO, SE LE VOLVERÁ A PEDIR UNA ENTRADA PARA QUE INDIQUE POR QUE TIPO DE ANIMAL QUIERE VER 
+				print("\n🐈🐾¿Por qué tipo de animal te gustaría ver? [Perros, gatos, aves, hamsters o conejos]: 🐕🐾");
+				while (true) { //BUCLE PARA CONTROLAR ÉSTE NUEVO MENÚ
+					try {
+						String tipo = readString(); // SE LEE EL STRING 
+						tipo.toLowerCase(); // SE PONE EL TEXTO EN MINÚSCULAS
+						
+						//LUEGO LO COMPARAMOS EN ESTE GRUPO DE CONDICIONALES SIMPLES 
+						
+						if (tipo.equals("perros") || tipo.equals("perro")) { 
+							println("\nProductos disponibles: 🐕\n");
+							println(t1.filtrar("perros")); //DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
+							break;
+						}
+						else if (tipo.equals("gatos") || tipo.equals("gato")) {
+							println("\nProductos disponibles: 🐈\n");
+							println(t1.filtrar("gatos")); //DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA 
+							break;
+						}
+						else if (tipo.equals("aves") || tipo.equals("ave")) {
+							println("\nProductos disponibles: 🐦\n");
+							println(t1.filtrar("aves"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
+							break;
+						}	
+						else if (tipo.equals("hamsters") || tipo.equals("hamster")) {
+							println("\nProductos disponibles: 🐹\n");
+							println(t1.filtrar("hamsters"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
+							break;
+						}
+						else if (tipo.equals("conejos") || tipo.equals("conejo")) {
+							println("\nProductos disponibles: 🐇\n");
+							println(t1.filtrar("conejos"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
+							break;
+						}
+						else {
+							println("🚫Por favor, ingrese el tipo del animal en minúsculas [Perros, gatos, aves o hamsters]🚫");
+							continue;
+						}
+					}
+					catch(InputMismatchException e) {
+						println("🚫Por favor, coloque un tipo valido de animal🚫");
+					}
+				}
+			}
+			
+			// UNA VEZ QUE AL USUARIO SE LE IMPRIMIÓ LOS PRODUCTOS, VENIMOS ACÁ A CONTROLAR LA COMPRA
+			
+			boolean control = true;
+			while (control) {
+				try {
+						print("Digite el índice del producto a comprar: ");
+						int indice = readInt(); //INDICE PARA LOCALIZAR EL PRODUCTO QUE QUIERE EL USUARIO 
+		
+						print("Indique cuantas unidades necesita del producto: ");
+						int unidades = readInt(); //CANTIDAD DE UNIDADES QUE EL USUARIO VA A COMPRAR
+						
+						//  REGISTRO DEL USUARIO PARA REALIZAR LA COMPRA-------------------------------------
+						
+						if (unidades==1) { //SI SOLO VA A COMPRAR UNA UNIDAD
+							println("\nSus datos serán tomados para registrar la compra.");
+							print("Ingrese su cédula: ");
+							long cedula = entrada.nextLong();
+							print("Ingrese su edad: ");
+							int edad = entrada.nextInt();
+							print("Ingrese su nombre: ");
+							entrada.nextLine();
+							String nombre = readString();
+							
+							//SE REGISTA EL USUARIO, CREANDO UN OBJETO DEL TIPO CLIENTE Y PASANDOLO AL MÉTODO COMPRA DE TIENDA 
+							Cliente cliente = new Cliente(nombre, edad, cedula);
+							println("\n"+t1.compra(indice, cliente)); 
+							//ESTE FILTRO DE: UNIDADES == 1, ES PORQUE EL MÉTODO COMPRA QUE RECIBE DOS PARÁMETROS RETORNA ALGO MÁS ADECUADO PARA ESTE CASO 
+						}
+						else { // CUANDO EL USUARIO VA A COMPRAR MÁS DE UNA UNIDAD 
+							println("\nSus datos serán tomados para registrar la compra.");
+							print("Ingrese su cédula: ");
+							long cedula = entrada.nextLong();
+							print("Ingrese su edad: ");
+							int edad = entrada.nextInt();
+							print("Ingrese su nombre: ");
+							entrada.nextLine();
+							String nombre = readString();
+							
+							//SE REGISTA EL USUARIO, CREANDO UN OBJETO DEL TIPO CLIENTE Y PASANDOLO AL MÉTODO COMPRA DE TIENDA
+							// SE LE AGREGA TAMBIEN, LA CANTIDAD DE UNIDADES AL MÉTODO COMPRA 
+							Cliente cliente = new Cliente(nombre, edad, cedula);
+							println("\n"+t1.compra(indice, unidades, cliente));
+						}
+						
+						// --------------------------------------------------------------------------------
+						
+						control = false; //SI SE COMPLETÓ EL BLOQUE TRY, SE CAMBIA EL ESTADO A FALSO PARA ROMPER EL CICLO 
+					
+				}
+				catch(InputMismatchException e) {
+					println("Por favor lea e ingrese correctamente los datos\n");
+				}
+				
+			}
+			
+			// SE LE PIDE SI DESEA VOLVER A REINICIAR EL CICLO DESDE EL MENÚ DE COMPRA 
+			print("\n¿Desea volver al catálogo? [si/no]: ");
+			String respuesta = " ";
+			while (true) {//CONTROL CON UN WHILE SOLAMENTE, HASTA QUE NO RECIBA UNA RESPUESTA VÁLIDA.
+				respuesta = entrada.nextLine();
+				respuesta.toLowerCase();
+				if (respuesta.equals("si")||respuesta.equals("no")) {
+					break; 
+				}else {
+					println("Por favor, ingrese una respuesta válida [si/no]");
+					continue;
+				}
+			}
+				if (respuesta.equals("si")) {
+					continue; //VOLVER A INICIAR CICLO DE COMPRA
+				}
+				else {
+					println("Esperamos verlo por aquí pronto.\n");
+					break; // SALIR DE LA TIENDA 
+				}
+			}//BUCLE COMPRAR
+	}//CONDICINAL MENU INGRESAR TIENDA
+	else {
+		break;//OPCION 2 SALIR
+	}
+	}//BUCLE INICIAL
+}//FINAL MÉTODO TIENDA

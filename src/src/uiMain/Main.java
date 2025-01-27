@@ -14,6 +14,7 @@ import gestorAplicacion.elementos.Cliente;
 import gestorAplicacion.elementos.Cupo;
 import gestorAplicacion.elementos.Mascota.EstadoSalud;
 import gestorAplicacion.elementos.Producto;
+import gestorAplicacion.elementos.Dieta;
 import gestorAplicacion.gestion.Cita;
 import gestorAplicacion.gestion.Tienda;
 import gestorAplicacion.elementos.Fallecido;
@@ -149,15 +150,16 @@ public class Main {
 	}
 	
 	//Para leer un número largo desde la scanner.
-public static long leerEnteroLargo() {
-    while (true) {
-        try {
-            return scanner.nextLong();
-        } catch (InputMismatchException e) {
-            scanner.next(); // Limpiar la scanner no válida
-        }
+	public static long leerEnteroLargo() {
+    	while (true) {
+        	try {
+            	return scanner.nextLong();
+        	} catch (InputMismatchException e) {
+            	scanner.next(); // Limpiar la scanner no válida
+        	}
+		}
 	}
-}
+	
 	//Para leer una cadena de texto desde la scanner.
 	public static String leerCadena() {
 		return scanner.nextLine();

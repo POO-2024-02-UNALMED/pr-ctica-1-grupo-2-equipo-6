@@ -105,15 +105,16 @@ public class Main {
 	}
 	
 	//Para leer un número largo desde la entrada.
-public static long leerEnteroLargo() {
-    while (true) {
-        try {
-            return scanner.nextLong();
-        } catch (InputMismatchException e) {
-            scanner.next(); // Limpiar la entrada no válida
-        }
+	public static long leerEnteroLargo() {
+    	while (true) {
+       		try {
+       	    	return scanner.nextLong();
+       	 	} catch (InputMismatchException e) {
+           	 	scanner.next(); // Limpiar la entrada no válida
+       		}
+		}
 	}
-}
+	
 	//Para leer una cadena de texto desde la entrada.
 	public static String leerCadena() {
 		return scanner.nextLine();

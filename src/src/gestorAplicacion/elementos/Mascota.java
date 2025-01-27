@@ -34,7 +34,13 @@ public class Mascota {
 		this.edad = edad;
 		this.sexo = sexo;
 		this.estadoSalud = estadoSalud;
-		this.tamano = tamano;
+		this.tamano = tamano; 
+		/*
+		Tamaño 1 = Miniatura
+		Tamaño 2 = Pequeño
+		Tamaño 3 = Mediano
+		Tamaño 4 = Grande
+		*/
 		this.peso = peso;
 	}
 	

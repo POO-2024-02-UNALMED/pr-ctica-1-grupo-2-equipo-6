@@ -37,28 +37,32 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		int opcion = 0;
 		
-		System.out.println("Bienvenido a la veterinaria virtual.");
-		System.out.println("\nIngrese sus datos");
-		System.out.println("\nNombre:");
+		System.out.println("(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ Bienvenido al Centro Veterinario Virtual: UNamascota. ᓚᘏᗢ");
+		System.out.println("--------------------");
+		System.out.println("\n - Ingrese sus datos");
+		System.out.println("\n - Nombre Completo: ");
 		String nombre = sc.nextLine();
-		System.out.println("Edad:");
+		System.out.println(" - Edad: ");
 		int edad = sc.nextInt(); 
 		sc.nextLine();
-		System.out.println("Cédula:");
+		System.out.println(" - Cédula: ");
 		long cedula = sc.nextLong();
+		System.out.println("--------------------");
 		
 		Cliente cliente = new Cliente(nombre, edad, cedula);
 		cliente.agregarPuntos(50000);
 		
 		while (opcion != 6) {
 			
-            System.out.println("\n¿Qué desea hacer?");
-            System.out.println("\n1. Emergencia Veterinaria");
-            System.out.println("2. (Funcionalidad 2)");
-            System.out.println("3. Tienda UNamascota");
-            System.out.println("4. Servicio memorial"); //memorial
-            System.out.println("5. (Planificacion de Dieta)");
-            System.out.println("6. Salir");
+			System.out.println("--------------------");
+            System.out.println("\n (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ ¿Qué desea hacer el día de hoy? ᓚᘏᗢ");
+            System.out.println("\n1. ᓚᘏᗢ Emergencia Veterinaria");
+            System.out.println("2. ᓚᘏᗢ (Funcionalidad 2)");
+            System.out.println("3. ᓚᘏᗢ Tienda UNamascota");
+            System.out.println("4. ᓚᘏᗢ Servicio de Memorial"); //memorial
+            System.out.println("5. ᓚᘏᗢ Planificador de Dieta");
+            System.out.println("6. (┬┬﹏┬┬) Salir");
+			System.out.println("\n--------------------");
             
             if (sc.hasNextInt()) {
                 opcion = sc.nextInt();

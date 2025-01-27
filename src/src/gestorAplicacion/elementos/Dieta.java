@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 
 public class Dieta implements Serializable {
+    private static final long serialVersionUID = 1L;
     Mascota mascota;
     double pesoIdeal;
     double gramosDiarios;
@@ -84,43 +85,46 @@ public class Dieta implements Serializable {
         }
     }
     
+   @Override
+public String toString() {
+    // Determinar el estado de peso
+    String estadoPeso;
+    switch (comparacionPeso()) {
+        case 1:
+            estadoPeso = "Está en su peso ideal.";
+            break;
+        case 2:
+            estadoPeso = "Debe subir de peso.";
+            break;
+        case 3:
+            estadoPeso = "Debe bajar de peso.";
+            break;
+        default:
+            estadoPeso = "Estado no definido.";
+    }
+
+    return "Nombre de la mascota: " + mascota.getNombre() + "\n" +
+           "Peso Actual: " + mascota.getPeso() + " kg\n" +
+           "Edad: " + mascota.getEdad() + " años\n" +
+           "Tamaño: " + mascota.getTamano() + "\n" +
+           "Peso ideal: " + this.pesoIdeal + " kg\n" +
+           "Cantidad de Gramos de alimento diarios: " + this.gramosDiarios + " g\n" +
+           estadoPeso + "\n\n" +
+           "Distribución en porcentajes de nutrientes:\n" +
+           " Proteínas: " + ((this.proteinas / this.gramosDiarios) * 100) + "%\n" +
+           " Grasas: " + ((this.grasas / this.gramosDiarios) * 100) + "%\n" +
+           " Carbohidratos: " + ((this.carbohidratos / this.gramosDiarios) * 100) + "%\n\n" +
+           "Distribución en gramos de nutrientes:\n" +
+           " Proteínas: " + this.proteinas + "\n" +
+           " Grasas: " + this.grasas + "\n" +
+           " Carbohidratos: " + this.carbohidratos;
+}
+
+
     public void menu() {
     try (PrintWriter writer = new PrintWriter("menu_dieta.txt")) {
         // Datos de la mascota
-        writer.println("Nombre de la mascota: " + mascota.getNombre());
-        writer.println("Peso Actual: " + mascota.getPeso() + " kg");
-        writer.println("Edad: " + mascota.getEdad() + " años");
-        writer.println("Tamaño: " + mascota.getTamano());
-        writer.println("Peso ideal: " + this.pesoIdeal + " kg");
-        writer.println("Cantidad de Gramos de alimento diarios: " + this.gramosDiarios + " g");
-
-        // Estado de peso
-        String estadoPeso;
-        switch (comparacionPeso()) {
-            case 1:
-                estadoPeso = "Está en su peso ideal.";
-                break;
-            case 2:
-                estadoPeso = "Debe subir de peso.";
-                break;
-            case 3:
-                estadoPeso = "Debe bajar de peso.";
-                break;
-            default:
-                estadoPeso = "Estado no definido.";
-        }
-        writer.println(estadoPeso);
-
-        // Distribución de nutrientes
-        writer.println("\nDistribución en porcentajes de nutrientes:");
-        writer.println(" Proteínas: " + ((this.proteinas / this.gramosDiarios) * 100) + "%");
-        writer.println(" Grasas: " +  ((this.grasas / this.gramosDiarios) * 100) + "%");
-        writer.println(" Carbohidratos: " + ((this.carbohidratos / this.gramosDiarios) * 100) + "%");
-
-        writer.println("\nDistribución en gramos de nutrientes:");
-        writer.println(" Proteínas: " + this.proteinas);
-        writer.println(" Grasas: " + this.grasas);
-        writer.println(" Carbohidratos: " + this.carbohidratos);
+        writer.println(this.toString());
 
         System.out.println("menu_dieta.txt creado con éxito.");
     } catch (Exception e) {

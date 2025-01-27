@@ -15,6 +15,7 @@ import gestorAplicacion.elementos.Cupo;
 import gestorAplicacion.elementos.Mascota.EstadoSalud;
 import gestorAplicacion.gestion.Cita;
 import gestorAplicacion.gestion.Tienda;
+import gestorAplicacion.elementos.Dieta;
 
 
 		
@@ -52,7 +53,7 @@ public class Main {
             System.out.println("2. (Funcionalidad 2)");
             System.out.println("3. Tienda UNamascota");
             System.out.println("4. (Funcionalidad 4)");
-            System.out.println("5. (Funcionalidad 5)");
+            System.out.println("5. (Planificacion de Dieta)");
             System.out.println("6. Salir");
             
             if (sc.hasNextInt()) {
@@ -80,7 +81,7 @@ public class Main {
             		System.out.println("Bienvenido a la funcionalidad 4.");
             		break;
             	case 5:
-            		System.out.println("Bienvenido a la funcionalidad 5.");
+            		planificacionDieta(cliente);
             		break;
             	case 6:
                     System.out.println("Saliendo del sistema.");
@@ -119,6 +120,18 @@ public class Main {
 	public static String leerCadena() {
 		return scanner.nextLine();
 	}
+
+	public static double leerDoble() {
+    while (true) {
+        try {
+            return scanner.nextDouble();
+        } catch (InputMismatchException e) {
+            scanner.next(); // Limpiar la entrada no válida
+        }
+	}
+}
+
+
 
 	public static void emergenciaVeterinaria(Cliente cliente) {
 		
@@ -922,3 +935,33 @@ public static void tienda() {
 	}
 	}//BUCLE INICIAL
 }//FINAL MÉTODO TIENDA
+
+public static void planificacionDieta(Cliente cliente) {
+	//ingresar datos de la mascota
+		System.out.println("\nIngresa los datos de su mascota:");
+		System.out.println("Nombre:");
+		String nombre = Main.leerCadena();
+		
+		System.out.println("Especie:");
+		String tipo = Main.leerCadena();
+		
+		System.out.println("Edad:");
+		int edad = Main.leerEntero();
+		
+		System.out.println("Sexo (M/F):");
+		String sexo = Main.leerCadena();
+		
+		System.out.println("Tamaño (1-4): \n1. Miniatura \n2. Pequeño \n3. Mediano \n4. Grande");
+		int tamano = Main.leerEntero();
+		
+		System.out.println("Peso en kg:");
+		double peso = Main.leerDoble();
+
+		//Crear un objeto Mascota con los datos que ingresó el usuario
+		Mascota mascota = new Mascota(nombre, tipo, edad, sexo, EstadoSalud.SANO, tamano, peso);
+		Dieta dieta = new Dieta(mascota);
+		dieta.planDieta();
+		System.out.println(dieta.toString());
+}
+
+}

@@ -37,15 +37,15 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		int opcion = 0;
 		
-		System.out.println("(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ Bienvenido al Centro Veterinario Virtual: UNamascota. ᓚᘏᗢ");
+		System.out.println("\n - - Bienvenido al Centro Veterinario Virtual: UNamascota. - - \n");
 		System.out.println("--------------------");
-		System.out.println("\n - Ingrese sus datos");
-		System.out.println("\n - Nombre Completo: ");
+		System.out.println("\n- Ingrese sus datos");
+		System.out.println("\n- Nombre Completo: ");
 		String nombre = sc.nextLine();
-		System.out.println(" - Edad: ");
+		System.out.println("- Edad: ");
 		int edad = sc.nextInt(); 
 		sc.nextLine();
-		System.out.println(" - Cédula: ");
+		System.out.println("- Cédula: ");
 		long cedula = sc.nextLong();
 		System.out.println("--------------------");
 		
@@ -56,12 +56,12 @@ public class Main {
 			
 			System.out.println("--------------------");
             System.out.println("\n (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ ¿Qué desea hacer el día de hoy? ᓚᘏᗢ");
-            System.out.println("\n1. ᓚᘏᗢ Emergencia Veterinaria");
-            System.out.println("2. ᓚᘏᗢ (Funcionalidad 2)");
-            System.out.println("3. ᓚᘏᗢ Tienda UNamascota");
-            System.out.println("4. ᓚᘏᗢ Servicio de Memorial"); //memorial
-            System.out.println("5. ᓚᘏᗢ Planificador de Dieta");
-            System.out.println("6. (┬┬﹏┬┬) Salir");
+            System.out.println("\n1. Emergencia Veterinaria");
+            System.out.println("2. (Funcionalidad 2)");
+            System.out.println("3. Tienda UNamascota");
+            System.out.println("4. Servicio de Memorial"); //memorial
+            System.out.println("5. Planificador de Dieta");
+            System.out.println("6. (┬┬~~┬┬) Salir");
 			System.out.println("\n--------------------");
             
             if (sc.hasNextInt()) {
@@ -1158,10 +1158,12 @@ public static void tienda() {
 	
 	boolean bucle = true; // VARIABLE PARA EL SEGUNDO MENÚ
 	
-	println("\n🐾🐕¡Bienvenido a la tienda de mascotas del Centro de cuidado Mascota: UNamascota!🐾🐈"+"\n Aquí encontrarás los mejores productos para el cuidado y la diversión de tu compañero peludo."+"\n");
+	println("\n - - ¡Bienvenido a la tienda de mascotas del Centro de cuidado Mascota: UNamascota! - - ");
+	println("Aquí encontrarás los mejores productos para el cuidado y la diversión de tu compañero peludo.");
 	
 	while (true) { 
 	
+		println("-----------------------------");
 		println("¿Qué te trae por estos lares?");
 		println("1. Ir de compras");
 		println("2. Salir\n");

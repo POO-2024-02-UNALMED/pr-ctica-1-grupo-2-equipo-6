@@ -117,27 +117,7 @@ public class Memorial implements Serializable {
 		ceniza.setTipo("Cenizas");
 		cenizas.add(ceniza);
 	}
-	
-	public String florOsarios (int indice, String flor) {
-		indice -= 1;
-		return osarios.get(indice).ponerFlor(flor);
-	}
-	
-	public String florSepulcro (int indice, String flor) {
-		indice -= 1;
-		return sepulcros.get(indice).ponerFlor(flor);
-	}
-	
-	public String florArboles (int indice, String flor) {
-		indice -= 1;
-		return arboles.get(indice).ponerFlor(flor);
-	}
-	
-	public String florCenizas (int indice, String flor) {
-	indice -= 1;
-	return cenizas.get(indice).ponerFlor(flor);
-	}
-	
+
 	public ArrayList<Fallecido> obtenerFallecidosPorTipo(String tipo) {
 		ArrayList<Fallecido> lista = new ArrayList<>();
 		switch (tipo) {

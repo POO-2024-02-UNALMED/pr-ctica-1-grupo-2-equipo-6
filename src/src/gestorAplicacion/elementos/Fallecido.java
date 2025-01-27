@@ -113,7 +113,7 @@ public class Fallecido implements Serializable{
 			return flores.get(0); // Se retorna el primer elemento, es decir "Sin Flores."
 		}
 		else if(flores.size()==1) { //Se pregunta si solo hay una flor en la lista.
-			return "Hay: "+flores.get(0);//Se devuelve el primer parametro, es decir la flor existente.
+			return "Hay una flor: "+flores.get(0);//Se devuelve el primer parametro, es decir la flor existente.
 		}
 		else {  
 			String acomulador = "Flores que hay: ";

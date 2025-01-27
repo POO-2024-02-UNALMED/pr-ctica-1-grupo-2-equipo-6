@@ -8,10 +8,10 @@ public class Dieta implements Serializable {
     private static final long serialVersionUID = 1L;
     private final Mascota mascota;
     private double pesoIdeal;
-    public double gramosDiarios;
-    public double proteinas;
-    public double grasas;
-    public double carbohidratos;
+    private double gramosDiarios;
+    private double proteinas;
+    private double grasas;
+    private double carbohidratos;
 
     //Constructor
     public Dieta(Mascota mascota) {

@@ -9,6 +9,8 @@ import gestorAplicacion.elementos.Empleado.Especialidad;
 import gestorAplicacion.elementos.Mascota;
 import gestorAplicacion.elementos.Mascota.EstadoSalud;
 import gestorAplicacion.gestion.Tienda;
+import gestorAplicacion.elementos.Fallecido;
+import gestorAplicacion.gestion.Memorial;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -22,6 +24,7 @@ public class Main {
 	static CentroAdopcion centro = new CentroAdopcion("POO");
 	private static Scanner scanner = new Scanner(System.in);
 	private static ArrayList<CentroAdopcion> sedes = new ArrayList<>();
+	private static Memorial memorial = new Memorial(centro);
 		
 	
 	public static void main(String[] args) {
@@ -48,7 +51,7 @@ public class Main {
             System.out.println("\n1. Emergencia Veterinaria");
             System.out.println("2. (Funcionalidad 2)");
             System.out.println("3. Tienda UNamascota");
-            System.out.println("4. (Funcionalidad 4)");
+            System.out.println("4. (Funcionalidad 4)"); //memorial
             System.out.println("5. (Planificacion de Dieta)");
             System.out.println("6. Salir");
             
@@ -75,6 +78,7 @@ public class Main {
             		break;
             	case 4:
             		System.out.println("Bienvenido a la funcionalidad 4.");
+            		gestionarMemorial(cliente);
             		break;
             	case 5:
             		planificacionDieta(cliente);
@@ -722,7 +726,130 @@ public class Main {
 			}
 		}
 */
-
+public static void gestionarMemorial(Cliente cliente) {
+	int opcion = 0;
+	while (opcion != 4) {
+		System.out.println("\nGestion del Memorial:");
+		System.out.println("1. Añadir fallecido");
+		System.out.println("2. Ver memorial");
+		System.out.println("3. Añadir flores");
+		System.out.println("4. Volver al menu principal");
+		
+		opcion = leerEntero();
+		
+		switch (opcion) {
+		case 1 -> {
+			System.out.println("Ingrese el nombre del fallecido:");
+			String nombreFallecido = sc.nextLine();
+			System.out.println("Ingrese la especie de la mascota:");
+			String especieFallecido = sc.nextLine();
+			System.out.println("Ingrese la edad que tenia al fallecer");
+			int edadMascota = sc.nextInt();
+			sc.nextLine();
+			Mascota mascota = new Mascota(nombreFallecido, especieFallecido, edadMascota, null, null, 0, 0);
+			
+			System.out.println("Ingrese la fecha de fallecimiento (YYYY-MM-DD)");
+			String fecha = sc.nextLine();
+			System.out.println("¿Deseas dejar un mensaje? (si/no)");
+			String respuesta = sc.nextLine();
+			
+			String mensaje;
+			if (respuesta.equalsIgnoreCase("Si")) {
+				System.out.println("Ingrese su mensaje:");
+				mensaje = sc.nextLine();
+				}
+			else {
+				mensaje = "Descansa en paz" + nombreFallecido;
+				}
+			System.out.println("Ingrese el tiempo que desea usar nuestros servicios (e.g., 10 años):");
+			String tiempo = sc.nextLine();
+			System.out.println("Ingrese el tipo de memorial que desea (Sepulcro/Osario/Cremacion/Arbol):");
+			String tipo = sc.nextLine();
+			
+			Fallecido fallecido = new Fallecido(mascota, fecha, mensaje, cliente, tiempo, tipo);
+			
+			switch (tipo) {
+			case "Sepulcro" -> memorial.anadirSepulcro(fallecido);
+			case "Osario" -> memorial.anadirOsario(fallecido);
+			case "Cenizas" -> memorial.anadirCenizas(fallecido);
+			case "Arbol" -> memorial.anadirArbol(fallecido);
+			default -> System.out.println("De momento no contamos con este tipo de servicio.");
+			
+				}
+			}
+		
+		case 2 -> {
+			System.out.println("Ingrese el tipo de memorial que desea ver (Sepulcro/Osario/Cenizas/Arbol):");
+			String tipo = sc.nextLine();
+			//String resultado = memorial.visita(tipo);
+			//System.out.println(resultado.isEmpty() ? "No hay registros en esta categoria.": resultado);
+			ArrayList<Fallecido> listaFallecidos = new ArrayList<>();
+			switch(tipo) {
+			case "Sepulcro" -> listaFallecidos = memorial.getSepulcros();
+			case "Osario" -> listaFallecidos = memorial.getOsarios();
+			case "Cenizas" -> listaFallecidos = memorial.getCenizas();
+			case "Arbol" -> listaFallecidos = memorial.getArboles();
+			default -> System.out.println("Tipo de memorial no disponoible.");
+			}
+			if (listaFallecidos.isEmpty()) {
+				System.out.println("No hay mascotas en este tipo de memorial.");
+			}
+			else {
+				System.out.println("Lista de mascotas en " + tipo + ":");
+		        for (int i = 0; i < listaFallecidos.size(); i++) {
+		            Fallecido fallecido = listaFallecidos.get(i);
+		            Mascota mascota = fallecido.getMascota();
+		            
+		            System.out.println((i + 1) + ".Nombre: " + mascota.getNombre());
+		            System.out.println("  Especie: " + mascota.getEspecie());
+		            System.out.println("  Edad: " + mascota.getEdad());
+		            System.out.println("  Fecha de fallecimiento: " + fallecido.getFecha());
+		            System.out.println("  Mensaje: " + fallecido.getMensaje());
+		            System.out.println(fallecido.mostrarFlores());
+		        }
+			}		        
+		}
+		case 3 -> {
+			System.out.println("Ingrese el tipo de memorial al cual desea agregar flores (Sepulcro/Osario/Cenizas/Arbol):");
+			String tipo = leerCadena();
+			ArrayList<Fallecido> listaFallecidos = memorial.obtenerFallecidosPorTipo(tipo);
+			switch(tipo) {
+			case "Sepulcro" -> listaFallecidos = memorial.getSepulcros();
+			case "Osario" -> listaFallecidos = memorial.getOsarios();
+			case "Cenizas" -> listaFallecidos = memorial.getCenizas();
+			case "Arbol" -> listaFallecidos = memorial.getArboles();
+			default -> System.out.println("Tipo de memorial no disponoible.");
+			}
+			
+			if (listaFallecidos.isEmpty()) {
+				System.out.println("No hay mascotas en este tipo de memorial.");
+			}
+			else {
+				System.out.println("Lista de memoriales:");
+			    for (int i = 0; i < listaFallecidos.size(); i++) {
+			        System.out.println((i + 1) + ". " + listaFallecidos.get(i).getMascota().getNombre());
+				}
+			    
+			    System.out.println("Ingrese el numero del memorial que desea ver:");
+			    int seleccion = sc.nextInt();
+			    if (seleccion >= 1 && seleccion <= listaFallecidos.size()) {
+			    	Fallecido seleccionado = listaFallecidos.get(seleccion - 1);
+			    	
+			    	System.out.println("Ingrese el nombre de la flor que desea agregar:");
+			    	String flor = leerCadena();
+			    	
+			    	String resultado = seleccionado.ponerFlor(flor);
+			    	System.out.println(resultado);
+			    }
+			    else {
+			    	System.out.println("Seleccion no valida.");
+			    }
+			}
+		}
+		case 4 -> System.out.println("Volviendo al menu principal...4");
+		}
+	}
+}
 
 public static void tienda() {
 		

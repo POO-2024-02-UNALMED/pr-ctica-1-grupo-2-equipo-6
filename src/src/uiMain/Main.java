@@ -962,3 +962,5 @@ public static void planificacionDieta(Cliente cliente) {
 		dieta.planDieta();
 		System.out.println(dieta.toString());
 }
+
+}

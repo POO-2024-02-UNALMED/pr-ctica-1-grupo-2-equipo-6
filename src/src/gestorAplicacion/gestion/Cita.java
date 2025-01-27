@@ -1,11 +1,9 @@
 package gestorAplicacion.gestion;
 
-import java.io.Serializable;
-
-import gestorAplicacion.elementos.Mascota;
 import gestorAplicacion.elementos.Cliente;
 import gestorAplicacion.elementos.Cupo;
 import gestorAplicacion.elementos.Empleado;
+import gestorAplicacion.elementos.Mascota;
 
 //DESCRIPCIÓN DE LA CLASE:
 //Almacena información sobre las citas agendadas para servicios como veterinaria, entrenamiento o peluquería, incluyendo el Mascota, cliente, empleado y costo.

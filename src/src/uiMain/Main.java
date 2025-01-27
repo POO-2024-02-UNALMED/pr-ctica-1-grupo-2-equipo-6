@@ -50,7 +50,7 @@ public class Main {
             System.out.println("\n¿Qué desea hacer?");
             System.out.println("\n1. Emergencia Veterinaria");
             System.out.println("2. (Funcionalidad 2)");
-            System.out.println("3. (Funcionalidad 3)");
+            System.out.println("3. Tienda UNamascota");
             System.out.println("4. (Funcionalidad 4)");
             System.out.println("5. (Funcionalidad 5)");
             System.out.println("6. Salir");
@@ -66,7 +66,7 @@ public class Main {
             
             switch (opcion) {
             	case 1:
-            		System.out.println("\nBienvenido a Emergencia Veterinaria.");
+            		System.out.println("\nBienvenido a Emergencias del Centro Veterinaria UNamascota.");
             		emergenciaVeterinaria(cliente);
             		break;
             	case 2:
@@ -74,7 +74,7 @@ public class Main {
 					//agendarServicio();
             		break;
             	case 3:
-            		System.out.println("Bienvenido a la funcionalidad 3.");
+            		System.out.println("Bienvenido a la Tienda del Centro Veterinario UNamascota.");
             		break;
             	case 4:
             		System.out.println("Bienvenido a la funcionalidad 4.");

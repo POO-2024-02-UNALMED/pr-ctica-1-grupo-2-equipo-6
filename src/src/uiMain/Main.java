@@ -1335,3 +1335,108 @@ public static void tienda() {
 	}//BUCLE INICIAL
 }//FINAL MÉTODO TIENDA
 }
+
+
+// ---------------------------------------------------------------------------------------
+
+
+
+public static void planificacionDieta(Cliente cliente) {
+	//ingresar datos de la mascota
+		System.out.println("\nIngresa los datos de su mascota:");
+		System.out.println("Nombre:");
+		String nombre = Main.leerCadena();
+		
+		System.out.println("Especie:");
+		String tipo = "";
+		while (true) {//validar que la especie introducida sea valido.
+			tipo = Main.leerCadena();
+			if (tipo.equalsIgnoreCase("Gato") || tipo.equalsIgnoreCase("Perro")) {
+				break;
+			} else {
+				System.out.println("Lo sentimos, la planiicacion de dieta solo esta disponible para gatos y perros.");
+				return;
+			 }
+		}
+		
+		System.out.println("Edad:");
+		int edad = Main.leerEntero();
+		
+		System.out.println("Sexo (M/F):");
+		String sexo = "";
+		while (true) {//validar que el dato introducido sea valido.
+			sexo = Main.leerCadena();
+			if (sexo.equalsIgnoreCase("M") || sexo.equalsIgnoreCase("F")) {
+				break;
+			} else { System.out.println("Entrada no valida, intentalo de nuevo."); }
+		}
+		
+		System.out.println("Tamaño (1-4): \n1. Miniatura \n2. Pequeño \n3. Mediano \n4. Grande");
+		int tamano = 3;
+		while (true) {//validar que el dato introducido sea valido.
+			tamano = Main.leerEntero();
+			if (tamano > 0 && tamano < 5) {
+				break;
+			} else { System.out.println("Entrada no valida, intentalo de nuevo."); }
+		}
+		
+		System.out.println("Peso en kg:");
+		double peso = Main.leerDoble();
+
+		//Crear un objeto Mascota con los datos que ingresó el usuario
+		Mascota mascota = new Mascota(nombre, tipo, edad, sexo, EstadoSalud.SANO, tamano, peso);
+		//Crea el objeto dieta asociado a la mascota
+		Dieta dieta = new Dieta(mascota);
+		//utiliza las formulas aritmeticas para calcular el porcentaje de nutrientes que debe
+		//consumir la mascota, dependiendo de su debe subir o bajar de peso.
+		dieta.calcularPesoIdeal();
+        dieta.gramosDiarios = dieta.getPesoIdeal() * mascota.getTamano() * 10;
+        switch (dieta.comparacionPeso()) {
+            case 1: //Esta en su peso ideal
+                dieta.grasas = dieta.getGramosDiarios() * 0.20;
+                dieta.proteinas = dieta.getGramosDiarios() * 0.30;
+                dieta.carbohidratos = dieta.getGramosDiarios() * 0.50;
+                break;
+            case 2: //Subir de peso
+                dieta.grasas = dieta.getGramosDiarios() * 0.30;
+                dieta.proteinas = dieta.getGramosDiarios() * 0.40;
+                dieta.carbohidratos = dieta.getGramosDiarios() * 0.30;
+                break;
+            case 3: //Bajar de peso
+                dieta.grasas = dieta.getGramosDiarios() * 0.15;
+                dieta.proteinas = dieta.getGramosDiarios() * 0.50;
+                dieta.carbohidratos = dieta.getGramosDiarios() * 0.35;
+				break;     
+    }
+		//imprime la dieta planificada
+		System.out.println(dieta.toString());
+		//agrega recomendaciones de productos.
+		if (mascota.getEspecie().equals("gato")) {
+			System.out.println(""); //Productos recomendados para gato
+		} else {
+			System.out.println(""); //Productos recomendados para perro
+		}
+		//serializa el objeto dieta creado
+
+		
+
+		//pregunta al usuario que desea hacer
+		System.out.println("\n¿Desea volver al menu principal o redirigirse a la tienda? [Menu/Tienda]: ");
+			String respuesta = " ";
+			while (true) {
+				respuesta = leerCadena();
+				respuesta.toLowerCase();
+				if (respuesta.equals("menu")||respuesta.equals("tienda")) {
+					break; 
+				}else {
+					System.out.println("Por favor, ingresa una respuesta válida [Menu/Tienda]");
+				}
+			}
+				if (respuesta.equals("menu")) {
+					System.out.println("Gracias por ingresar a la interaz de planeacion de dieta!\nRedireccionandote al menu principal...");
+				}
+				else {
+					System.out.println("Gracias por ingresar a la interaz de planeacion de dieta!\nRedireccionandote a la Tienda...");
+					tienda();
+				}
+}//Fin de Planeacion Dieta

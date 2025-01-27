@@ -433,10 +433,10 @@ public static long leerEnteroLargo() {
 				} while (sedeSeleccionada < 1 || sedeSeleccionada > 4);
 		
 			// mostrar los servicioSSeleccionados disponibles según la sede seleccionada
-			System.out.println("\n📋 servicioSSeleccionados Disponibles 📋");
+			System.out.println("\n📋 Servicios Disponibles 📋");
 			switch (sedeSeleccionada) {
 				case 1:
-					System.out.println("SEDE MEDELLIN - servicio Disponiibles: \n1. Entrenamiento \n2. Veterinaria");
+					System.out.println("SEDE MEDELLIN - servicio Disponibles: \n1. Entrenamiento \n2. Veterinaria");
 					break;
 				case 2:
 					System.out.println("SEDE BOGOTA - servicio Disponibles: \n1. Peluquería");
@@ -822,7 +822,7 @@ public static long leerEnteroLargo() {
 			}
 			// función para obtener los datos del cliente
 			public static Cliente obtenerDatosCliente() {
-				System.out.println("\nAntes de continuar, le informamos que para hacer uso del servicioSSeleccionado la persona encargada de la mascota debe ser mayor de edad.\n");
+				System.out.println("\nAntes de continuar, le informamos que para hacer uso del servicio seleccionado la persona encargada de la mascota debe ser mayor de edad.\n");
 		
 				String nombre;
 				int edad = 0;

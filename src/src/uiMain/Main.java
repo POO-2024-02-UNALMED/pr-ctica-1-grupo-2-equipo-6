@@ -1052,7 +1052,7 @@ public static long leerEnteroLargo() {
 			}
 			case 3 -> {
 				System.out.println("Ingrese el tipo de memorial al cual desea agregar flores (Sepulcro/Osario/Cenizas/Arbol):");
-				String tipo = leerCadena();
+				String tipo = sc.nextLine();
 				ArrayList<Fallecido> listaFallecidos = memorial.obtenerFallecidosPorTipo(tipo);
 				switch(tipo) {
 				case "Sepulcro" -> listaFallecidos = memorial.getSepulcros();
@@ -1073,11 +1073,12 @@ public static long leerEnteroLargo() {
 					
 					System.out.println("Ingrese el numero del memorial que desea ver:");
 					int seleccion = sc.nextInt();
+					sc.nextLine();
 					if (seleccion >= 1 && seleccion <= listaFallecidos.size()) {
 						Fallecido seleccionado = listaFallecidos.get(seleccion - 1);
 						
 						System.out.println("Ingrese el nombre de la flor que desea agregar:");
-						String flor = leerCadena();
+						String flor = sc.nextLine();
 						
 						String resultado = seleccionado.ponerFlor(flor);
 						System.out.println(resultado);

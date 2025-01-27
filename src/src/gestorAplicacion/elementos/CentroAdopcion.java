@@ -1,10 +1,8 @@
 package gestorAplicacion.elementos;
 
-import java.util.List;
-
 import gestorAplicacion.elementos.Mascota.EstadoSalud;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class CentroAdopcion {
 	
@@ -133,7 +131,7 @@ public class CentroAdopcion {
                 return true;
             case 3:
                 if (cliente != null && monto <= cliente.getPuntos()) {
-                	cliente.disminuirPuntos(monto);
+                	cliente.disminuir_Puntos(monto);
                     System.out.println("\nPago procesado con puntos acumulados.");
                     return true;
                 } else {

@@ -1,12 +1,11 @@
 package gestorAplicacion.gestion;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-
-import gestorAplicacion.elementos.Producto;
+import gestorAplicacion.elementos.CentroAdopcion;
 import gestorAplicacion.elementos.Cliente;
 import gestorAplicacion.elementos.Empleado;
-import gestorAplicacion.elementos.CentroAdopcion;
+import gestorAplicacion.elementos.Producto;
+import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Tienda implements Serializable{
 	
@@ -141,7 +140,7 @@ public class Tienda implements Serializable{
                     int puntos = cliente.getPuntos(); //SE TOMAN LOS PUNTOS DEL CLIENTE
                     
                     if (puntos>=15) {// SI TIENE MÁS DE 15 PUNTOS ACOMULADOS, SE LE HACE UN DESCUENTO AUTOMÁTICAMENTE
-                    	cliente.disminuir_puntos(puntos); // SE LE QUITAN LOS 15 PUNTOS 
+                    	cliente.disminuir_Puntos(puntos); // SE LE QUITAN LOS 15 PUNTOS 
                     	precio -= precio*0.1; // SE MODIFICA EL PRECIO ORIGINAL 
                     	// EN EL RETURN DEVOLVEMOS LO IMPORTADO 
                     	 return "-------------------------------------------\n"+"✅Muchas gracias por tu compra, adquiriste: "+nombre+" para "+tipo+"\n"+"Total a pagar: "+precio+" $"+"\n"+"✅Han sido descontados 15 puntos para un 10% de descuento\n"+"Puntos restantes en tu cartera de puntos: "+cliente.getPuntos()+"\n-------------------------------------------";
@@ -185,7 +184,7 @@ public class Tienda implements Serializable{
                     int puntos = cliente.getPuntos(); // SE TOMAN LOS PUNTOS 
                     
                     if (puntos>=15) { // SI TIENE MÁS DE 15 PUNTOS ACOMULADOS, SE LE HACE UN DESCUENTO AUTOMÁTICAMENTE
-                    	cliente.disminuir_puntos(puntos); // SE RESTAN LOS 15 PUNTOS QUE SE USARON COMO DESCUENTO
+                    	cliente.disminuir_Puntos(puntos); // SE RESTAN LOS 15 PUNTOS QUE SE USARON COMO DESCUENTO
                     	precio -= precio*unidades*0.1; // SE CALCULA EL PRECIO CON EL 10% DE DESCUENTO
                     	 return "-------------------------------------------\n"+"✅ Has comprado "+unidades+" unidades de: "+nombre+" para "+tipo+"\n"+"Total a pagar: "+precio+" $"+"\n"+"✅Han sido descontados 15 puntos para un 10% de descuento\n"+"Puntos restantes en tu cartera de puntos: "+cliente.getPuntos()+"\n-------------------------------------------";
                     }else { // RETORNA ÚNICAMENTE EL PRECIO PORQUE NO TIENE LOS PUNTOS SUFUCIENTES

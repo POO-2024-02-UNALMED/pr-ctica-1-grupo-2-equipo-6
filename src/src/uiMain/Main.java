@@ -1,20 +1,17 @@
 package uiMain;
 
-import java.util.List;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-
 import gestorAplicacion.elementos.CentroAdopcion;
+import gestorAplicacion.elementos.CentroAdopcion.Sedes;
+import gestorAplicacion.elementos.Cliente;
+import gestorAplicacion.elementos.Dieta;
 import gestorAplicacion.elementos.Empleado;
 import gestorAplicacion.elementos.Empleado.Especialidad;
 import gestorAplicacion.elementos.Mascota;
-import gestorAplicacion.elementos.CentroAdopcion.Sedes;
-import gestorAplicacion.elementos.Cliente;
-import gestorAplicacion.elementos.Cupo;
 import gestorAplicacion.elementos.Mascota.EstadoSalud;
-import gestorAplicacion.gestion.Cita;
 import gestorAplicacion.gestion.Tienda;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 
 		
@@ -50,9 +47,9 @@ public class Main {
             System.out.println("\n¿Qué desea hacer?");
             System.out.println("\n1. Emergencia Veterinaria");
             System.out.println("2. (Funcionalidad 2)");
-            System.out.println("3. (Funcionalidad 3)");
+            System.out.println("3. Tienda UNamascota");
             System.out.println("4. (Funcionalidad 4)");
-            System.out.println("5. (Funcionalidad 5)");
+            System.out.println("5. (Planificacion de Dieta)");
             System.out.println("6. Salir");
             
             if (sc.hasNextInt()) {
@@ -66,7 +63,7 @@ public class Main {
             
             switch (opcion) {
             	case 1:
-            		System.out.println("\nBienvenido a Emergencia Veterinaria.");
+            		System.out.println("\nBienvenido a Emergencias del Centro Veterinaria UNamascota.");
             		emergenciaVeterinaria(cliente);
             		break;
             	case 2:
@@ -74,13 +71,13 @@ public class Main {
 					//agendarServicio();
             		break;
             	case 3:
-            		System.out.println("Bienvenido a la funcionalidad 3.");
+            		System.out.println("Bienvenido a la Tienda del Centro Veterinario UNamascota.");
             		break;
             	case 4:
             		System.out.println("Bienvenido a la funcionalidad 4.");
             		break;
             	case 5:
-            		System.out.println("Bienvenido a la funcionalidad 5.");
+            		planificacionDieta(cliente);
             		break;
             	case 6:
                     System.out.println("Saliendo del sistema.");
@@ -91,42 +88,6 @@ public class Main {
             
 		}
 		sc.close();
-	}
-
-	//MÉTODOS NECESARIOS	
-	//ENTRADAS DE DATOS POR TIPO
-	static byte readByte() {
-		return entrada.nextByte();
-	}
-	
-	static int readInt() {
-		return entrada.nextInt();
-	}
-	
-	static String readString() {	
-		String string = entrada.nextLine();
-		return string;
-	}
-	
-	static long readLong() {
-		return entrada.nextLong();
-	}
-	
-	static boolean readBoolean() {
-		boolean x=entrada.nextBoolean();
-		return x;
-	}
-	
-	static double nextDouble() {
-		return entrada.nextDouble();
-	}
-	
-	static void println(Object obj) {
-		System.out.println(obj);
-	}
-	
-	static void print(Object obj) {
-		System.out.print(obj);
 	}
 
 	//Para leer un entero desde la entrada.
@@ -141,19 +102,32 @@ public class Main {
 	}
 	
 	//Para leer un número largo desde la entrada.
-public static long leerEnteroLargo() {
-    while (true) {
-        try {
-            return scanner.nextLong();
-        } catch (InputMismatchException e) {
-            scanner.next(); // Limpiar la entrada no válida
-        }
+	public static long leerEnteroLargo() {
+    	while (true) {
+       		try {
+       	    	return scanner.nextLong();
+       	 	} catch (InputMismatchException e) {
+           	 	scanner.next(); // Limpiar la entrada no válida
+       		}
+		}
 	}
-}
+	
 	//Para leer una cadena de texto desde la entrada.
 	public static String leerCadena() {
 		return scanner.nextLine();
 	}
+
+	public static double leerDoble() {
+    	while (true) {
+        	try {
+            	return scanner.nextDouble();
+        	} catch (InputMismatchException e) {
+        	    scanner.next(); // Limpiar la entrada no válida
+        	}
+		}
+	}
+
+
 
 	public static void emergenciaVeterinaria(Cliente cliente) {
 		
@@ -356,7 +330,7 @@ public static long leerEnteroLargo() {
 		//sc.close();
 	}
 
-}
+
 
 
 
@@ -749,127 +723,127 @@ public static long leerEnteroLargo() {
 		}
 */
 
+
 public static void tienda() {
 		
-
-		
 	//CREAMOS UN EMPLEADO PARA QUE ATIENDA LA TIENDA
-	Empleado empliado = new Empleado("Albert", 22, 555, 1323, "West Elm", Empleado.Rol.TENDERO);
+	Empleado empleado = new Empleado("Albert", 22, 555, 1323, "West Elm", Empleado.Especialidad.VENDEDOR);
+            CentroAdopcion sede1 = null;
 	
 	// CREACIÓN DE TIENDA
-	//t1 = new Tienda(empliado, sede1);
-	Tienda t1 = new Tienda(empliado,sede1);
+	//t1 = new Tienda(empleado, sede1);
+	Tienda t1 = new Tienda(empleado, sede1);
 	
 	// BUCLE QUE MANTIENE LA OPERACION DE LA TIENDA, DE ROMPERSE, SE TERMINA LA FUNCIONALIDAD
 	
 	boolean bucle = true; // VARIABLE PARA EL SEGUNDO MENÚ
 	
-	println("\n🐾🐕¡Bienvenido a la tienda de mascotas del Centro de cuidado Animal: UNamascota!🐾🐈"+"\n Aquí encontrarás los mejores productos para el cuidado y la diversión de tu compañero peludo."+"\n");
+	System.out.println("\n🐾🐕¡Bienvenido a la tienda de mascotas del Centro de cuidado Animal: UNamascota!🐾🐈"+"\n Aquí encontrarás los mejores productos para el cuidado y la diversión de tu compañero peludo."+"\n");
 	
 	while (true) { 
 	
-		println("¿Qué te trae por estos lares?");
-		println("1. Ir de compras");
-		println("2. Salir\n");
-		println("Ingrese el número de la opción que desea [1-2]: ");
+		System.out.println("¿Qué te trae por estos lares?");
+		System.out.println("1. Ir de compras");
+		System.out.println("2. Salir\n");
+		System.out.println("Ingrese el número de la opción que desea [1-2]: ");
 		
 		int menu = 0; // ENTERO QUE EL USUARIO VA A INGREASAR, PARA ESCOGER OPCION 
 		while (menu==0) { //MIENTRAS EL ENTERO SEA CERO (PARA CONTROLAR QUE EL USUARIO LE DÉ UN VALOR)
 			try {//CONTROL DE ERRORES 
-				menu = readInt(); //SE LEE EL ENTERO 
+				menu = leerEntero(); //SE LEE EL ENTERO 
 				if (menu>0 && menu<=2) { //SI ESTÁ ENTRE 1 Y 2 TERMINA 
 					break;
 				}
 				else {
-					println("🚫¡Oh no!, Ingrese un número válido por favor🚫");
+					System.out.println("🚫¡Oh no!, Ingrese un número válido por favor🚫");
 					menu = 0;
 					continue;
 				}
 			}
 			catch(InputMismatchException e) {
-				println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
+				System.out.println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
 			}
 			finally {
-					entrada.nextLine();//SALTO DE LINEA
+					scanner.nextLine();//SALTO DE LINEA
 				}
 		}
 		
 	if (menu==1) {	// OPCION 1 DEL PRIMER MENÚ, ADQUIRIR PRODCUTO.		
 		while (bucle==true) { //UTILIZAMOS LA VARIABLE BUCLE INICIADA ANTES DEL PRIMER WHILE
 			
-			println("\n--------------------------------------------------------");
-			println("\n🐾🐕¿Cómo desea que se le muestren los productos?🐾🐈");
-			println("1. Mostrar todo");
-			println("2. Filtrar por tipo\n");
-			print("Ingrese el número de la opción que desea [1-2]: \n");
-			println("\n--------------------------------------------------------");
+			System.out.println("\n--------------------------------------------------------");
+			System.out.println("\n🐾🐕¿Cómo desea que se le muestren los productos?🐾🐈");
+			System.out.println("1. Mostrar todo");
+			System.out.println("2. Filtrar por tipo\n");
+			System.out.println("Ingrese el número de la opción que desea [1-2]: \n");
+			System.out.println("\n--------------------------------------------------------");
 				
 			int menuTienda = 0; // VOLVEMOS A RECIBIR UNA ENTRADA, ESTA VEZ PARA DECIDIR COMO FILTRAR LOS PRODUCTOS
 			while (menuTienda==0) {
 				try {
-					menuTienda = readInt();
+					menuTienda = leerEntero();
 					if (menuTienda>0 && menuTienda<=2) { // SE CONTROLA QUE ESTÉ DENTRO DEL RANGO 
 						break;
 					}
 					else {
-						println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
+						System.out.println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
 						menuTienda = 0;
 						continue;
 					}
 				}
 				catch(InputMismatchException e) {
-					println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
+					System.out.println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
 				}
 				finally {
-					entrada.nextLine();//SALTO DE LINEA
+					scanner.nextLine();//SALTO DE LINEA
 				}
 			}
 			
 			if (menuTienda==1) { //EN CASO DE QUE SE QUIERA VISUALIZAR TODOO	
-				println("\nProductos disponibles:");
-				println(t1.inventario()); // SE LLAMA AL MÉTODO INVENTARIO DE TIENDA, PARA QUE DEVULVA TODOS LOS PRODUCTOS SIN MÁS
+				System.out.println("\nProductos disponibles:");
+				System.out.println(t1.inventario()); // SE LLAMA AL MÉTODO INVENTARIO DE TIENDA, PARA QUE DEVULVA TODOS LOS PRODUCTOS SIN MÁS
 			}
 			else { // DE LO CONTRARIO, SE LE VOLVERÁ A PEDIR UNA ENTRADA PARA QUE INDIQUE POR QUE TIPO DE ANIMAL QUIERE VER 
-				print("\n🐈🐾¿Por qué tipo de animal te gustaría ver? [Perros, gatos, aves, hamsters o conejos]: 🐕🐾");
+				System.out.println("\n🐈🐾¿Por qué tipo de animal te gustaría ver? [Perros, gatos, aves, hamsters o conejos]: 🐕🐾");
 				while (true) { //BUCLE PARA CONTROLAR ÉSTE NUEVO MENÚ
 					try {
-						String tipo = readString(); // SE LEE EL STRING 
+						String tipo = leerCadena(); // SE LEE EL STRING 
 						tipo.toLowerCase(); // SE PONE EL TEXTO EN MINÚSCULAS
 						
 						//LUEGO LO COMPARAMOS EN ESTE GRUPO DE CONDICIONALES SIMPLES 
 						
 						if (tipo.equals("perros") || tipo.equals("perro")) { 
-							println("\nProductos disponibles: 🐕\n");
-							println(t1.filtrar("perros")); //DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
+							System.out.println("\nProductos disponibles: 🐕\n");
+							System.out.println(t1.filtrar("perros")); //DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
 							break;
 						}
 						else if (tipo.equals("gatos") || tipo.equals("gato")) {
-							println("\nProductos disponibles: 🐈\n");
-							println(t1.filtrar("gatos")); //DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA 
+							System.out.println("\nProductos disponibles: 🐈\n");
+							System.out.println(t1.filtrar("gatos")); //DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA 
 							break;
 						}
 						else if (tipo.equals("aves") || tipo.equals("ave")) {
-							println("\nProductos disponibles: 🐦\n");
-							println(t1.filtrar("aves"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
+							System.out.println("\nProductos disponibles: 🐦\n");
+							System.out.println(t1.filtrar("aves"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
 							break;
 						}	
 						else if (tipo.equals("hamsters") || tipo.equals("hamster")) {
-							println("\nProductos disponibles: 🐹\n");
-							println(t1.filtrar("hamsters"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
+							System.out.println("\nProductos disponibles: 🐹\n");
+							System.out.println(t1.filtrar("hamsters"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
 							break;
 						}
 						else if (tipo.equals("conejos") || tipo.equals("conejo")) {
-							println("\nProductos disponibles: 🐇\n");
-							println(t1.filtrar("conejos"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
+							System.out.println("\nProductos disponibles: 🐇\n");
+							System.out.println(t1.filtrar("conejos"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
 							break;
 						}
 						else {
-							println("🚫Por favor, ingrese el tipo del animal en minúsculas [Perros, gatos, aves o hamsters]🚫");
+							System.out.println("🚫Por favor, ingrese el tipo del animal en minúsculas [Perros, gatos, aves o hamsters]🚫");
 							continue;
 						}
 					}
 					catch(InputMismatchException e) {
-						println("🚫Por favor, coloque un tipo valido de animal🚫");
+						System.out.println("🚫Por favor, coloque un tipo valido de animal🚫");
 					}
 				}
 			}
@@ -879,43 +853,43 @@ public static void tienda() {
 			boolean control = true;
 			while (control) {
 				try {
-						print("Digite el índice del producto a comprar: ");
-						int indice = readInt(); //INDICE PARA LOCALIZAR EL PRODUCTO QUE QUIERE EL USUARIO 
+						System.out.println("Digite el índice del producto a comprar: ");
+						int indice = leerEntero(); //INDICE PARA LOCALIZAR EL PRODUCTO QUE QUIERE EL USUARIO 
 		
-						print("Indique cuantas unidades necesita del producto: ");
-						int unidades = readInt(); //CANTIDAD DE UNIDADES QUE EL USUARIO VA A COMPRAR
+						System.out.println("Indique cuantas unidades necesita del producto: ");
+						int unidades = leerEntero(); //CANTIDAD DE UNIDADES QUE EL USUARIO VA A COMPRAR
 						
 						//  REGISTRO DEL USUARIO PARA REALIZAR LA COMPRA-------------------------------------
 						
 						if (unidades==1) { //SI SOLO VA A COMPRAR UNA UNIDAD
-							println("\nSus datos serán tomados para registrar la compra.");
-							print("Ingrese su cédula: ");
-							long cedula = entrada.nextLong();
-							print("Ingrese su edad: ");
-							int edad = entrada.nextInt();
-							print("Ingrese su nombre: ");
-							entrada.nextLine();
-							String nombre = readString();
+							System.out.println("\nSus datos serán tomados para registrar la compra.");
+							System.out.print("Ingrese su cédula: ");
+							long cedula = scanner.nextLong();
+							System.out.print("Ingrese su edad: ");
+							int edad = scanner.nextInt();
+							System.out.println("Ingrese su nombre: ");
+							scanner.nextLine();
+							String nombre = leerCadena();
 							
 							//SE REGISTA EL USUARIO, CREANDO UN OBJETO DEL TIPO CLIENTE Y PASANDOLO AL MÉTODO COMPRA DE TIENDA 
 							Cliente cliente = new Cliente(nombre, edad, cedula);
-							println("\n"+t1.compra(indice, cliente)); 
+							System.out.println("\n"+t1.compra(indice, cliente)); 
 							//ESTE FILTRO DE: UNIDADES == 1, ES PORQUE EL MÉTODO COMPRA QUE RECIBE DOS PARÁMETROS RETORNA ALGO MÁS ADECUADO PARA ESTE CASO 
 						}
 						else { // CUANDO EL USUARIO VA A COMPRAR MÁS DE UNA UNIDAD 
-							println("\nSus datos serán tomados para registrar la compra.");
-							print("Ingrese su cédula: ");
-							long cedula = entrada.nextLong();
-							print("Ingrese su edad: ");
-							int edad = entrada.nextInt();
-							print("Ingrese su nombre: ");
-							entrada.nextLine();
-							String nombre = readString();
+							System.out.println("\nSus datos serán tomados para registrar la compra.");
+							System.out.print("Ingrese su cédula: ");
+							long cedula = scanner.nextLong();
+							System.out.print("Ingrese su edad: ");
+							int edad = scanner.nextInt();
+							System.out.print("Ingrese su nombre: ");
+							scanner.nextLine();
+							String nombre = leerCadena();
 							
 							//SE REGISTA EL USUARIO, CREANDO UN OBJETO DEL TIPO CLIENTE Y PASANDOLO AL MÉTODO COMPRA DE TIENDA
 							// SE LE AGREGA TAMBIEN, LA CANTIDAD DE UNIDADES AL MÉTODO COMPRA 
 							Cliente cliente = new Cliente(nombre, edad, cedula);
-							println("\n"+t1.compra(indice, unidades, cliente));
+							System.out.println("\n"+t1.compra(indice, unidades, cliente));
 						}
 						
 						// --------------------------------------------------------------------------------
@@ -924,21 +898,22 @@ public static void tienda() {
 					
 				}
 				catch(InputMismatchException e) {
-					println("Por favor lea e ingrese correctamente los datos\n");
+					System.out.println("Por favor lea e ingrese correctamente los datos\n");
 				}
 				
 			}
 			
 			// SE LE PIDE SI DESEA VOLVER A REINICIAR EL CICLO DESDE EL MENÚ DE COMPRA 
-			print("\n¿Desea volver al catálogo? [si/no]: ");
+			System.out.print("\n¿Desea volver al catálogo? [si/no]: ");
 			String respuesta = " ";
 			while (true) {//CONTROL CON UN WHILE SOLAMENTE, HASTA QUE NO RECIBA UNA RESPUESTA VÁLIDA.
-				respuesta = entrada.nextLine();
+				respuesta = scanner.nextLine();
 				respuesta.toLowerCase();
+
 				if (respuesta.equals("si")||respuesta.equals("no")) {
 					break; 
 				}else {
-					println("Por favor, ingrese una respuesta válida [si/no]");
+					System.out.println("Por favor, ingrese una respuesta válida [si/no]");
 					continue;
 				}
 			}
@@ -946,7 +921,7 @@ public static void tienda() {
 					continue; //VOLVER A INICIAR CICLO DE COMPRA
 				}
 				else {
-					println("Esperamos verlo por aquí pronto.\n");
+					System.out.println("Esperamos verlo por aquí pronto.\n");
 					break; // SALIR DE LA TIENDA 
 				}
 			}//BUCLE COMPRAR
@@ -956,3 +931,110 @@ public static void tienda() {
 	}
 	}//BUCLE INICIAL
 }//FINAL MÉTODO TIENDA
+
+
+// ---------------------------------------------------------------------------------------
+
+
+
+public static void planificacionDieta(Cliente cliente) {
+	//ingresar datos de la mascota
+		System.out.println("\nIngresa los datos de su mascota:");
+		System.out.println("Nombre:");
+		String nombre = Main.leerCadena();
+		
+		System.out.println("Especie:");
+		String tipo = "";
+		while (true) {//validar que la especie introducida sea valido.
+			tipo = Main.leerCadena();
+			if (tipo.equalsIgnoreCase("Gato") || tipo.equalsIgnoreCase("Perro")) {
+				break;
+			} else {
+				System.out.println("Lo sentimos, la planiicacion de dieta solo esta disponible para gatos y perros.");
+				return;
+			 }
+		}
+		
+		System.out.println("Edad:");
+		int edad = Main.leerEntero();
+		
+		System.out.println("Sexo (M/F):");
+		String sexo = "";
+		while (true) {//validar que el dato introducido sea valido.
+			sexo = Main.leerCadena();
+			if (sexo.equalsIgnoreCase("M") || sexo.equalsIgnoreCase("F")) {
+				break;
+			} else { System.out.println("Entrada no valida, intentalo de nuevo."); }
+		}
+		
+		System.out.println("Tamaño (1-4): \n1. Miniatura \n2. Pequeño \n3. Mediano \n4. Grande");
+		int tamano = 3;
+		while (true) {//validar que el dato introducido sea valido.
+			tamano = Main.leerEntero();
+			if (tamano > 0 && tamano < 5) {
+				break;
+			} else { System.out.println("Entrada no valida, intentalo de nuevo."); }
+		}
+		
+		System.out.println("Peso en kg:");
+		double peso = Main.leerDoble();
+
+		//Crear un objeto Mascota con los datos que ingresó el usuario
+		Mascota mascota = new Mascota(nombre, tipo, edad, sexo, EstadoSalud.SANO, tamano, peso);
+		//Crea el objeto dieta asociado a la mascota
+		Dieta dieta = new Dieta(mascota);
+		//utiliza las formulas aritmeticas para calcular el porcentaje de nutrientes que debe
+		//consumir la mascota, dependiendo de su debe subir o bajar de peso.
+		dieta.calcularPesoIdeal();
+        dieta.gramosDiarios = dieta.getPesoIdeal() * mascota.getTamano() * 10;
+        switch (dieta.comparacionPeso()) {
+            case 1: //Esta en su peso ideal
+                dieta.grasas = dieta.getGramosDiarios() * 0.20;
+                dieta.proteinas = dieta.getGramosDiarios() * 0.30;
+                dieta.carbohidratos = dieta.getGramosDiarios() * 0.50;
+                break;
+            case 2: //Subir de peso
+                dieta.grasas = dieta.getGramosDiarios() * 0.30;
+                dieta.proteinas = dieta.getGramosDiarios() * 0.40;
+                dieta.carbohidratos = dieta.getGramosDiarios() * 0.30;
+                break;
+            case 3: //Bajar de peso
+                dieta.grasas = dieta.getGramosDiarios() * 0.15;
+                dieta.proteinas = dieta.getGramosDiarios() * 0.50;
+                dieta.carbohidratos = dieta.getGramosDiarios() * 0.35;
+				break;     
+    }
+		//imprime la dieta planificada
+		System.out.println(dieta.toString());
+		//agrega recomendaciones de productos.
+		if (mascota.getEspecie().equals("gato")) {
+			System.out.println(""); //Productos recomendados para gato
+		} else {
+			System.out.println(""); //Productos recomendados para perro
+		}
+		//serializa el objeto dieta creado
+
+		
+
+		//pregunta al usuario que desea hacer
+		System.out.println("\n¿Desea volver al menu principal o redirigirse a la tienda? [Menu/Tienda]: ");
+			String respuesta = " ";
+			while (true) {
+				respuesta = leerCadena();
+				respuesta.toLowerCase();
+				if (respuesta.equals("menu")||respuesta.equals("tienda")) {
+					break; 
+				}else {
+					System.out.println("Por favor, ingresa una respuesta válida [Menu/Tienda]");
+				}
+			}
+				if (respuesta.equals("menu")) {
+					System.out.println("Gracias por ingresar a la interaz de planeacion de dieta!\nRedireccionandote al menu principal...");
+				}
+				else {
+					System.out.println("Gracias por ingresar a la interaz de planeacion de dieta!\nRedireccionandote a la Tienda...");
+					tienda();
+				}
+}//Fin de Planeacion Dieta
+
+}

@@ -1,7 +1,4 @@
 package gestorAplicacion.elementos;
-import gestorAplicacion.elementos.Mascota;
-
-    //import java.io.Serializable;
 
 	// LÓPEZ GONZÁLEZ, ALEJANDRO
 	// BETANCUR URIBE, EMMANUEL
@@ -48,7 +45,7 @@ public class Cliente extends Persona {
 		this.puntos+=puntos;
 	}
 	
-	public void disminuirPuntos(int puntos) {
+	public void disminuir_Puntos(int puntos) {
 		this.puntos-=puntos;
 	}
 	

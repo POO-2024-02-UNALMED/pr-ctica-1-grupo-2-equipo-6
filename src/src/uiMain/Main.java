@@ -93,42 +93,6 @@ public class Main {
 		sc.close();
 	}
 
-	//MÉTODOS NECESARIOS	
-	//ENTRADAS DE DATOS POR TIPO
-	static byte readByte() {
-		return entrada.nextByte();
-	}
-	
-	static int readInt() {
-		return entrada.nextInt();
-	}
-	
-	static String readString() {	
-		String string = entrada.nextLine();
-		return string;
-	}
-	
-	static long readLong() {
-		return entrada.nextLong();
-	}
-	
-	static boolean readBoolean() {
-		boolean x=entrada.nextBoolean();
-		return x;
-	}
-	
-	static double nextDouble() {
-		return entrada.nextDouble();
-	}
-	
-	static void println(Object obj) {
-		System.out.println(obj);
-	}
-	
-	static void print(Object obj) {
-		System.out.print(obj);
-	}
-
 	//Para leer un entero desde la entrada.
 	public static int leerEntero() {
 		while (true) {
@@ -356,7 +320,7 @@ public static long leerEnteroLargo() {
 		//sc.close();
 	}
 
-}
+
 
 
 
@@ -749,12 +713,13 @@ public static long leerEnteroLargo() {
 		}
 */
 
+
 public static void tienda() {
 		
 
 		
 	//CREAMOS UN EMPLEADO PARA QUE ATIENDA LA TIENDA
-	Empleado empliado = new Empleado("Albert", 22, 555, 1323, "West Elm", Empleado.Rol.TENDERO);
+	Empleado empliado = new Empleado("Albert", 22, 555, 1323, "West Elm", Empleado.Especialidad.VENDEDOR);
 	
 	// CREACIÓN DE TIENDA
 	//t1 = new Tienda(empliado, sede1);
@@ -880,7 +845,7 @@ public static void tienda() {
 			while (control) {
 				try {
 						print("Digite el índice del producto a comprar: ");
-						int indice = readInt(); //INDICE PARA LOCALIZAR EL PRODUCTO QUE QUIERE EL USUARIO 
+						int indice = leerEntero(); //INDICE PARA LOCALIZAR EL PRODUCTO QUE QUIERE EL USUARIO 
 		
 						print("Indique cuantas unidades necesita del producto: ");
 						int unidades = readInt(); //CANTIDAD DE UNIDADES QUE EL USUARIO VA A COMPRAR

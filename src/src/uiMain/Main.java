@@ -80,6 +80,7 @@ public class Main {
             		break;
             	case 3:
             		System.out.println("Bienvenido a la funcionalidad 3.");
+					tienda();
             		break;
             	case 4:
             		System.out.println("Bienvenido al servicio memorial.");

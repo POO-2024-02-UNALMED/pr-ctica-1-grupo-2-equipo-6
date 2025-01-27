@@ -14,6 +14,7 @@ import gestorAplicacion.elementos.Cliente;
 import gestorAplicacion.elementos.Cupo;
 import gestorAplicacion.elementos.Mascota.EstadoSalud;
 import gestorAplicacion.elementos.Producto;
+import gestorAplicacion.elementos.Dieta;
 import gestorAplicacion.gestion.Cita;
 import gestorAplicacion.gestion.Tienda;
 import gestorAplicacion.elementos.Fallecido;

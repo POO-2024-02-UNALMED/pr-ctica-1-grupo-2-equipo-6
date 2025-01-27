@@ -40,12 +40,12 @@ public class Main {
 		System.out.println("\n - - Bienvenido al Centro Veterinario Virtual: UNamascota. - - \n");
 		System.out.println("--------------------");
 		System.out.println("\n- Ingrese sus datos");
-		System.out.println("\n- Nombre Completo: ");
+		System.out.print("\n- Nombre Completo: ");
 		String nombre = sc.nextLine();
-		System.out.println("- Edad: ");
+		System.out.print("- Edad: ");
 		int edad = sc.nextInt(); 
 		sc.nextLine();
-		System.out.println("- Cédula: ");
+		System.out.print("- Cédula: ");
 		long cedula = sc.nextLong();
 		System.out.println("--------------------");
 		
@@ -55,47 +55,54 @@ public class Main {
 		while (opcion != 6) {
 			
 			System.out.println("--------------------");
-            System.out.println("\n (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ ¿Qué desea hacer el día de hoy? ᓚᘏᗢ");
+            System.out.println("\n - - ¿Qué desea hacer el día de hoy? - -");
             System.out.println("\n1. Emergencia Veterinaria");
-            System.out.println("2. (Funcionalidad 2)");
-            System.out.println("3. Tienda UNamascota");
+            System.out.println("2. Adquirir Servicios: PetTraining");
+			System.out.println("3. Tienda: UNamascota");
             System.out.println("4. Servicio de Memorial"); //memorial
             System.out.println("5. Planificador de Dieta");
             System.out.println("6. (┬┬~~┬┬) Salir");
 			System.out.println("\n--------------------");
+			System.out.print("Ingrese el número de la opción que desea [1-6]: ");
             
             if (sc.hasNextInt()) {
                 opcion = sc.nextInt();
                 sc.nextLine();
             } else {
-                System.out.println("scanner no válida. Por favor, ingrese un número del 1 al 6.\n");
+                System.out.println("Scanner no válida. Por favor, ingrese un número válido [1-6].\n");
                 sc.nextLine();
                 continue;
             }
             
             switch (opcion) {
             	case 1:
+					System.out.println("\n--------------------");
             		System.out.println("\nBienvenido a Emergencia Veterinaria.");
             		emergenciaVeterinaria(cliente);
             		break;
             	case 2:
-            		System.out.println("Bienvenido a la funcionalidad 2.");
+					System.out.println("\n--------------------");
+            		System.out.println("\nBienvenido a PetTraining.");
 					agendarservicioSSeleccionado();
             		break;
             	case 3:
-            		System.out.println("Bienvenido a la funcionalidad 3.");
+					System.out.println("\n--------------------");
+            		System.out.println("\nBienvenido a Tienda UNamascota.");
 					tienda();
             		break;
             	case 4:
-            		System.out.println("Bienvenido al servicio memorial.");
+					System.out.println("\n--------------------");
+            		System.out.println("\nBienvenido al servicio memorial.");
             		gestionarMemorial(cliente);
             		break;
             	case 5:
-					System.out.println("Bienvenido al Sistema de planificacion de Dieta.");
+					System.out.println("\n--------------------");
+					System.out.println("\nBienvenido al Sistema de planificacion de Dieta.");
             		planificacionDieta(cliente);
             		break;
             	case 6:
-                    System.out.println("Saliendo del sistema.");
+					System.out.println("\n--------------------");
+                    System.out.println("\nSaliendo del sistema.");
                     break;
             	default:
             		System.out.println("Opción no válida. Por favor, intente de nuevo.\n");
@@ -190,28 +197,29 @@ public static long leerEnteroLargo() {
 		
 		//Pedir datos de la mascota al usuario
 		System.out.println("\nIngrese los datos de su mascota:");
-		System.out.println("Nombre:");
+		System.out.print("Nombre: ");
 		String nombre = sc.nextLine();
 		
-		System.out.println("Especie:");
+		System.out.print("Especie: ");
 		String tipo = sc.nextLine();
 		
-		System.out.println("Edad:");
+		System.out.print("Edad: ");
 		int edad = sc.nextInt();
 		sc.nextLine();
 		
-		System.out.println("Sexo (M/F):");
+		System.out.print("Sexo (M/F): ");
 		String sexo = sc.nextLine();
 		
-		System.out.println("Tamaño (1-4): \n1. Miniatura \n2. Pequeño \n3. Mediano \n4. Grande");
+		System.out.print("Tamaño (1-4): \n1. Miniatura \n2. Pequeño \n3. Mediano \n4. Grande \nIngrese el número correspondiente: ");
 		int tamano = sc.nextInt();
 		sc.nextLine();
 		
-		System.out.println("Peso en kg:");
+		System.out.print("Peso en kg: ");
 		double peso = sc.nextDouble();
 		sc.nextLine();
 		
-		System.out.println("Síntomas (sin comas):");
+		System.out.println("\nDe la siguiente lista: fiebre, vómito, picazón, enrojecimiento, inflamación");
+		System.out.print("Síntomas (sin comas): ");
 		String sintomas = sc.nextLine();
 		String[] listaSintomas = sintomas.split(" ");
 		//---------------------------------------------------
@@ -224,6 +232,7 @@ public static long leerEnteroLargo() {
 		//Pedirle al usuario que elija la sede y asignarla a la instancia de centro de adopción
 		System.out.println("\n¿En dónde desea que su mascota sea atendida? (1-4):");
 		centro.mostrarSedes();
+		System.out.print("Ingrese el número correspondiente a la sede: ");
 		int sede = sc.nextInt();
 		sc.nextLine();
 		while (sede < 1 || sede > Sedes.values().length) {
@@ -289,6 +298,7 @@ public static long leerEnteroLargo() {
 					System.out.println(i+1 + ". " + centro.gestionarVeterinario().get(i));
 				}
 				
+				System.err.print("Ingrese el número correspondiente al veterinario que desea: ");
 				int opcion = sc.nextInt();
 				sc.nextLine();
 				

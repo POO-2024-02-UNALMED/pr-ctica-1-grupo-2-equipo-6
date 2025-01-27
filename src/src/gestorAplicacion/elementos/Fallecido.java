@@ -1,5 +1,6 @@
 package gestorAplicacion.elementos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 // BULA FUENTES, MELANIE
@@ -8,9 +9,10 @@ import java.util.ArrayList;
 //DESCRIPCIÓN DE LA CLASE:
 //Representa a los animales que han fallecido,Incluyendo datos sobre el dueño, fecha de fallecimiento y mensajes de recuerdo.
 	
-public class Fallecido{
+public class Fallecido implements Serializable{
 
     //---> Atributos <---
+	private static final long serialVersionUID = 1L;
 	private Mascota mascota;
 	private String fecha;
 	private String mensaje;

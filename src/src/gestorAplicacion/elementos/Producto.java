@@ -1,14 +1,16 @@
 package gestorAplicacion.elementos;
 
+import java.io.Serializable;
+
 // BULA FUENTES, MELANIE
 // OSPINA GAVIRIA, TOMAS
 
 //Descripción De La Clase:
 //Representa los arti­culos en venta en la tienda, incluyendo nombre, precio, tipo de animal, tipo de Uso y cantidad disponible. 
 
-public class Producto {
+public class Producto implements Serializable {
 	//---> Atributos <---
-
+    private static final long serialVersionUID = 1L;
     private String nombre; //Nombre del producto.
     private float precio; //Precio individual del producto.
     private String tipoAnimal; //Tipo de animal que puede usar el producto.

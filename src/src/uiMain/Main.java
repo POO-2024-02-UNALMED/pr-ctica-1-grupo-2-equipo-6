@@ -2,6 +2,11 @@ package uiMain;
 
 import java.util.List;
 import java.util.Scanner;
+
+import baseDatos.Deserializador;
+import baseDatos.Serializador;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
@@ -17,6 +22,7 @@ import gestorAplicacion.gestion.Cita;
 import gestorAplicacion.gestion.Tienda;
 import gestorAplicacion.elementos.Fallecido;
 import gestorAplicacion.gestion.Memorial;
+import baseDatos.Deserializador;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -24,32 +30,26 @@ import java.util.Scanner;
 
 		
 
-public class Main {
-	
+public class Main implements Serializable {
+	private static final long serialVersionUID = 1L;
 	static Scanner sc = new Scanner(System.in);
 	static CentroAdopcion centro = new CentroAdopcion("POO");
 	private static Scanner scanner = new Scanner(System.in);
-	private static ArrayList<CentroAdopcion> sedes = new ArrayList<>();
+	public static ArrayList<CentroAdopcion> centroAdopcions;
 	private static Memorial memorial = new Memorial(centro);
-		
+	
+	static CentroAdopcion sede1;
+	static CentroAdopcion sede2;
+	static CentroAdopcion sede3;
+	static CentroAdopcion sede4;
 	
 	public static void main(String[] args) {
-		
+		centroAdopcions = Deserializador.deserializarCentrosAdopcion();
 		Scanner sc = new Scanner(System.in);
 		int opcion = 0;
 		
 		System.out.println("Bienvenido a la veterinaria virtual.");
-		System.out.println("\nIngrese sus datos");
-		System.out.println("\nNombre:");
-		String nombre = sc.nextLine();
-		System.out.println("Edad:");
-		int edad = sc.nextInt(); 
-		sc.nextLine();
-		System.out.println("Cédula:");
-		long cedula = sc.nextLong();
 		
-		Cliente cliente = new Cliente(nombre, edad, cedula);
-		cliente.agregarPuntos(50000);
 		
 		while (opcion != 6) {
 			
@@ -73,10 +73,10 @@ public class Main {
             switch (opcion) {
             	case 1:
             		System.out.println("\nBienvenido a Emergencia Veterinaria.");
-            		emergenciaVeterinaria(cliente);
+            		emergenciaVeterinaria();
             		break;
             	case 2:
-            		System.out.println("Bienvenido a la funcionalidad 2.");
+            		System.out.println("Bienvenido a Agendar Cita.");
 					agendarservicioSSeleccionado();
             		break;
             	case 3:
@@ -84,13 +84,14 @@ public class Main {
             		break;
             	case 4:
             		System.out.println("Bienvenido a la funcionalidad 4.");
-            		gestionarMemorial(cliente);
+            		gestionarMemorial();
             		break;
             	case 5:
             		System.out.println("Bienvenido a la funcionalidad 5.");
             		break;
             	case 6:
                     System.out.println("Saliendo del sistema.");
+					salirDelSistema();
                     break;
             	default:
             		System.out.println("Opción no válida. Por favor, intente de nuevo.\n");
@@ -162,8 +163,18 @@ public static long leerEnteroLargo() {
 		return scanner.nextLine();
 	}
 
-	public static void emergenciaVeterinaria(Cliente cliente) {
+	public static void emergenciaVeterinaria() {
+		System.out.println("\nIngrese sus datos");
+		System.out.println("\nNombre:");
+		String nom = sc.nextLine();
+		System.out.println("Edad:");
+		int ed = sc.nextInt(); 
+		sc.nextLine();
+		System.out.println("Cédula:");
+		long cedula = sc.nextLong();
 		
+		Cliente cliente = new Cliente(nom, ed, cedula);
+		cliente.agregarPuntos(50000);
 		
 		
 		//Veterinarios en en centro de adopción. Agregar más
@@ -574,10 +585,11 @@ public static long leerEnteroLargo() {
 			if (!servicioSeleccionadoDisponible) {
 				System.out.println("\nNos disculpamos, pero el servicioSSeleccionado que desea no está disponible para su tipo de mascota. Agradecemos su comprensión.\n");
 				repetir = false;
+				continue;
 			}
 		
 			// obtener la sede seleccionada y los empleados disponibles
-			CentroAdopcion sede = sedes.get(sedeSeleccionada - 1);
+			CentroAdopcion sede = centroAdopcions.get(sedeSeleccionada - 1);
 			ArrayList<Empleado> empleadosDisponibles = sede.tieneEmpleados();
 		
 			// si no hay empleados disponibles, se termina el proceso
@@ -721,7 +733,48 @@ public static long leerEnteroLargo() {
 							
 							citasAgendadas.add(nuevaCita);//AGREGAR LA CITA AL ARRAY DE CITAS QUE EL USUARIO ESTÁ AGENDANDO
 							
-							
+							// si hay citas agendadas
+							if (citasAgendadas.size() != 0) {
+								boolean aplicarDescuento = false;
+					
+								// si el cliente tiene más de 15 puntos, se le ofrece un descuento
+								if (cliente.getPuntos() > 15) {
+									System.out.println("\nSr./Sra. " + cliente.getNombre() + " en estos momentos cuenta con " + cliente.getPuntos() + " puntos."
+											+ "\n¿Desea hacer uso de 15 puntos para obtener un descuento del 10%?");
+									String scanner;
+									do {
+										System.out.print("Responda si / no: ");
+										scanner = leerCadena();
+					
+										if (!scanner.equalsIgnoreCase("si") && !scanner.equalsIgnoreCase("no")) {
+											System.out.println("Proporcione una respuestata válida.\n");
+										}
+									} while (!scanner.equalsIgnoreCase("si") && !scanner.equalsIgnoreCase("no"));
+					
+									// si acepta el descuento, se aplica a todas las citas agendadas y se descuentan los puntos
+									if (scanner.equalsIgnoreCase("si")) {
+										aplicarDescuento = true;
+					
+										for (Cita cita : citasAgendadas) {
+											cita.aplicarDescuento();
+											cliente.disminuir_Puntos(15);
+										}
+					
+										System.out.println("¡Descuento aplicado exitosamente! Se han descontado 15 puntos de su cuenta.");
+									} else {
+										System.out.println("No se aplicó el descuento.");
+									}
+								}
+						
+								// mostrar los detalles de las citas agendadas
+							System.out.println("\n🗓️ DETALLES DE LAS CITAS AGENDADAS 🗓️");
+				
+							for (Cita cita : citasAgendadas) {
+								System.out.println(cita);
+								System.out.println("-----------------\n");
+							}
+			
+		
 							println("\n¡Cita agendada exitosamente!");
 							
 							
@@ -750,115 +803,77 @@ public static long leerEnteroLargo() {
 						}   	    	    	
 					}    
 				}
-			}while(repetir);
-				// si hay citas agendadas
-				if (citasAgendadas.size() != 0) {
-					boolean aplicarDescuento = false;
+			}
+		}while(repetir);
 		
-					// si el cliente tiene más de 15 puntos, se le ofrece un descuento
-					if (cliente.getPuntos() > 15) {
-						System.out.println("\nSr./Sra. " + cliente.getNombre() + " en estos momentos cuenta con " + cliente.getPuntos() + " puntos."
-								+ "\n¿Desea hacer uso de 15 puntos para obtener un descuento del 10%?");
-						String scanner;
-						do {
-							System.out.print("Responda si / no: ");
-							scanner = leerCadena();
+	}
+				
+			// función para obtener los datos del cliente
+		public static Cliente obtenerDatosCliente() {
+			System.out.println("\nAntes de continuar, le informamos que para hacer uso del servicioSSeleccionado la persona encargada de la mascota debe ser mayor de edad.\n");
+	
+			String nombre;
+			int edad = 0;
+			long cedula = 0;
 		
-							if (!scanner.equalsIgnoreCase("si") && !scanner.equalsIgnoreCase("no")) {
-								System.out.println("Proporcione una respuestata válida.\n");
-							}
-						} while (!scanner.equalsIgnoreCase("si") && !scanner.equalsIgnoreCase("no"));
-		
-						// si acepta el descuento, se aplica a todas las citas agendadas y se descuentan los puntos
-						if (scanner.equalsIgnoreCase("si")) {
-							aplicarDescuento = true;
-		
-							for (Cita cita : citasAgendadas) {
-								cita.aplicarDescuento();
-								cliente.disminuir_Puntos(15);
-							}
-		
-							System.out.println("¡Descuento aplicado exitosamente! Se han descontado 15 puntos de su cuenta.");
-						} else {
-							System.out.println("No se aplicó el descuento.");
-						}
+			System.out.println("Proporcione la siguiente información. ");
+			System.out.print("Ingrese su nombre: ");
+			nombre = leerCadena();
+			while (edad <= 0) {
+				try {
+					System.out.print("Ingrese su edad: ");
+					edad = leerEntero();
+					if (edad <= 0) {
+						System.out.println("Proporcione una respuestata válida.\n");
 					}
-		
-					// mostrar los detalles de las citas agendadas
-					System.out.println("\n🗓️ DETALLES DE LAS CITAS AGENDADAS 🗓️");
-		
-					for (Cita cita : citasAgendadas) {
-						System.out.println(cita);
-						System.out.println("-----------------\n");
-					}
+				} catch (RuntimeException e) {
+					System.out.println("Proporcione una respuestata válida.\n");
+				} finally {
+					leerCadena(); // consumir salto de línea
 				}
 			}
-			// función para obtener los datos del cliente
-			public static Cliente obtenerDatosCliente() {
-				System.out.println("\nAntes de continuar, le informamos que para hacer uso del servicioSSeleccionado la persona encargada de la mascota debe ser mayor de edad.\n");
 		
-				String nombre;
-				int edad = 0;
-				long cedula = 0;
-		
-				System.out.println("Proporcione la siguiente información. ");
-				System.out.print("Ingrese su nombre: ");
-				nombre = leerCadena();
-				while (edad <= 0) {
+				// si el usuario es menor de edad, se piden los datos de un adulto responsable
+			if (edad < 18) {
+				System.out.println("El interesado en hacer uso del servicioSSeleccionado es menor de edad.\n");
+				do {
+					System.out.println("Proporcione los datos de un adulto responsable: ");
+					System.out.print("Ingrese su nombre: ");
+					nombre = leerCadena();
+	
 					try {
 						System.out.print("Ingrese su edad: ");
 						edad = leerEntero();
+	
 						if (edad <= 0) {
-							System.out.println("Proporcione una respuestata válida.\n");
+							System.out.println("Proporcione una edad válida.\n");
 						}
+		
+						if (edad > 0 && edad < 18) {
+							System.out.println("La edad ingresada no corresponde a la de un adulto.\n");
+						}
+	
 					} catch (RuntimeException e) {
 						System.out.println("Proporcione una respuestata válida.\n");
 					} finally {
 						leerCadena(); // consumir salto de línea
 					}
-				}
+				} while (edad < 18);
+			}
 		
-				// si el usuario es menor de edad, se piden los datos de un adulto responsable
-				if (edad < 18) {
-					System.out.println("El interesado en hacer uso del servicioSSeleccionado es menor de edad.\n");
-					do {
-						System.out.println("Proporcione los datos de un adulto responsable: ");
-						System.out.print("Ingrese su nombre: ");
-						nombre = leerCadena();
-		
-						try {
-							System.out.print("Ingrese su edad: ");
-							edad = leerEntero();
-		
-							if (edad <= 0) {
-								System.out.println("Proporcione una edad válida.\n");
-							}
-		
-							if (edad > 0 && edad < 18) {
-								System.out.println("La edad ingresada no corresponde a la de un adulto.\n");
-							}
-		
-						} catch (RuntimeException e) {
-							System.out.println("Proporcione una respuestata válida.\n");
-						} finally {
-							leerCadena(); // consumir salto de línea
-						}
-					} while (edad < 18);
-				}
-		
-				while (cedula <= 0) {
-					try {
-						System.out.print("Ingrese su número de identificación: ");
-						cedula = leerEnteroLargo();
-						if (cedula <= 0) {
-							System.out.println("Proporcione una respuestata válida.\n");
-							cedula = 0;
-						}
-					} catch (InputMismatchException e) {
+			while (cedula <= 0) {
+				try {
+					System.out.print("Ingrese su número de identificación: ");
+					cedula = leerEnteroLargo();
+					if (cedula <= 0) {
 						System.out.println("Proporcione una respuestata válida.\n");
-						leerCadena();
+						cedula = 0;
 					}
+				} catch (InputMismatchException e) {
+					System.out.println("Proporcione una respuestata válida.\n");
+					leerCadena();
 				}
+			}
 		
 				Cliente cliente = new Cliente(nombre, edad, cedula);
 				return cliente;
@@ -967,7 +982,22 @@ public static long leerEnteroLargo() {
 				return mascota;	
 			}
 
-	public static void gestionarMemorial(Cliente cliente) {
+
+//>>--------------------------------------------------------------------------------------------------------------------------------------<<
+
+	
+	public static void gestionarMemorial() {
+		System.out.println("\nIngrese sus datos");
+		System.out.println("\nNombre:");
+		String nombre = sc.nextLine();
+		System.out.println("Edad:");
+		int edad = sc.nextInt(); 
+		sc.nextLine();
+		System.out.println("Cédula:");
+		long cedula = sc.nextLong();
+		
+		Cliente cliente = new Cliente(nombre, edad, cedula);
+		cliente.agregarPuntos(50000);
 		int opcion = 0;
 		while (opcion != 4) {
 			System.out.println("\nGestion del Memorial:");
@@ -1300,4 +1330,11 @@ public static void tienda() {
 	}
 	}//BUCLE INICIAL
 }//FINAL MÉTODO TIENDA
+private static void salirDelSistema() {
+
+		
+		println("¡Vuelva pronto!");
+		
+		System.exit(0);
+	}
 }

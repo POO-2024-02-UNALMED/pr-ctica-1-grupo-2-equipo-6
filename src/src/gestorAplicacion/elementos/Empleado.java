@@ -1,5 +1,6 @@
 package gestorAplicacion.elementos;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -9,8 +10,8 @@ import java.util.ArrayList;
 //DESCRIPCIÓN DE LA CLASE
 //Representa al personal del centro, que puede ser veterinario, peluquero, cuidador o Vendedor, y gestiona la atención a los clientes y mascotas.
 
-public class Empleado extends Persona {
-	
+public class Empleado extends Persona implements Serializable{
+	private static final long serialVersionUID = 1L;
     public static enum Especialidad {
         VETERINARIO,PELUQUERO,ENTRENADOR,VENDEDOR;
     }

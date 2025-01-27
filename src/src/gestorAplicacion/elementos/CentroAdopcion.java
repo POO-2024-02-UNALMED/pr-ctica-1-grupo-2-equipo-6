@@ -3,6 +3,7 @@ package gestorAplicacion.elementos;
 import java.util.List;
 
 import gestorAplicacion.elementos.Mascota.EstadoSalud;
+import gestorAplicacion.elementos.Cliente;
 
 import java.util.ArrayList;
 

@@ -51,7 +51,7 @@ public class Main {
             System.out.println("\n¿Qué desea hacer?");
             System.out.println("\n1. Emergencia Veterinaria");
             System.out.println("2. (Funcionalidad 2)");
-            System.out.println("3. (Funcionalidad 3)");
+            System.out.println("3. Tienda UNamascota");
             System.out.println("4. (Funcionalidad 4)");
             System.out.println("5. (Planificacion de Dieta)");
             System.out.println("6. Salir");
@@ -67,7 +67,7 @@ public class Main {
             
             switch (opcion) {
             	case 1:
-            		System.out.println("\nBienvenido a Emergencia Veterinaria.");
+            		System.out.println("\nBienvenido a Emergencias del Centro Veterinaria UNamascota.");
             		emergenciaVeterinaria(cliente);
             		break;
             	case 2:
@@ -75,7 +75,7 @@ public class Main {
 					//agendarServicio();
             		break;
             	case 3:
-            		System.out.println("Bienvenido a la funcionalidad 3.");
+            		System.out.println("Bienvenido a la Tienda del Centro Veterinario UNamascota.");
             		break;
             	case 4:
             		System.out.println("Bienvenido a la funcionalidad 4.");
@@ -92,42 +92,6 @@ public class Main {
             
 		}
 		sc.close();
-	}
-
-	//MÉTODOS NECESARIOS	
-	//ENTRADAS DE DATOS POR TIPO
-	static byte readByte() {
-		return entrada.nextByte();
-	}
-	
-	static int readInt() {
-		return entrada.nextInt();
-	}
-	
-	static String readString() {	
-		String string = entrada.nextLine();
-		return string;
-	}
-	
-	static long readLong() {
-		return entrada.nextLong();
-	}
-	
-	static boolean readBoolean() {
-		boolean x=entrada.nextBoolean();
-		return x;
-	}
-	
-	static double nextDouble() {
-		return entrada.nextDouble();
-	}
-	
-	static void println(Object obj) {
-		System.out.println(obj);
-	}
-	
-	static void print(Object obj) {
-		System.out.print(obj);
 	}
 
 	//Para leer un entero desde la entrada.
@@ -369,7 +333,7 @@ public static long leerEnteroLargo() {
 		//sc.close();
 	}
 
-}
+
 
 
 
@@ -762,12 +726,13 @@ public static long leerEnteroLargo() {
 		}
 */
 
+
 public static void tienda() {
 		
 
 		
 	//CREAMOS UN EMPLEADO PARA QUE ATIENDA LA TIENDA
-	Empleado empliado = new Empleado("Albert", 22, 555, 1323, "West Elm", Empleado.Rol.TENDERO);
+	Empleado empliado = new Empleado("Albert", 22, 555, 1323, "West Elm", Empleado.Especialidad.VENDEDOR);
 	
 	// CREACIÓN DE TIENDA
 	//t1 = new Tienda(empliado, sede1);
@@ -893,7 +858,7 @@ public static void tienda() {
 			while (control) {
 				try {
 						print("Digite el índice del producto a comprar: ");
-						int indice = readInt(); //INDICE PARA LOCALIZAR EL PRODUCTO QUE QUIERE EL USUARIO 
+						int indice = leerEntero(); //INDICE PARA LOCALIZAR EL PRODUCTO QUE QUIERE EL USUARIO 
 		
 						print("Indique cuantas unidades necesita del producto: ");
 						int unidades = readInt(); //CANTIDAD DE UNIDADES QUE EL USUARIO VA A COMPRAR

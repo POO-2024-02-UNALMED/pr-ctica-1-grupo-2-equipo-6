@@ -21,6 +21,7 @@ import gestorAplicacion.gestion.Memorial;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import gestorAplicacion.elementos.Dieta;
 
 
 		
@@ -88,7 +89,8 @@ public class Main {
             		gestionarMemorial(cliente);
             		break;
             	case 5:
-            		System.out.println("Bienvenido a la funcionalidad 5.");
+					System.out.println("Bienvenido al Sistema de planificacion de Dieta.");
+            		planificacionDieta(cliente);
             		break;
             	case 6:
                     System.out.println("Saliendo del sistema.");
@@ -158,6 +160,18 @@ public static long leerEnteroLargo() {
         }
 	}
 }
+
+	//Para leer un double desde la scanner.
+	public static double leerDouble() {
+        while (true) {
+            try {
+                return scanner.nextDouble();
+            } catch (InputMismatchException e) {
+                scanner.next(); // Limpiar la entrada no válida
+            }
+        }
+    }
+
 	//Para leer una cadena de texto desde la scanner.
 	public static String leerCadena() {
 		return scanner.nextLine();
@@ -1334,4 +1348,88 @@ public static void tienda() {
 	}
 	}//BUCLE INICIAL
 }//FINAL MÉTODO TIENDA
+
+public static void planificacionDieta(Cliente cliente) {
+	//ingresar datos de la mascota
+		System.out.println("\nIngresa los datos de su mascota:");
+		System.out.println("Nombre:");
+		String nombre = Main.leerCadena();
+		
+		System.out.println("Especie:");
+		String tipo = "";
+		while (true) {//validar que la especie introducida sea valido.
+			tipo = Main.leerCadena();
+			if (tipo.equalsIgnoreCase("Gato") || tipo.equalsIgnoreCase("Perro")) {
+				break;
+			} else {
+				System.out.println("Lo sentimos, la planiicacion de dieta solo esta disponible para gatos y perros.");
+				return;
+			 }
+		}
+		
+		System.out.println("Edad:");
+		int edad = Main.leerEntero();
+		
+		System.out.println("Sexo (M/F):");
+		String sexo = "";
+		while (true) {//validar que el dato introducido sea valido.
+			sexo = Main.leerCadena();
+			if (sexo.equalsIgnoreCase("M") || sexo.equalsIgnoreCase("F")) {
+				break;
+			} else { System.out.println("Entrada no valida, intentalo de nuevo."); }
+		}
+		
+		System.out.println("Tamaño (1-4): \n1. Miniatura \n2. Pequeño \n3. Mediano \n4. Grande");
+		int tamano = 3;
+		while (true) {//validar que el dato introducido sea valido.
+			tamano = Main.leerEntero();
+			if (tamano > 0 && tamano < 5) {
+				break;
+			} else { System.out.println("Entrada no valida, intentalo de nuevo."); }
+		}
+		
+		System.out.println("Peso en kg:");
+		double peso = Main.leerDouble();
+
+		//Crear un objeto Mascota con los datos que ingresó el usuario
+		Mascota mascota = new Mascota(nombre, tipo, edad, sexo, EstadoSalud.SANO, tamano, peso);
+		//Crea el objeto dieta asociado a la mascota
+		Dieta dieta = new Dieta(mascota);
+		//utiliza las formulas aritmeticas de los metodos calcularPesoIdeal() y planDieta() para calcular el porcentaje de nutrientes que debe
+		//consumir la mascota, dependiendo de su debe subir o bajar de peso.
+		dieta.calcularPesoIdeal();
+        dieta.planDieta();
+		//imprime la dieta planificada
+		System.out.println(dieta.toString());
+		//agrega recomendaciones de productos.
+		if (mascota.getEspecie().toLowerCase().equals("gato")) {
+			System.out.println(""); //Productos recomendados para gato
+		} else {
+			System.out.println(""); //Productos recomendados para perro
+		}
+		//serializa el objeto dieta creado
+
+		
+
+		//pregunta al usuario que desea hacer
+		System.out.println("\n¿Desea volver al menu principal o redirigirse a la tienda? [Menu/Tienda]: ");
+			String respuesta = " ";
+			while (true) {
+				respuesta = leerCadena();
+				respuesta.toLowerCase();
+				if (respuesta.equals("menu")||respuesta.equals("tienda")) {
+					break; 
+				}else {
+					System.out.println("Por favor, ingresa una respuesta válida [Menu/Tienda]");
+				}
+			}
+				if (respuesta.equals("menu")) {
+					System.out.println("Gracias por ingresar a la interaz de planeacion de dieta!\nRedireccionandote al menu principal...");
+				}
+				else {
+					System.out.println("Gracias por ingresar a la interaz de planeacion de dieta!\nRedireccionandote a la Tienda...");
+					tienda();
+				}
+}//Fin de Planeacion Dieta
+
 }

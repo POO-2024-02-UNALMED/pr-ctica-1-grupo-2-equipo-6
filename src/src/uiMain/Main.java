@@ -13,6 +13,7 @@ import gestorAplicacion.elementos.CentroAdopcion.Sedes;
 import gestorAplicacion.elementos.Cliente;
 import gestorAplicacion.elementos.Cupo;
 import gestorAplicacion.elementos.Mascota.EstadoSalud;
+import gestorAplicacion.elementos.Producto;
 import gestorAplicacion.gestion.Cita;
 import gestorAplicacion.gestion.Tienda;
 import gestorAplicacion.elementos.Fallecido;
@@ -57,7 +58,7 @@ public class Main {
             System.out.println("\n1. Emergencia Veterinaria");
             System.out.println("2. (Funcionalidad 2)");
             System.out.println("3. Tienda UNamascota");
-            System.out.println("4. (Funcionalidad 4)"); //memorial
+            System.out.println("4. Servicio memorial"); //memorial
             System.out.println("5. (Planificacion de Dieta)");
             System.out.println("6. Salir");
             
@@ -83,7 +84,7 @@ public class Main {
             		System.out.println("Bienvenido a la funcionalidad 3.");
             		break;
             	case 4:
-            		System.out.println("Bienvenido a la funcionalidad 4.");
+            		System.out.println("Bienvenido al servicio memorial.");
             		gestionarMemorial(cliente);
             		break;
             	case 5:
@@ -1002,8 +1003,34 @@ public static long leerEnteroLargo() {
 				else {
 					mensaje = "Descansa en paz" + nombreFallecido;
 					}
-				System.out.println("Ingrese el tiempo que desea usar nuestros servicios (e.g., 10 años):");
-				String tiempo = sc.nextLine();
+				System.out.println("Por cuanto tiempo desea usar nuestros servicios:");
+				System.out.println("1. Para siempre.");
+				System.out.println("2. Tiempo limitado.");
+				int duracion = sc.nextInt();
+				sc.nextLine();
+				
+				float precio = 0;
+				String tiempo = null;
+				if(duracion == 1) {
+					tiempo = "Forever";
+					precio = 1000000;
+				}
+				else if (duracion == 2) {
+					System.out.println("Ingrese el tiempo que desea usar nuestros servicios (En multiplos de 5):");
+					int anos = sc.nextInt();
+					sc.nextLine();
+					if (anos % 5 != 0) {
+						System.out.println("El tiempo debe de ser en multiplos de 5años. Redondearemos al múltiplo más cercano.");
+						anos = ((anos + 4) / 5) * 5;
+					}
+					tiempo = anos + " años";
+					precio = (anos / 5) * 50000;
+				}
+				else {
+					System.out.println("Opcion no valida.");
+					break;
+				}
+				
 				System.out.println("Ingrese el tipo de memorial que desea (Sepulcro/Osario/Cremacion/Arbol):");
 				String tipo = sc.nextLine();
 				
@@ -1017,6 +1044,12 @@ public static long leerEnteroLargo() {
 				default -> System.out.println("De momento no contamos con este tipo de servicio.");
 				
 					}
+				
+				System.out.println("Memorial añadido con éxito.");
+				System.out.println("Precio del servicio: $" + precio);
+				
+				Producto servicioMemorial = new Producto("Memorial - " + tipo, precio, "Todos", "Servicio memorial", 1);
+				//System.out.println("Se ha registrado el prodcuto: " + servicioMemorial);
 				}
 			
 			case 2 -> {

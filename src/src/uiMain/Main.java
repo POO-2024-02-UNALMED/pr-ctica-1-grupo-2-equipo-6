@@ -1,33 +1,29 @@
 package uiMain;
 
-import java.util.List;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-
 import gestorAplicacion.elementos.CentroAdopcion;
-import gestorAplicacion.elementos.Empleado;
-import gestorAplicacion.elementos.Empleado.Especialidad;
-import gestorAplicacion.elementos.Mascota;
 import gestorAplicacion.elementos.CentroAdopcion.Sedes;
 import gestorAplicacion.elementos.Cliente;
 import gestorAplicacion.elementos.Cupo;
+import gestorAplicacion.elementos.Dieta;
+import gestorAplicacion.elementos.Empleado;
+import gestorAplicacion.elementos.Empleado.Especialidad;
+import gestorAplicacion.elementos.Fallecido;
+import gestorAplicacion.elementos.Mascota;
 import gestorAplicacion.elementos.Mascota.EstadoSalud;
 import gestorAplicacion.elementos.Producto;
-import gestorAplicacion.elementos.Dieta;
 import gestorAplicacion.gestion.Cita;
-import gestorAplicacion.gestion.Tienda;
-import gestorAplicacion.elementos.Fallecido;
 import gestorAplicacion.gestion.Memorial;
+import gestorAplicacion.gestion.Tienda;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import gestorAplicacion.elementos.Dieta;
 
 
 		
 
 public class Main {
+
+	static CentroAdopcion sede1;
 	
 	static Scanner sc = new Scanner(System.in);
 	static CentroAdopcion centro = new CentroAdopcion("POO");

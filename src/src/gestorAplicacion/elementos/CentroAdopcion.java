@@ -199,4 +199,18 @@ public class CentroAdopcion {
 		return clienteNuevo;
 	}
 	
+	public ArrayList <Empleado>tieneEmpleados() {
+			
+		ArrayList<Empleado> emp_Disponibles = new ArrayList<>();
+		
+		for (Empleado empleado: this.veterinarios) {
+			
+			if (empleado.tieneCupos()) {
+				
+				emp_Disponibles.add(empleado);
+			}
+		}
+		
+		return emp_Disponibles;
+	}
 }

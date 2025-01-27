@@ -1,17 +1,20 @@
 package uiMain;
 
+import java.util.List;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+
 import gestorAplicacion.elementos.CentroAdopcion;
-import gestorAplicacion.elementos.CentroAdopcion.Sedes;
-import gestorAplicacion.elementos.Cliente;
-import gestorAplicacion.elementos.Dieta;
 import gestorAplicacion.elementos.Empleado;
 import gestorAplicacion.elementos.Empleado.Especialidad;
 import gestorAplicacion.elementos.Mascota;
+import gestorAplicacion.elementos.CentroAdopcion.Sedes;
+import gestorAplicacion.elementos.Cliente;
+import gestorAplicacion.elementos.Cupo;
 import gestorAplicacion.elementos.Mascota.EstadoSalud;
+import gestorAplicacion.gestion.Cita;
 import gestorAplicacion.gestion.Tienda;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 
 		
@@ -47,37 +50,37 @@ public class Main {
             System.out.println("\n¿Qué desea hacer?");
             System.out.println("\n1. Emergencia Veterinaria");
             System.out.println("2. (Funcionalidad 2)");
-            System.out.println("3. Tienda UNamascota");
+            System.out.println("3. (Funcionalidad 3)");
             System.out.println("4. (Funcionalidad 4)");
-            System.out.println("5. (Planificacion de Dieta)");
+            System.out.println("5. (Funcionalidad 5)");
             System.out.println("6. Salir");
             
             if (sc.hasNextInt()) {
                 opcion = sc.nextInt();
                 sc.nextLine();
             } else {
-                System.out.println("Entrada no válida. Por favor, ingrese un número del 1 al 6.\n");
+                System.out.println("scanner no válida. Por favor, ingrese un número del 1 al 6.\n");
                 sc.nextLine();
                 continue;
             }
             
             switch (opcion) {
             	case 1:
-            		System.out.println("\nBienvenido a Emergencias del Centro Veterinaria UNamascota.");
+            		System.out.println("\nBienvenido a Emergencia Veterinaria.");
             		emergenciaVeterinaria(cliente);
             		break;
             	case 2:
             		System.out.println("Bienvenido a la funcionalidad 2.");
-					//agendarServicio();
+					agendarservicioSSeleccionado();
             		break;
             	case 3:
-            		System.out.println("Bienvenido a la Tienda del Centro Veterinario UNamascota.");
+            		System.out.println("Bienvenido a la funcionalidad 3.");
             		break;
             	case 4:
             		System.out.println("Bienvenido a la funcionalidad 4.");
             		break;
             	case 5:
-            		planificacionDieta(cliente);
+            		System.out.println("Bienvenido a la funcionalidad 5.");
             		break;
             	case 6:
                     System.out.println("Saliendo del sistema.");
@@ -90,44 +93,67 @@ public class Main {
 		sc.close();
 	}
 
-	//Para leer un entero desde la entrada.
+	//MÉTODOS NECESARIOS	
+	//scannerS DE DATOS POR TIPO
+	static byte readByte() {
+		return scanner.nextByte();
+	}
+	
+	static int readInt() {
+		return scanner.nextInt();
+	}
+	
+	static String readString() {	
+		String string = scanner.nextLine();
+		return string;
+	}
+	
+	static long readLong() {
+		return scanner.nextLong();
+	}
+	
+	static boolean readBoolean() {
+		boolean x=scanner.nextBoolean();
+		return x;
+	}
+	
+	static double nextDouble() {
+		return scanner.nextDouble();
+	}
+	
+	static void println(Object obj) {
+		System.out.println(obj);
+	}
+	
+	static void print(Object obj) {
+		System.out.print(obj);
+	}
+
+	//Para leer un entero desde la scanner.
 	public static int leerEntero() {
 		while (true) {
 			try {
 				return scanner.nextInt();
 			} catch (InputMismatchException e) {
-				scanner.next(); // Limpiar la entrada no válida
+				scanner.next(); // Limpiar la scanner no válida
 			}
 		}
 	}
 	
-	//Para leer un número largo desde la entrada.
-	public static long leerEnteroLargo() {
-    	while (true) {
-       		try {
-       	    	return scanner.nextLong();
-       	 	} catch (InputMismatchException e) {
-           	 	scanner.next(); // Limpiar la entrada no válida
-       		}
-		}
+	//Para leer un número largo desde la scanner.
+public static long leerEnteroLargo() {
+    while (true) {
+        try {
+            return scanner.nextLong();
+        } catch (InputMismatchException e) {
+            scanner.next(); // Limpiar la scanner no válida
+        }
 	}
-	
-	//Para leer una cadena de texto desde la entrada.
+}
+	//Para leer una cadena de texto desde la scanner.
 	public static String leerCadena() {
 		return scanner.nextLine();
 	}
-
-	public static double leerDoble() {
-    	while (true) {
-        	try {
-            	return scanner.nextDouble();
-        	} catch (InputMismatchException e) {
-        	    scanner.next(); // Limpiar la entrada no válida
-        	}
-		}
-	}
-
-
 
 	public static void emergenciaVeterinaria(Cliente cliente) {
 		
@@ -177,7 +203,7 @@ public class Main {
 		int sede = sc.nextInt();
 		sc.nextLine();
 		while (sede < 1 || sede > Sedes.values().length) {
-			System.out.println("Entrada inválida. Por favor, ingrese un número entre 1 y " + Sedes.values().length + ":");
+			System.out.println("scanner inválida. Por favor, ingrese un número entre 1 y " + Sedes.values().length + ":");
 			sede = sc.nextInt();
 			sc.nextLine();
 		}
@@ -244,7 +270,7 @@ public class Main {
 				
 				//Verificar que el usuario ingrese un número en el rango correcto
 				while(opcion < 1 || opcion > centro.gestionarVeterinario().size()) {
-					System.out.println("\nEntrada inválida. Por favor, ingrese un número entre 1 y " + centro.gestionarVeterinario().size() + ":");
+					System.out.println("\nscanner inválida. Por favor, ingrese un número entre 1 y " + centro.gestionarVeterinario().size() + ":");
 					opcion = sc.nextInt();
 					sc.nextLine();
 				}
@@ -269,7 +295,7 @@ public class Main {
 				
 				//Verificar que el usuario ingrese un número en el rango correcto
 				while(opcion < 1 || opcion > centro.mostrarOpcionesPago().length) {
-					System.out.println("Entrada inválida. Por favor, ingrese un número entre 1 y " + centro.mostrarOpcionesPago().length + ":");
+					System.out.println("scanner inválida. Por favor, ingrese un número entre 1 y " + centro.mostrarOpcionesPago().length + ":");
 					opcion = sc.nextInt();
 					sc.nextLine();
 				}
@@ -332,26 +358,20 @@ public class Main {
 
 
 
-
-
 	//>>-----------------------------------------------------------------------------------------------------------------<<
 
 			
-/*	// función para agendar un servicio
-	static void agendarServicio(){
+	// función para agendar un servicioSSeleccionado
+	static void agendarservicioSSeleccionado(){
 		ArrayList<Cita> citasAgendadas = new ArrayList<>();
 		System.out.println("\n\n🐾 ¡Bienvenido a PetTraining! 🐾");
 		System.out.println("Gracias por elegirnos para cuidar y entrenar a tu peludito.");			
 		System.out.println("Por favor, sigue las instrucciones a continuación para que podamos atenderlo de la mejor manera.\n");
 		
 		boolean repetir = false;
+		boolean clienteConocido = false;
 		Cliente cliente = null;
 
-		// obtener los datos del cliente y verificar si está registrado
-		cliente = obtenerDatosCliente();
-		cliente = CentroAdopcion.EsCliente(cliente); // comprobar si el cliente ya está registrado
-		leerCadena(); // consumir salto de línea
-		
 		do {
 			int sedeSeleccionada = 0;
 			int servicioSeleccionado = 0;
@@ -369,44 +389,44 @@ public class Main {
 				try {
 					sedeSeleccionada = leerEntero();
 					if (sedeSeleccionada < 1 || sedeSeleccionada > 4) {
-						System.out.println("Proporcione una respuesta válida.\n");
+						System.out.println("Proporcione una respuestata válida.\n");
 					}
 					} catch (InputMismatchException e) {
-						System.out.println("Proporcione una respuesta válida.\n");
+						System.out.println("Proporcione una respuestata válida.\n");
 					} finally {
 						leerCadena();
 					}
 				} while (sedeSeleccionada < 1 || sedeSeleccionada > 4);
 		
-			// mostrar los servicios disponibles según la sede seleccionada
-			System.out.println("\n📋 Servicios Disponibles 📋");
+			// mostrar los servicioSSeleccionados disponibles según la sede seleccionada
+			System.out.println("\n📋 servicioSSeleccionados Disponibles 📋");
 			switch (sedeSeleccionada) {
 				case 1:
-					System.out.println("SEDE CENTRO - Servicios: \n1. Entrenamiento \n2. Veterinaria");
+					System.out.println("SEDE MEDELLIN - servicio Disponiibles: \n1. Entrenamiento \n2. Veterinaria");
 					break;
 				case 2:
-					System.out.println("SEDE NORTE - Servicios: \n1. Peluquería");
+					System.out.println("SEDE BOGOTA - servicio Disponibles: \n1. Peluquería");
 					break;
 				case 3:
-					System.out.println("SEDE SUR - Servicios: \n1. Veterinaria \n2. Entrenamiento");
+					System.out.println("SEDE CALI - servicio Disponibles: \n1. Veterinaria \n2. Entrenamiento");
 					break;
 				case 4:
-					System.out.println("SEDE OESTE - Servicios: \n1. Entrenamiento");
+					System.out.println("SEDE CARTAGENA - servicio Disponibles: \n1. Entrenamiento");
 					break;
 			}
 		
 			System.out.println("3. Cambiar de sede\n");
 		
-			// pedir al usuario que seleccione un servicio o cambiar de sede
+			// pedir al usuario que seleccione un servicioSSeleccionado o cambiar de sede
 			do {
 				System.out.print("Ingrese su elección dentro del rango [1-3]: ");
 				try {
 					servicioSeleccionado = leerEntero();
 					if (servicioSeleccionado < 1 || servicioSeleccionado > 3) {
-						System.out.println("Proporcione una respuesta válida.\n");
+						System.out.println("Proporcione una respuestata válida.\n");
 					}
 				} catch (InputMismatchException e) {
-					System.out.println("Proporcione una respuesta válida.\n");
+					System.out.println("Proporcione una respuestata válida.\n");
 				} finally {
 					leerCadena();
 				}
@@ -417,49 +437,136 @@ public class Main {
 				continue;
 			}
 		
-			// verificar si el servicio está disponible para la especie de la mascota del cliente
-			boolean servicioDisponible = false;
+			// verificar si el servicioSSeleccionado está disponible para la especie de la mascota del cliente
+			boolean servicioSeleccionadoDisponible = false;
 			switch (sedeSeleccionada) {
 				case 1:
 					if (servicioSeleccionado == 1) {
 					// entrenamiento incluye guardería
-						System.out.println("\nEl servicio de entrenamiento (incluye guardería) está disponible para perros y gatos.");
-						//servicioDisponible = confirmarEspecie("perros y gatos");
+						System.out.println("\nEl servicio de entrenamiento está disponible para perros y gatos.");
+						String respuestata1;
+						do {
+							println("¿Su mascota pertenece a alguna de estas especies?");
+							print("Responda si / no: ");
+							respuestata1= leerCadena();
+							
+							if (respuestata1.equalsIgnoreCase("si")!=true && respuestata1.equalsIgnoreCase("no")!=true) {
+								println("Proporcione una respuestata válida.\n");
+							}
+						}while (respuestata1.equalsIgnoreCase("si")!=true && respuestata1.equalsIgnoreCase("no")!=true);
+						
+						if (respuestata1.equalsIgnoreCase("si")==true) {
+							servicioSeleccionadoDisponible = true;
+							servicioSeleccionado = 1;
+						}
+						break;
 					} else if (servicioSeleccionado == 2) {
+						String respuestata1;
 						System.out.println("\nEl servicio de veterinaria está disponible para perros, gatos, conejos y hámsters.");
-						//servicioDisponible = confirmarEspecie("perros, gatos, conejos y hámsters");
+						do {
+							println("¿Su mascota pertenece a alguna de estas especies?");
+							print("Responda si / no: ");
+							respuestata1= leerCadena();
+							
+							if (respuestata1.equalsIgnoreCase("si")!=true && respuestata1.equalsIgnoreCase("no")!=true) {
+								println("Proporcione una respuestata válida.\n");
+							}
+						}while (respuestata1.equalsIgnoreCase("si")!=true && respuestata1.equalsIgnoreCase("no")!=true);
+						
+						if (respuestata1.equalsIgnoreCase("si")==true) {
+							servicioSeleccionadoDisponible = true;
+							servicioSeleccionado = 2;
+						}
+						break;
 					}
 					break;
 				case 2:
 					if (servicioSeleccionado == 1) {
+						String respuestata2;
 						System.out.println("\nEl servicio de peluquería está disponible para perros y gatos.");
-						//servicioDisponible = confirmarEspecie("perros y gatos");
+						do {
+							println("¿Su mascota pertenece a alguna de estas especies?");
+							print("Responda si / no: ");
+							respuestata2= leerCadena();
+							
+							if (respuestata2.equalsIgnoreCase("si")!=true && respuestata2.equalsIgnoreCase("no")!=true) {
+								println("Proporcione una respuestata válida.\n");
+							}
+						}while (respuestata2.equalsIgnoreCase("si")!=true && respuestata2.equalsIgnoreCase("no")!=true);
+						
+						if (respuestata2.equalsIgnoreCase("si")==true) {
+							servicioSeleccionadoDisponible = true;
+							servicioSeleccionado = 3;
+						}
+						break;
 					}
 					break;
 				case 3:
 					if (servicioSeleccionado == 1) {
+						String respuestata3;
 						System.out.println("\nEl servicio de veterinaria está disponible para perros, gatos, conejos y hámsters.");
-						//servicioDisponible = confirmarEspecie("perros, gatos, conejos y hámsters");
+						do {
+							println("¿Su mascota pertenece a alguna de estas especies?");
+							print("Responda si / no: ");
+							respuestata3= leerCadena();
+							
+							if (respuestata3.equalsIgnoreCase("si")!=true && respuestata3.equalsIgnoreCase("no")!=true) {
+								println("Proporcione una respuestata válida.\n");
+							}
+						}while (respuestata3.equalsIgnoreCase("si")!=true && respuestata3.equalsIgnoreCase("no")!=true);
+						
+						if (respuestata3.equalsIgnoreCase("si")==true) {
+							servicioSeleccionadoDisponible = true;
+							servicioSeleccionado = 2;
+						}
+						break;
 					} else if (servicioSeleccionado == 2) {
-					// entrenamiento incluye guardería
-						System.out.println("\nEl servicio de entrenamiento (incluye guardería) está disponible para perros y gatos.");
-						//servicioDisponible = confirmarEspecie("perros y gatos");
+						String respuestata3;
+						System.out.println("\nEl servicio de entrenamiento está disponible para perros y gatos.");
+						do {
+							println("¿Su mascota pertenece a alguna de estas especies?");
+							print("Responda si / no: ");
+							respuestata3= leerCadena();
+							
+							if (respuestata3.equalsIgnoreCase("si")!=true && respuestata3.equalsIgnoreCase("no")!=true) {
+								println("Proporcione una respuestata válida.\n");
+							}
+						}while (respuestata3.equalsIgnoreCase("si")!=true && respuestata3.equalsIgnoreCase("no")!=true);
+						
+						if (respuestata3.equalsIgnoreCase("si")==true) {
+							servicioSeleccionadoDisponible = true;
+							servicioSeleccionado = 1;
+						}
+						break;
 					}
 					break;
 				case 4:
+				String respuestata4;
 					if (servicioSeleccionado == 1) {
-					// entrenamiento incluye guardería
-						System.out.println("\nEl servicio de entrenamiento (incluye guardería) está disponible para perros y gatos.");
-						//servicioDisponible = confirmarEspecie("perros y gatos");
+						System.out.println("\nEl servicio de entrenamiento está disponible para perros y gatos.");
+						do {
+							println("¿Su mascota pertenece a alguna de estas especies?");
+							print("Responda si / no: ");
+							respuestata4= leerCadena();
+							
+							if (respuestata4.equalsIgnoreCase("si")!=true && respuestata4.equalsIgnoreCase("no")!=true) {
+								println("Proporcione una respuestata válida.\n");
+							}
+						}while (respuestata4.equalsIgnoreCase("si")!=true && respuestata4.equalsIgnoreCase("no")!=true);
+						
+						if (respuestata4.equalsIgnoreCase("si")==true) {
+							servicioSeleccionadoDisponible = true;
+							servicioSeleccionado = 1;
+						}
+						break;
 					}
 					break;
 				}
 		
-			// si el servicio no está disponible para la especie, se termina el proceso
-			if (!servicioDisponible) {
-				System.out.println("\nNos disculpamos, pero el servicio que desea no está disponible para su tipo de mascota. Agradecemos su comprensión.\n");
+			// si el servicioSSeleccionado no está disponible para la especie, se termina el proceso
+			if (!servicioSeleccionadoDisponible) {
+				System.out.println("\nNos disculpamos, pero el servicioSSeleccionado que desea no está disponible para su tipo de mascota. Agradecemos su comprensión.\n");
 				repetir = false;
-				continue;
 			}
 		
 			// obtener la sede seleccionada y los empleados disponibles
@@ -470,144 +577,173 @@ public class Main {
 			if (empleadosDisponibles.size() == 0) {
 				System.out.println("\nActualmente, debido a la falta de disponibilidad de citas, no es posible continuar con el proceso de agendamiento.");
 				repetir = false;
-				continue;
-			} else {
-			// mostrar los empleados disponibles según el servicio seleccionado
-				switch (servicioSeleccionado) {
-					case 1:
-						System.out.println("\nContamos con los siguientes entrenadores, seleccione el de su preferencia:");
-						break;
-					case 2:
-						System.out.println("\nContamos con los siguientes veterinarios, seleccione el de su preferencia:");
-						break;
+			}
+			else {
+				switch(servicioSeleccionado) {
+			
+				case 1:
+					println("\nContamos con los siguientes entrenadores de mascotas, seleccione el de su preferencia:");
+					break;
+						
+				case 2:
+					println("\nContamos con los siguientes veterinarios, seleccione el de su preferencia:");
+					break;
+						
+				case 3:
+					println("\nContamos con los siguientes peluqueros de mascotas, seleccione el de su preferencia:");
+					break;	
 				}
-		
-						int indiceEmpleado = 1;
-						for (Empleado emp : empleadosDisponibles) {
-							System.out.println(indiceEmpleado + " - " + emp);
-							indiceEmpleado++;
+					
+				int i = 1;
+					
+				for(Empleado emple : empleadosDisponibles) {
+					println(i +" - "+ emple);
+					i++;
+				}
+					
+				//SELECCIONAR AL EMPLEADO
+				int num_empleado = 0;
+				 do {
+					print("\nIngrese su elección dentro del rango [1-" + empleadosDisponibles.size() + "]: " );
+					try {
+						num_empleado= leerEntero();
+							
+						if (num_empleado<1 || num_empleado > empleadosDisponibles.size()) {
+							println("Proporcione una respuestata válida.");
 						}
-		
-						// pedir al usuario que seleccione un empleado
-						int numEmpleadoSeleccionado = 0;
-						do {
-							System.out.print("\nIngrese su elección dentro del rango [1-" + empleadosDisponibles.size() + "]: ");
-							try {
-								numEmpleadoSeleccionado = leerEntero();
-								if (numEmpleadoSeleccionado < 1 || numEmpleadoSeleccionado > empleadosDisponibles.size()) {
-									System.out.println("Proporcione una respuesta válida.");
-								}
-							} catch (InputMismatchException e) {
-								System.out.println("Proporcione una respuesta válida.");
-							} finally {
-								leerCadena();
+							
+					}catch(InputMismatchException e) {
+						println("Proporcione una respuestata válida.");
+					}finally {
+						leerCadena();
+					}
+				}while(num_empleado<1 || num_empleado > empleadosDisponibles.size());
+					 
+				Empleado empleado_seleccionado = empleadosDisponibles.get(num_empleado - 1);//EMPLEADO SELECCIONADO
+				println("Empleado seleccionado: " + empleado_seleccionado);//QUITAR
+					 
+					 
+				 //SELECCIONAR EL DIA (LUNES, MARTES,MIERCOLES..) EN EL QUE SE QUIERE EL servicioSSeleccionado
+				println("\nSeleccione el día en el que desea el servicioSSeleccionado.");
+				String[] diasSemana = {"lunes", "martes", "miércoles", "jueves", "viernes", "sábado"};
+				int num_dia=0;
+				for (int j = 0; j <diasSemana.length; j++) {
+					println((j + 1) + ". " + diasSemana[j]);
+					}
+					
+				do {
+					try {
+						print("Ingrese su elección dentro del rango [1-6]: ");
+						num_dia = leerEntero();
+						if (num_dia<1 || num_dia>6) {
+							println("Proporcione una respuestata válida.\n");
+								
 							}
-						} while (numEmpleadoSeleccionado < 1 || numEmpleadoSeleccionado > empleadosDisponibles.size());
-		
-						Empleado empleadoSeleccionado = empleadosDisponibles.get(numEmpleadoSeleccionado - 1); // empleado seleccionado
-						System.out.println("Empleado seleccionado: " + empleadoSeleccionado);
-		
-						// selección del día de la cita
-						System.out.println("\nSeleccione el día en el que desea el servicio.");
-						String[] diasSemana = {"lunes", "martes", "miércoles", "jueves", "viernes", "sábado"};
-						int diaSeleccionado = 0;
-						for (int j = 0; j < diasSemana.length; j++) {
-							System.out.println((j + 1) + ". " + diasSemana[j]);
+						}catch(InputMismatchException e) {
+							println("Proporcione una respuestata válida.\n");
+							leerCadena();
+							}
+					}while(num_dia<1 || num_dia>6);
+					
+				//CUPOS QUE TIENE EL EMPLEADO PARA EL DIA SELECCIONADO
+				ArrayList <Cupo> cupos_disponibles = empleado_seleccionado.cupos_disponibles(num_dia);
+					
+				//SI EL EMPLEADO NO TIENE CUPOS PARA ESE DÍA, ENTONCES EL PROCESO NO PODRÁ CONTINIAR.
+				if (cupos_disponibles.size()==0) {
+					println("Lamentablemente, el empleado seleccionado no tiene disponibilidad para el día que se eligió.");
+					repetir = false;
+				}
+				else {
+				//SI EL EMPLEADO TIENE CUPOS PARA EL DIA SELECCIONADO, ENTONCES SE LE MOSTRARÁN AL CLIENTE
+					println("\nPor favor, seleccione la franja horaria que mejor se adapte a su necesidad. Si ninguna opción es adecuada,"
+						+ "\npuedes seleccionar la opción " + (cupos_disponibles.size()+1) +" para cancelar.\n");
+						
+					println("Cupos disponibles para el " + diasSemana[num_dia -1] + " " + cupos_disponibles.get(0).fechaFormateada() + ": "); 
+					int o = 1;
+					for (Cupo cupo: cupos_disponibles) {
+							
+						println( o + ". " + cupo);
+							
+						o++;
+					}
+					println((cupos_disponibles.size()+1) + ". Cancelar");
+						
+					//SELECCIONAR EL CUPO DE PREFERENCIA, O CANCELAR
+					int num_cupo=0;
+					do {
+						try {
+							print("Ingrese su elección en el rango en el rango [1 -" + (cupos_disponibles.size()+1) +"]: ");
+							num_cupo = leerEntero();
+							
+							if (num_cupo<1 || num_cupo>(cupos_disponibles.size()+1)) {
+								println("Proporcione una respuestata válida");
+							}
+								
+						}catch(InputMismatchException e) {
+							 println("Proporcione una respuestata válida.");
 						}
-		
-						// pedir al usuario que seleccione un día
-						do {
-							try {
-								System.out.print("Ingrese su elección dentro del rango [1-6]: ");
-								diaSeleccionado = leerEntero();
-								if (diaSeleccionado < 1 || diaSeleccionado > 6) {
-									System.out.println("Proporcione una respuesta válida.\n");
-								}
-							} catch (InputMismatchException e) {
-								System.out.println("Proporcione una respuesta válida.\n");
-								leerCadena();
+						finally {
+							leerCadena(); //CONSUMIR SALTO DE LÍNEA
+						}
+						
+					}while(num_cupo<1 || num_cupo>(cupos_disponibles.size()+1));
+						
+					//SI EL USUARIO DECIDE CANCELAR EL PROCESO DE AGENDAMIENTO DE CITA, ENTONCES EL PROCESO FINALIZARÁ.
+					if (num_cupo==(cupos_disponibles.size()+1)) {
+							
+						println("Se ha cancelado el agendamiento de la cita.");
+							
+					}
+					else {	
+					//DE LO CONTRARIO, SI SELECCIONA UNI, ENTONCES SE PROCEDE A REOCGER LOS DATOS DEL CLIENTE 
+					//Y LA MASCOTA.
+						Cupo cupo_seleccionado = cupos_disponibles.get(num_cupo-1);
+						
+						if (clienteConocido!=true) {
+							
+							cliente = obtenerDatosCliente(); //DATOS DEL CLIENTE
+							
+							cliente = CentroAdopcion.EsCliente(cliente); //COMPROBAR SI EL CLIENTE YA ESTÁ REGISTRADO
+							leerCadena();
 							}
-
-							ArrayList <Cupo> cuposDisponibles = empleadoSeleccionado.cuposDisponibles(num_dia);
-        	    
-							//SI EL EMPLEADO NO TIENE CUPOS PARA ESE DÍA, ENTONCES EL PROCESO NO PODRÁ CONTINIAR.
-							if (cuposDisponibles.size()==0) {
-								System.out.println("Lamentablemente, el empleado seleccionado no tiene disponibilidad para el día que se eligió.");
-								repetir = false;
+							
+							Mascota mascota = obtenerDatosMascota(servicioSeleccionado); //DATOS DE LA MASCOTA.
+							
+							//CREAR EL OBJETO DE TIPO CITA
+							Cita nuevaCita = new Cita(cliente,mascota,empleado_seleccionado,cupo_seleccionado,servicioSeleccionado);
+							
+							citasAgendadas.add(nuevaCita);//AGREGAR LA CITA AL ARRAY DE CITAS QUE EL USUARIO ESTÁ AGENDANDO
+							
+							
+							println("\n¡Cita agendada exitosamente!");
+							
+							
+							println("\n¿Desea agendar otra cita?");
+							String respuesta;
+							leerCadena(); //CONSUMIR SALTO DE LÍNEA
+							do {
+								print("Responda si / no: ");
+								respuesta= leerCadena();
+								
+								if (respuesta.equalsIgnoreCase("si")!=true && respuesta.equalsIgnoreCase("no")!=true) {
+									println("Proporcione una respuestata válida.\n");
+									
+								}
+							}while (respuesta.equalsIgnoreCase("si")!=true && respuesta.equalsIgnoreCase("no")!=true);
+							
+							if (respuesta.equalsIgnoreCase("si")==true) {
+								
+								repetir=true;
+								clienteConocido = true;
 							}
 							else {
-								//SI EL EMPLEADO TIENE CUPOS PARA EL DIA SELECCIONADO, ENTONCES SE LE MOSTRARÁN AL CLIENTE
-								System.out.println("\nPor favor, seleccione la franja horaria que mejor se adapte a su necesidad. Si ninguna opción es adecuada,"
-										+ "\npuedes seleccionar la opción " + (cuposDisponibles.size()+1) +" para cancelar.\n");
-								
-								System.out.println("Cupos disponibles para el " + diasSemana[num_dia -1] + " " + cuposDisponibles.get(0).fechaFormateada() + ": "); 
-								int o = 1;
-								for (Cupo cupo: cuposDisponibles) {
-									
-									System.out.println( o + ". " + cupo);
-									
-									o++;
-								}
-								System.out.println((cuposDisponibles.size()+1) + ". Cancelar");
-								
-								//SELECCIONAR EL CUPO DE PREFERENCIA, O CANCELAR
-								int num_cupo=0;
-								do {
-									try {
-										System.out.print("Ingrese su elección en el rango en el rango [1 -" + (cuposDisponibles.size()+1) +"]: ");
-										num_cupo = leerEntero();
-									
-										if (num_cupo<1 || num_cupo>(cuposDisponibles.size()+1)) {
-											System.out.println("Proporcione una respuesta válida");
-										}
-										
-								 }catch(InputMismatchException e) {
-									System.out.println("Proporcione una respuesta válida.");
-								}
-									finally {
-										leerCadena(); //CONSUMIR SALTO DE LÍNEA
-									}
-
-							} while (num_cupo < 1 || num_cupo > (cuposDisponibles.size() + 1));
-		
-							// si el usuario decide cancelar el proceso de agendamiento
-							if (num_cupo == (cuposDisponibles.size() + 1)) {
-								System.out.println("Se ha cancelado el agendamiento de la cita.");
-							} else {
-								// si el usuario selecciona un cupo, se procede a recoger los datos del cliente y la mascota
-								Cupo cupoSeleccionado = cuposDisponibles.get(num_cupo - 1);
-		
-								// crear el objeto de tipo cita
-								Cita nuevaCita = new Cita(cliente, null , empleadoSeleccionado, cupoSeleccionado, servicioSeleccionado);
-		
-								// agregar la cita al array de citas que el usuario está agendando
-								citasAgendadas.add(nuevaCita);
-		
-								System.out.println("\n¡Cita agendada exitosamente!");
-		
-								// preguntar al usuario si desea agendar otra cita
-								System.out.println("\n¿Desea agendar otra cita?");
-								String respuesta;
-								leerCadena(); // consumir salto de línea
-								do {
-									System.out.print("Responda si / no: ");
-									respuesta = leerCadena();
-		
-									if (!respuesta.equalsIgnoreCase("si") && !respuesta.equalsIgnoreCase("no")) {
-										System.out.println("Proporcione una respuesta válida.\n");
-									}
-								} while (!respuesta.equalsIgnoreCase("si") && !respuesta.equalsIgnoreCase("no"));
-		
-								if (respuesta.equalsIgnoreCase("si")) {
-									repetir = true;
-								} else {
-									repetir = false;
-								}
-							}
-						}
-					}
-				} while (repetir);
-		
+								repetir = false;
+								clienteConocido = false;
+							}     	    	    	    
+						}   	    	    	
+					}    
+				}
+			}while(repetir);
 				// si hay citas agendadas
 				if (citasAgendadas.size() != 0) {
 					boolean aplicarDescuento = false;
@@ -616,23 +752,23 @@ public class Main {
 					if (cliente.getPuntos() > 15) {
 						System.out.println("\nSr./Sra. " + cliente.getNombre() + " en estos momentos cuenta con " + cliente.getPuntos() + " puntos."
 								+ "\n¿Desea hacer uso de 15 puntos para obtener un descuento del 10%?");
-						String entrada;
+						String scanner;
 						do {
 							System.out.print("Responda si / no: ");
-							entrada = leerCadena();
+							scanner = leerCadena();
 		
-							if (!entrada.equalsIgnoreCase("si") && !entrada.equalsIgnoreCase("no")) {
-								System.out.println("Proporcione una respuesta válida.\n");
+							if (!scanner.equalsIgnoreCase("si") && !scanner.equalsIgnoreCase("no")) {
+								System.out.println("Proporcione una respuestata válida.\n");
 							}
-						} while (!entrada.equalsIgnoreCase("si") && !entrada.equalsIgnoreCase("no"));
+						} while (!scanner.equalsIgnoreCase("si") && !scanner.equalsIgnoreCase("no"));
 		
 						// si acepta el descuento, se aplica a todas las citas agendadas y se descuentan los puntos
-						if (entrada.equalsIgnoreCase("si")) {
+						if (scanner.equalsIgnoreCase("si")) {
 							aplicarDescuento = true;
 		
 							for (Cita cita : citasAgendadas) {
 								cita.aplicarDescuento();
-								cliente.disminuirPuntos(15);
+								cliente.disminuir_Puntos(15);
 							}
 		
 							System.out.println("¡Descuento aplicado exitosamente! Se han descontado 15 puntos de su cuenta.");
@@ -652,7 +788,7 @@ public class Main {
 			}
 			// función para obtener los datos del cliente
 			public static Cliente obtenerDatosCliente() {
-				System.out.println("\nAntes de continuar, le informamos que para hacer uso del servicio la persona encargada de la mascota debe ser mayor de edad.\n");
+				System.out.println("\nAntes de continuar, le informamos que para hacer uso del servicioSSeleccionado la persona encargada de la mascota debe ser mayor de edad.\n");
 		
 				String nombre;
 				int edad = 0;
@@ -666,10 +802,10 @@ public class Main {
 						System.out.print("Ingrese su edad: ");
 						edad = leerEntero();
 						if (edad <= 0) {
-							System.out.println("Proporcione una respuesta válida.\n");
+							System.out.println("Proporcione una respuestata válida.\n");
 						}
 					} catch (RuntimeException e) {
-						System.out.println("Proporcione una respuesta válida.\n");
+						System.out.println("Proporcione una respuestata válida.\n");
 					} finally {
 						leerCadena(); // consumir salto de línea
 					}
@@ -677,7 +813,7 @@ public class Main {
 		
 				// si el usuario es menor de edad, se piden los datos de un adulto responsable
 				if (edad < 18) {
-					System.out.println("El interesado en hacer uso del servicio es menor de edad.\n");
+					System.out.println("El interesado en hacer uso del servicioSSeleccionado es menor de edad.\n");
 					do {
 						System.out.println("Proporcione los datos de un adulto responsable: ");
 						System.out.print("Ingrese su nombre: ");
@@ -696,7 +832,7 @@ public class Main {
 							}
 		
 						} catch (RuntimeException e) {
-							System.out.println("Proporcione una respuesta válida.\n");
+							System.out.println("Proporcione una respuestata válida.\n");
 						} finally {
 							leerCadena(); // consumir salto de línea
 						}
@@ -708,11 +844,11 @@ public class Main {
 						System.out.print("Ingrese su número de identificación: ");
 						cedula = leerEnteroLargo();
 						if (cedula <= 0) {
-							System.out.println("Proporcione una respuesta válida.\n");
+							System.out.println("Proporcione una respuestata válida.\n");
 							cedula = 0;
 						}
 					} catch (InputMismatchException e) {
-						System.out.println("Proporcione una respuesta válida.\n");
+						System.out.println("Proporcione una respuestata válida.\n");
 						leerCadena();
 					}
 				}
@@ -720,32 +856,135 @@ public class Main {
 				Cliente cliente = new Cliente(nombre, edad, cedula);
 				return cliente;
 			}
-		}
-*/
+			public static Mascota obtenerDatosMascota(int servicio) {
+				leerCadena();//CONSUMIR SALTO DE LÍNEA
+				
+				String nombre = null;
+				int edad = 0;
+				String especie = null;
+				String sexo = null;
+				
+				println("\nProporcione la siguiente información sobre su mascota.");
+				
+				print("Ingrese el nombre: ");
+				nombre= leerCadena();
+				
+				do {
+					try {
+						print("Ingrese la edad (meses): ");
+						edad= leerEntero();
+					
+						if (edad<=0) {
+							println("Proporcione una  respuesta válida.\n");
+							}
+						}catch(InputMismatchException e) {
+							println("proporcione una respuesta válida.\n");
+							leerCadena();
+							}		
+				}while(edad<=0);
+				
+				int eleccion=0;
+				int opciones=0;
+				
+				println("\nSeleccione la especie de su mascota.");
+				if (servicio==1 || servicio==3) {
+					opciones=2;
+					println("1. Perro \n2. Gato");
+				}
+				
+				if (servicio==2) {
+					opciones=4;
+					println("1. Perro \n2. Gato\n3. Conejo \n4. Hámster");
+				}
+		
+				do {		
+					try {
+						print("Ingrese su elección dentro del rango [1-"+ opciones +"]: ");
+						eleccion=leerEntero();
+						
+						if (eleccion<1 || eleccion > opciones) {
+							println("Opción fuera de rango.\n");
+						}
+						}catch(InputMismatchException e) {
+							println("Se ha ingresado un tipo de dato incorrecto.\n");
+							leerCadena();
+							}
+					}while(eleccion<1 || eleccion>opciones);
+				
+				switch(eleccion) {
+				
+				case 1:
+					especie="Perro";
+					break;
+				case 2:
+					especie= "Gato";
+					break;
+				case 3:
+					especie ="Conejo";
+					break;
+				case 4:
+					especie="Hámster";
+					break;		
+				}
+				
+				println("\nSeleccione el género de su mascota: ");
+				println("1. Macho\n2. Hembra");
+				eleccion=0;
+				
+				do {		
+					try {
+						print("Ingrese su elección dentro del rango [1-2]: ");
+						eleccion=leerEntero();
+						
+						if (eleccion<1 || eleccion >2) {
+							println("Proporcione una respuesta válida.\n");
+						}
+						}catch(InputMismatchException e) {
+							println("Proporcione una respuesta válida.\n");
+							leerCadena();//CONSUMIR SALTO DE LÍNEA
+							}
+					}while(eleccion<1 || eleccion>2);
+				
+				switch(eleccion) {
+				
+				case 1:
+					sexo="Macho";
+					break;
+				case 2:
+					sexo="Hembra";
+					break;
+				}
+				
+				Mascota mascota = new Mascota(nombre,especie, edad,sexo);
+				
+				return mascota;	
+			}
 
 
+//>>--------------------------------------------------------------------------------------------------------------------------------------<<
 public static void tienda() {
 		
+
+		
 	//CREAMOS UN EMPLEADO PARA QUE ATIENDA LA TIENDA
-	Empleado empleado = new Empleado("Albert", 22, 555, 1323, "West Elm", Empleado.Especialidad.VENDEDOR);
-            CentroAdopcion sede1 = null;
+	Empleado empliado = new Empleado("Albert", 22, 555, 1323, "West Elm", Empleado.Especialidad.VENDEDOR);
 	
 	// CREACIÓN DE TIENDA
-	//t1 = new Tienda(empleado, sede1);
-	Tienda t1 = new Tienda(empleado, sede1);
+	//t1 = new Tienda(empliado, sede1);
+	Tienda t1 = new Tienda(empliado,sede1);
 	
 	// BUCLE QUE MANTIENE LA OPERACION DE LA TIENDA, DE ROMPERSE, SE TERMINA LA FUNCIONALIDAD
 	
 	boolean bucle = true; // VARIABLE PARA EL SEGUNDO MENÚ
 	
-	System.out.println("\n🐾🐕¡Bienvenido a la tienda de mascotas del Centro de cuidado Animal: UNamascota!🐾🐈"+"\n Aquí encontrarás los mejores productos para el cuidado y la diversión de tu compañero peludo."+"\n");
+	println("\n🐾🐕¡Bienvenido a la tienda de mascotas del Centro de cuidado Mascota: UNamascota!🐾🐈"+"\n Aquí encontrarás los mejores productos para el cuidado y la diversión de tu compañero peludo."+"\n");
 	
 	while (true) { 
 	
-		System.out.println("¿Qué te trae por estos lares?");
-		System.out.println("1. Ir de compras");
-		System.out.println("2. Salir\n");
-		System.out.println("Ingrese el número de la opción que desea [1-2]: ");
+		println("¿Qué te trae por estos lares?");
+		println("1. Ir de compras");
+		println("2. Salir\n");
+		println("Ingrese el número de la opción que desea [1-2]: ");
 		
 		int menu = 0; // ENTERO QUE EL USUARIO VA A INGREASAR, PARA ESCOGER OPCION 
 		while (menu==0) { //MIENTRAS EL ENTERO SEA CERO (PARA CONTROLAR QUE EL USUARIO LE DÉ UN VALOR)
@@ -755,13 +994,13 @@ public static void tienda() {
 					break;
 				}
 				else {
-					System.out.println("🚫¡Oh no!, Ingrese un número válido por favor🚫");
+					println("🚫¡Oh no!, Ingrese un número válido por favor🚫");
 					menu = 0;
 					continue;
 				}
 			}
 			catch(InputMismatchException e) {
-				System.out.println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
+				println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
 			}
 			finally {
 					scanner.nextLine();//SALTO DE LINEA
@@ -771,14 +1010,14 @@ public static void tienda() {
 	if (menu==1) {	// OPCION 1 DEL PRIMER MENÚ, ADQUIRIR PRODCUTO.		
 		while (bucle==true) { //UTILIZAMOS LA VARIABLE BUCLE INICIADA ANTES DEL PRIMER WHILE
 			
-			System.out.println("\n--------------------------------------------------------");
-			System.out.println("\n🐾🐕¿Cómo desea que se le muestren los productos?🐾🐈");
-			System.out.println("1. Mostrar todo");
-			System.out.println("2. Filtrar por tipo\n");
-			System.out.println("Ingrese el número de la opción que desea [1-2]: \n");
-			System.out.println("\n--------------------------------------------------------");
+			println("\n--------------------------------------------------------");
+			println("\n🐾🐕¿Cómo desea que se le muestren los productos?🐾🐈");
+			println("1. Mostrar todo");
+			println("2. Filtrar por tipo\n");
+			print("Ingrese el número de la opción que desea [1-2]: \n");
+			println("\n--------------------------------------------------------");
 				
-			int menuTienda = 0; // VOLVEMOS A RECIBIR UNA ENTRADA, ESTA VEZ PARA DECIDIR COMO FILTRAR LOS PRODUCTOS
+			int menuTienda = 0; // VOLVEMOS A RECIBIR UNA scanner, ESTA VEZ PARA DECIDIR COMO FILTRAR LOS PRODUCTOS
 			while (menuTienda==0) {
 				try {
 					menuTienda = leerEntero();
@@ -786,13 +1025,13 @@ public static void tienda() {
 						break;
 					}
 					else {
-						System.out.println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
+						println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
 						menuTienda = 0;
 						continue;
 					}
 				}
 				catch(InputMismatchException e) {
-					System.out.println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
+					println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
 				}
 				finally {
 					scanner.nextLine();//SALTO DE LINEA
@@ -800,11 +1039,11 @@ public static void tienda() {
 			}
 			
 			if (menuTienda==1) { //EN CASO DE QUE SE QUIERA VISUALIZAR TODOO	
-				System.out.println("\nProductos disponibles:");
-				System.out.println(t1.inventario()); // SE LLAMA AL MÉTODO INVENTARIO DE TIENDA, PARA QUE DEVULVA TODOS LOS PRODUCTOS SIN MÁS
+				println("\nProductos disponibles:");
+				println(t1.inventario()); // SE LLAMA AL MÉTODO INVENTARIO DE TIENDA, PARA QUE DEVULVA TODOS LOS PRODUCTOS SIN MÁS
 			}
-			else { // DE LO CONTRARIO, SE LE VOLVERÁ A PEDIR UNA ENTRADA PARA QUE INDIQUE POR QUE TIPO DE ANIMAL QUIERE VER 
-				System.out.println("\n🐈🐾¿Por qué tipo de animal te gustaría ver? [Perros, gatos, aves, hamsters o conejos]: 🐕🐾");
+			else { // DE LO CONTRARIO, SE LE VOLVERÁ A PEDIR UNA scanner PARA QUE INDIQUE POR QUE TIPO DE Mascota QUIERE VER 
+				print("\n🐈🐾¿Por qué tipo de Mascota te gustaría ver? [Perros, gatos, aves, hamsters o conejos]: 🐕🐾");
 				while (true) { //BUCLE PARA CONTROLAR ÉSTE NUEVO MENÚ
 					try {
 						String tipo = leerCadena(); // SE LEE EL STRING 
@@ -813,37 +1052,37 @@ public static void tienda() {
 						//LUEGO LO COMPARAMOS EN ESTE GRUPO DE CONDICIONALES SIMPLES 
 						
 						if (tipo.equals("perros") || tipo.equals("perro")) { 
-							System.out.println("\nProductos disponibles: 🐕\n");
-							System.out.println(t1.filtrar("perros")); //DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
+							println("\nProductos disponibles: 🐕\n");
+							println(t1.filtrar("perros")); //DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
 							break;
 						}
 						else if (tipo.equals("gatos") || tipo.equals("gato")) {
-							System.out.println("\nProductos disponibles: 🐈\n");
-							System.out.println(t1.filtrar("gatos")); //DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA 
+							println("\nProductos disponibles: 🐈\n");
+							println(t1.filtrar("gatos")); //DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA 
 							break;
 						}
 						else if (tipo.equals("aves") || tipo.equals("ave")) {
-							System.out.println("\nProductos disponibles: 🐦\n");
-							System.out.println(t1.filtrar("aves"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
+							println("\nProductos disponibles: 🐦\n");
+							println(t1.filtrar("aves"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
 							break;
 						}	
 						else if (tipo.equals("hamsters") || tipo.equals("hamster")) {
-							System.out.println("\nProductos disponibles: 🐹\n");
-							System.out.println(t1.filtrar("hamsters"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
+							println("\nProductos disponibles: 🐹\n");
+							println(t1.filtrar("hamsters"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
 							break;
 						}
 						else if (tipo.equals("conejos") || tipo.equals("conejo")) {
-							System.out.println("\nProductos disponibles: 🐇\n");
-							System.out.println(t1.filtrar("conejos"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
+							println("\nProductos disponibles: 🐇\n");
+							println(t1.filtrar("conejos"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
 							break;
 						}
 						else {
-							System.out.println("🚫Por favor, ingrese el tipo del animal en minúsculas [Perros, gatos, aves o hamsters]🚫");
+							println("🚫Por favor, ingrese el tipo del Mascota en minúsculas [Perros, gatos, aves o hamsters]🚫");
 							continue;
 						}
 					}
 					catch(InputMismatchException e) {
-						System.out.println("🚫Por favor, coloque un tipo valido de animal🚫");
+						println("🚫Por favor, coloque un tipo valido de Mascota🚫");
 					}
 				}
 			}
@@ -853,43 +1092,43 @@ public static void tienda() {
 			boolean control = true;
 			while (control) {
 				try {
-						System.out.println("Digite el índice del producto a comprar: ");
+						print("Digite el índice del producto a comprar: ");
 						int indice = leerEntero(); //INDICE PARA LOCALIZAR EL PRODUCTO QUE QUIERE EL USUARIO 
 		
-						System.out.println("Indique cuantas unidades necesita del producto: ");
+						print("Indique cuantas unidades necesita del producto: ");
 						int unidades = leerEntero(); //CANTIDAD DE UNIDADES QUE EL USUARIO VA A COMPRAR
 						
 						//  REGISTRO DEL USUARIO PARA REALIZAR LA COMPRA-------------------------------------
 						
 						if (unidades==1) { //SI SOLO VA A COMPRAR UNA UNIDAD
-							System.out.println("\nSus datos serán tomados para registrar la compra.");
-							System.out.print("Ingrese su cédula: ");
+							println("\nSus datos serán tomados para registrar la compra.");
+							print("Ingrese su cédula: ");
 							long cedula = scanner.nextLong();
-							System.out.print("Ingrese su edad: ");
+							print("Ingrese su edad: ");
 							int edad = scanner.nextInt();
-							System.out.println("Ingrese su nombre: ");
+							print("Ingrese su nombre: ");
 							scanner.nextLine();
 							String nombre = leerCadena();
 							
 							//SE REGISTA EL USUARIO, CREANDO UN OBJETO DEL TIPO CLIENTE Y PASANDOLO AL MÉTODO COMPRA DE TIENDA 
 							Cliente cliente = new Cliente(nombre, edad, cedula);
-							System.out.println("\n"+t1.compra(indice, cliente)); 
+							println("\n"+t1.compra(indice, cliente)); 
 							//ESTE FILTRO DE: UNIDADES == 1, ES PORQUE EL MÉTODO COMPRA QUE RECIBE DOS PARÁMETROS RETORNA ALGO MÁS ADECUADO PARA ESTE CASO 
 						}
 						else { // CUANDO EL USUARIO VA A COMPRAR MÁS DE UNA UNIDAD 
-							System.out.println("\nSus datos serán tomados para registrar la compra.");
-							System.out.print("Ingrese su cédula: ");
+							println("\nSus datos serán tomados para registrar la compra.");
+							print("Ingrese su cédula: ");
 							long cedula = scanner.nextLong();
-							System.out.print("Ingrese su edad: ");
+							print("Ingrese su edad: ");
 							int edad = scanner.nextInt();
-							System.out.print("Ingrese su nombre: ");
+							print("Ingrese su nombre: ");
 							scanner.nextLine();
 							String nombre = leerCadena();
 							
 							//SE REGISTA EL USUARIO, CREANDO UN OBJETO DEL TIPO CLIENTE Y PASANDOLO AL MÉTODO COMPRA DE TIENDA
 							// SE LE AGREGA TAMBIEN, LA CANTIDAD DE UNIDADES AL MÉTODO COMPRA 
 							Cliente cliente = new Cliente(nombre, edad, cedula);
-							System.out.println("\n"+t1.compra(indice, unidades, cliente));
+							println("\n"+t1.compra(indice, unidades, cliente));
 						}
 						
 						// --------------------------------------------------------------------------------
@@ -898,30 +1137,29 @@ public static void tienda() {
 					
 				}
 				catch(InputMismatchException e) {
-					System.out.println("Por favor lea e ingrese correctamente los datos\n");
+					println("Por favor lea e ingrese correctamente los datos\n");
 				}
 				
 			}
 			
 			// SE LE PIDE SI DESEA VOLVER A REINICIAR EL CICLO DESDE EL MENÚ DE COMPRA 
-			System.out.print("\n¿Desea volver al catálogo? [si/no]: ");
-			String respuesta = " ";
-			while (true) {//CONTROL CON UN WHILE SOLAMENTE, HASTA QUE NO RECIBA UNA RESPUESTA VÁLIDA.
-				respuesta = scanner.nextLine();
-				respuesta.toLowerCase();
-
-				if (respuesta.equals("si")||respuesta.equals("no")) {
+			print("\n¿Desea volver al catálogo? [si/no]: ");
+			String respuestata = " ";
+			while (true) {//CONTROL CON UN WHILE SOLAMENTE, HASTA QUE NO RECIBA UNA respuestaTA VÁLIDA.
+				respuestata = scanner.nextLine();
+				respuestata.toLowerCase();
+				if (respuestata.equals("si")||respuestata.equals("no")) {
 					break; 
 				}else {
-					System.out.println("Por favor, ingrese una respuesta válida [si/no]");
+					println("Por favor, ingrese una respuestata válida [si/no]");
 					continue;
 				}
 			}
-				if (respuesta.equals("si")) {
+				if (respuestata.equals("si")) {
 					continue; //VOLVER A INICIAR CICLO DE COMPRA
 				}
 				else {
-					System.out.println("Esperamos verlo por aquí pronto.\n");
+					println("Esperamos verlo por aquí pronto.\n");
 					break; // SALIR DE LA TIENDA 
 				}
 			}//BUCLE COMPRAR
@@ -931,110 +1169,4 @@ public static void tienda() {
 	}
 	}//BUCLE INICIAL
 }//FINAL MÉTODO TIENDA
-
-
-// ---------------------------------------------------------------------------------------
-
-
-
-public static void planificacionDieta(Cliente cliente) {
-	//ingresar datos de la mascota
-		System.out.println("\nIngresa los datos de su mascota:");
-		System.out.println("Nombre:");
-		String nombre = Main.leerCadena();
-		
-		System.out.println("Especie:");
-		String tipo = "";
-		while (true) {//validar que la especie introducida sea valido.
-			tipo = Main.leerCadena();
-			if (tipo.equalsIgnoreCase("Gato") || tipo.equalsIgnoreCase("Perro")) {
-				break;
-			} else {
-				System.out.println("Lo sentimos, la planiicacion de dieta solo esta disponible para gatos y perros.");
-				return;
-			 }
-		}
-		
-		System.out.println("Edad:");
-		int edad = Main.leerEntero();
-		
-		System.out.println("Sexo (M/F):");
-		String sexo = "";
-		while (true) {//validar que el dato introducido sea valido.
-			sexo = Main.leerCadena();
-			if (sexo.equalsIgnoreCase("M") || sexo.equalsIgnoreCase("F")) {
-				break;
-			} else { System.out.println("Entrada no valida, intentalo de nuevo."); }
-		}
-		
-		System.out.println("Tamaño (1-4): \n1. Miniatura \n2. Pequeño \n3. Mediano \n4. Grande");
-		int tamano = 3;
-		while (true) {//validar que el dato introducido sea valido.
-			tamano = Main.leerEntero();
-			if (tamano > 0 && tamano < 5) {
-				break;
-			} else { System.out.println("Entrada no valida, intentalo de nuevo."); }
-		}
-		
-		System.out.println("Peso en kg:");
-		double peso = Main.leerDoble();
-
-		//Crear un objeto Mascota con los datos que ingresó el usuario
-		Mascota mascota = new Mascota(nombre, tipo, edad, sexo, EstadoSalud.SANO, tamano, peso);
-		//Crea el objeto dieta asociado a la mascota
-		Dieta dieta = new Dieta(mascota);
-		//utiliza las formulas aritmeticas para calcular el porcentaje de nutrientes que debe
-		//consumir la mascota, dependiendo de su debe subir o bajar de peso.
-		dieta.calcularPesoIdeal();
-        dieta.gramosDiarios = dieta.getPesoIdeal() * mascota.getTamano() * 10;
-        switch (dieta.comparacionPeso()) {
-            case 1: //Esta en su peso ideal
-                dieta.grasas = dieta.getGramosDiarios() * 0.20;
-                dieta.proteinas = dieta.getGramosDiarios() * 0.30;
-                dieta.carbohidratos = dieta.getGramosDiarios() * 0.50;
-                break;
-            case 2: //Subir de peso
-                dieta.grasas = dieta.getGramosDiarios() * 0.30;
-                dieta.proteinas = dieta.getGramosDiarios() * 0.40;
-                dieta.carbohidratos = dieta.getGramosDiarios() * 0.30;
-                break;
-            case 3: //Bajar de peso
-                dieta.grasas = dieta.getGramosDiarios() * 0.15;
-                dieta.proteinas = dieta.getGramosDiarios() * 0.50;
-                dieta.carbohidratos = dieta.getGramosDiarios() * 0.35;
-				break;     
-    }
-		//imprime la dieta planificada
-		System.out.println(dieta.toString());
-		//agrega recomendaciones de productos.
-		if (mascota.getEspecie().equals("gato")) {
-			System.out.println(""); //Productos recomendados para gato
-		} else {
-			System.out.println(""); //Productos recomendados para perro
-		}
-		//serializa el objeto dieta creado
-
-		
-
-		//pregunta al usuario que desea hacer
-		System.out.println("\n¿Desea volver al menu principal o redirigirse a la tienda? [Menu/Tienda]: ");
-			String respuesta = " ";
-			while (true) {
-				respuesta = leerCadena();
-				respuesta.toLowerCase();
-				if (respuesta.equals("menu")||respuesta.equals("tienda")) {
-					break; 
-				}else {
-					System.out.println("Por favor, ingresa una respuesta válida [Menu/Tienda]");
-				}
-			}
-				if (respuesta.equals("menu")) {
-					System.out.println("Gracias por ingresar a la interaz de planeacion de dieta!\nRedireccionandote al menu principal...");
-				}
-				else {
-					System.out.println("Gracias por ingresar a la interaz de planeacion de dieta!\nRedireccionandote a la Tienda...");
-					tienda();
-				}
-}//Fin de Planeacion Dieta
-
 }

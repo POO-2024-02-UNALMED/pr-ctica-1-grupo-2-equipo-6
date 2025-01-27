@@ -6,17 +6,16 @@ import java.io.Serializable;
 
 public class Dieta implements Serializable {
     private static final long serialVersionUID = 1L;
-    Mascota mascota;
-    double pesoIdeal;
-    double gramosDiarios;
-    double proteinas;
-    double grasas;
-    double carbohidratos;
+    private final Mascota mascota;
+    private double pesoIdeal;
+    public double gramosDiarios;
+    public double proteinas;
+    public double grasas;
+    public double carbohidratos;
 
     //Constructor
     public Dieta(Mascota mascota) {
         this.mascota = mascota;
-        calcularPesoIdeal();
     }
 
     //metodos Get

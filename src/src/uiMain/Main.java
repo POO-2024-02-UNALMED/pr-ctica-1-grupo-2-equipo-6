@@ -1174,10 +1174,10 @@ public static void tienda() {
 	while (true) { 
 	
 		println("-----------------------------");
-		println("¿Qué te trae por estos lares?");
+		println("¿Qué te trae por estos lares amante de los peluditos?");
 		println("1. Ir de compras");
 		println("2. Salir\n");
-		println("Ingrese el número de la opción que desea [1-2]: ");
+		print("Ingrese el número de la opción que desea [1-2]: ");
 		
 		int menu = 0; // ENTERO QUE EL USUARIO VA A INGREASAR, PARA ESCOGER OPCION 
 		while (menu==0) { //MIENTRAS EL ENTERO SEA CERO (PARA CONTROLAR QUE EL USUARIO LE DÉ UN VALOR)
@@ -1187,13 +1187,13 @@ public static void tienda() {
 					break;
 				}
 				else {
-					println("🚫¡Oh no!, Ingrese un número válido por favor🚫");
+					println("¡Oh no!, Ingrese un número válido por favor");
 					menu = 0;
 					continue;
 				}
 			}
 			catch(InputMismatchException e) {
-				println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
+				println("Por favor ingrese un índice disponible (Pista: Entre 1 y 2)");
 			}
 			finally {
 					scanner.nextLine();//SALTO DE LINEA
@@ -1204,7 +1204,7 @@ public static void tienda() {
 		while (bucle==true) { //UTILIZAMOS LA VARIABLE BUCLE INICIADA ANTES DEL PRIMER WHILE
 			
 			println("\n--------------------------------------------------------");
-			println("\n🐾🐕¿Cómo desea que se le muestren los productos?🐾🐈");
+			println("\n¿Cómo desea que se le muestren los productos?");
 			println("1. Mostrar todo");
 			println("2. Filtrar por tipo\n");
 			print("Ingrese el número de la opción que desea [1-2]: \n");
@@ -1218,13 +1218,13 @@ public static void tienda() {
 						break;
 					}
 					else {
-						println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
+						println("Por favor ingrese un índice disponible (Pista: Entre 1 y 2)");
 						menuTienda = 0;
 						continue;
 					}
 				}
 				catch(InputMismatchException e) {
-					println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
+					println("Por favor ingrese un índice disponible (Pista: Entre 1 y 2)");
 				}
 				finally {
 					scanner.nextLine();//SALTO DE LINEA
@@ -1244,38 +1244,54 @@ public static void tienda() {
 						
 						//LUEGO LO COMPARAMOS EN ESTE GRUPO DE CONDICIONALES SIMPLES 
 						
-						if (tipo.equals("perros") || tipo.equals("perro")) { 
-							println("\nProductos disponibles: 🐕\n");
-							println(t1.filtrar("perros")); //DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
-							break;
-						}
-						else if (tipo.equals("gatos") || tipo.equals("gato")) {
-							println("\nProductos disponibles: 🐈\n");
-							println(t1.filtrar("gatos")); //DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA 
-							break;
-						}
-						else if (tipo.equals("aves") || tipo.equals("ave")) {
-							println("\nProductos disponibles: 🐦\n");
-							println(t1.filtrar("aves"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
-							break;
-						}	
-						else if (tipo.equals("hamsters") || tipo.equals("hamster")) {
-							println("\nProductos disponibles: 🐹\n");
-							println(t1.filtrar("hamsters"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
-							break;
-						}
-						else if (tipo.equals("conejos") || tipo.equals("conejo")) {
-							println("\nProductos disponibles: 🐇\n");
-							println(t1.filtrar("conejos"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
-							break;
-						}
-						else {
-							println("🚫Por favor, ingrese el tipo del Mascota en minúsculas [Perros, gatos, aves o hamsters]🚫");
-							continue;
+						switch (tipo.toLowerCase()) {
+							case "perros":
+								println("\nProductos disponibles: \n");
+								println(t1.filtrar("perros"));
+								break;
+							case "perro":
+								println("\nProductos disponibles: \n");
+								println(t1.filtrar("perros"));
+								break;
+							case "gatos":
+								println("\nProductos disponibles: \n");
+								println(t1.filtrar("gatos"));
+								break;
+							case "gato":
+								println("\nProductos disponibles: \n");
+								println(t1.filtrar("gatos"));
+								break;
+							case "aves":
+								println("\nProductos disponibles: \n");
+								println(t1.filtrar("aves"));
+								break;
+							case "ave":
+								println("\nProductos disponibles: \n");
+								println(t1.filtrar("aves"));
+								break;
+							case "hamsters":
+								println("\nProductos disponibles: \n");
+								println(t1.filtrar("hamsters"));
+								break;
+							case "hamster":
+								println("\nProductos disponibles: \n");
+								println(t1.filtrar("hamsters"));
+								break;
+							case "conejos":
+								println("\nProductos disponibles: \n");
+								println(t1.filtrar("conejos"));
+								break;
+							case "conejo":
+								println("\nProductos disponibles: \n");
+								println(t1.filtrar("conejos"));
+								break;
+							default:
+								println("Por favor, ingrese el tipo del Mascota en minúsculas [Perros, gatos, aves o hamsters]");
+								continue;
 						}
 					}
 					catch(InputMismatchException e) {
-						println("🚫Por favor, coloque un tipo valido de Mascota🚫");
+						println("Por favor, coloque un tipo valido de Mascota");
 					}
 				}
 			}
@@ -1317,16 +1333,22 @@ public static void tienda() {
 							print("Ingrese su nombre: ");
 							scanner.nextLine();
 							String nombre = leerCadena();
+							print("Ingrese su dirección: ");
+							scanner.nextLine();
+							String direccion = leerCadena();
+							print("Ingrese su número de teléfono: ");
+							scanner.nextLong();
+							long telefono = leerEnteroLargo();
 							
-							//SE REGISTA EL USUARIO, CREANDO UN OBJETO DEL TIPO CLIENTE Y PASANDOLO AL MÉTODO COMPRA DE TIENDA
+							// SE REGISTA EL USUARIO, CREANDO UN OBJETO DEL TIPO CLIENTE Y PASANDOLO AL MÉTODO COMPRA DE TIENDA
 							// SE LE AGREGA TAMBIEN, LA CANTIDAD DE UNIDADES AL MÉTODO COMPRA 
-							Cliente cliente = new Cliente(nombre, edad, cedula);
+							Cliente cliente = new Cliente(nombre, edad, cedula, telefono, direccion);
 							println("\n"+t1.compra(indice, unidades, cliente));
 						}
 						
 						// --------------------------------------------------------------------------------
 						
-						control = false; //SI SE COMPLETÓ EL BLOQUE TRY, SE CAMBIA EL ESTADO A FALSO PARA ROMPER EL CICLO 
+						control = false;
 					
 				}
 				catch(InputMismatchException e) {
@@ -1337,18 +1359,18 @@ public static void tienda() {
 			
 			// SE LE PIDE SI DESEA VOLVER A REINICIAR EL CICLO DESDE EL MENÚ DE COMPRA 
 			print("\n¿Desea volver al catálogo? [si/no]: ");
-			String respuestata = " ";
+			String respuesta = " ";
 			while (true) {//CONTROL CON UN WHILE SOLAMENTE, HASTA QUE NO RECIBA UNA respuestaTA VÁLIDA.
-				respuestata = scanner.nextLine();
-				respuestata.toLowerCase();
-				if (respuestata.equals("si")||respuestata.equals("no")) {
+				respuesta = scanner.nextLine();
+				respuesta.toLowerCase();
+				if (respuesta.equals("si")||respuesta.equals("no")) {
 					break; 
 				}else {
 					println("Por favor, ingrese una respuestata válida [si/no]");
 					continue;
 				}
 			}
-				if (respuestata.equals("si")) {
+				if (respuesta.equals("si")) {
 					continue; //VOLVER A INICIAR CICLO DE COMPRA
 				}
 				else {
@@ -1376,7 +1398,7 @@ public static void planificacionDieta(Cliente cliente) {
 			if (tipo.equalsIgnoreCase("Gato") || tipo.equalsIgnoreCase("Perro")) {
 				break;
 			} else {
-				System.out.println("Lo sentimos, la planiicacion de dieta solo esta disponible para gatos y perros.");
+				System.out.println("Lo sentimos, la planificacion de dieta solo esta disponible para gatos y perros.");
 				return;
 			 }
 		}

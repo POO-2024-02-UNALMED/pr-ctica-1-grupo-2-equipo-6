@@ -122,14 +122,14 @@ public class Main {
 	}
 
 	public static double leerDoble() {
-    while (true) {
-        try {
-            return scanner.nextDouble();
-        } catch (InputMismatchException e) {
-            scanner.next(); // Limpiar la entrada no válida
-        }
+    	while (true) {
+        	try {
+            	return scanner.nextDouble();
+        	} catch (InputMismatchException e) {
+        	    scanner.next(); // Limpiar la entrada no válida
+        	}
+		}
 	}
-}
 
 
 

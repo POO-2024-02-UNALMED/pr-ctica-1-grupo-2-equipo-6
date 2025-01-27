@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import gestorAplicacion.elementos.Producto;
 import gestorAplicacion.elementos.Cliente;
 import gestorAplicacion.elementos.Empleado;
+import gestorAplicacion.elementos.CentroAdopcion;
 
 public class Tienda implements Serializable{
 	
@@ -135,7 +136,7 @@ public class Tienda implements Serializable{
                     	productos.remove(indice); // SI LAS UNIDADES QUEDAN EN CERO, SE ELIMINA EL PRODUCTO DE LA LISTA 
                     }
                     
-                    cliente = CentroAdopcion.isCliente(cliente); // SE COMPRUEBA SI EL CLIENTE EXISTE 
+                    cliente = CentroAdopcion.EsCliente(cliente); // SE COMPRUEBA SI EL CLIENTE EXISTE 
                     float precio = productos.get(indice).getPrecio(); // SE GUARDA EL PRECIO PARA LA FUTURA FACTURA 
                     int puntos = cliente.getPuntos(); //SE TOMAN LOS PUNTOS DEL CLIENTE
                     
@@ -179,7 +180,7 @@ public class Tienda implements Serializable{
                     	
                     }
                     
-                    cliente = CentroAdopcion.isCliente(cliente); // SE COMPRUEBA SI EL CLIENTE EXISTE 
+                    cliente = CentroAdopcion.EsCliente(cliente); // SE COMPRUEBA SI EL CLIENTE EXISTE 
                     float precio = productos.get(indice).getPrecio(); // SE GUARDA EL PRECIO PARA GENERAR DESPUES FACTURA 
                     int puntos = cliente.getPuntos(); // SE TOMAN LOS PUNTOS 
                     

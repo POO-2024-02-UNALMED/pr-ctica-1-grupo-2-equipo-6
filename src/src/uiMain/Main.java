@@ -1,21 +1,17 @@
 package uiMain;
 
-import java.util.List;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-
+import gestorAplicacion.elementos.CentroAdopcion;
+import gestorAplicacion.elementos.CentroAdopcion.Sedes;
+import gestorAplicacion.elementos.Cliente;
+import gestorAplicacion.elementos.Dieta;
 import gestorAplicacion.elementos.Empleado;
 import gestorAplicacion.elementos.Empleado.Especialidad;
 import gestorAplicacion.elementos.Mascota;
-import gestorAplicacion.elementos.CentroAdopcion.Sedes;
-import gestorAplicacion.elementos.CentroAdopcion;
-import gestorAplicacion.elementos.Cliente;
-import gestorAplicacion.elementos.Cupo;
 import gestorAplicacion.elementos.Mascota.EstadoSalud;
-import gestorAplicacion.gestion.Cita;
 import gestorAplicacion.gestion.Tienda;
-import gestorAplicacion.elementos.Dieta;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 
 		
@@ -731,11 +727,12 @@ public class Main {
 public static void tienda() {
 		
 	//CREAMOS UN EMPLEADO PARA QUE ATIENDA LA TIENDA
-	Empleado empliado = new Empleado("Albert", 22, 555, 1323, "West Elm", Empleado.Especialidad.VENDEDOR);
+	Empleado empleado = new Empleado("Albert", 22, 555, 1323, "West Elm", Empleado.Especialidad.VENDEDOR);
+            CentroAdopcion sede1 = null;
 	
 	// CREACIÓN DE TIENDA
-	//t1 = new Tienda(empliado, sede1);
-	Tienda t1 = new Tienda(empliado,sede1);
+	//t1 = new Tienda(empleado, sede1);
+	Tienda t1 = new Tienda(empleado, sede1);
 	
 	// BUCLE QUE MANTIENE LA OPERACION DE LA TIENDA, DE ROMPERSE, SE TERMINA LA FUNCIONALIDAD
 	

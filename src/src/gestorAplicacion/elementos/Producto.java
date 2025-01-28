@@ -19,14 +19,19 @@ public class Producto implements Serializable {
 
     //---> Constructores <---
     public Producto(String nombre, float precio, String tipoAnimal, String tipoUso, int cantidadUnidades){
+        this(nombre, precio, tipoUso, cantidadUnidades); // Reutiliza el segundo constructor
+        this.tipoAnimal = tipoAnimal; // Se inicializa correctamente aquí
+    }
+    
+    public Producto(String nombre, float precio, String tipoUso, int cantidadUnidades){
         this.nombre = nombre;
         this.precio = precio;
-        this.tipoAnimal = tipoAnimal;
-        this.tipoUso = tipoUso;
+        this.tipoUso = tipoUso; // Asignación que faltaba
         this.cantidadUnidades = cantidadUnidades;
     }
 
     //---> Metodos Getters And Setters <---
+
     public void setNombre(String nombre){
         this.nombre = nombre;
     }
@@ -63,6 +68,8 @@ public class Producto implements Serializable {
     }
 
     //---> Metodo ToString <---
+    
+    @Override
     public String toString(){
         return "\nProducto: "+getNombre()+"\n"+"Precio: "+getPrecio()+"\n"+"Destinado a: "+getTipoAnimal()+"\n"+"Tipo del Producto: "+getTipoUso()+"\n"+ "Cantidad unidades: "+getCantidadUnidades()+"\n";        
     }

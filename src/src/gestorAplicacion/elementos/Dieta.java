@@ -125,7 +125,7 @@ public String toString() {
         // Datos de la mascota
         writer.println(this.toString());
 
-        System.out.println("Archivo de texto creado con éxito.\nAbrelo en la carpeta basedatos/dietas.");
+        System.out.println("Archivo de texto creado con éxito.\nAbrelo en la carpeta basedatos.");
     } catch (Exception e) {
         System.out.println("Error al crear el archivo de menú: " + e.getMessage());
     }

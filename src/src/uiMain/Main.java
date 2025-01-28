@@ -1247,29 +1247,29 @@ public static void planificacionDieta() {
 
 		//Mini tienda de productos dieteticos
 		
-		// Determinar el tipo de Dieta bar (perro o gato)
-		String tipoDietaBar = tipo.equalsIgnoreCase("Perro") ? "Dieta Bar para Perros" : "Dieta Bar para Gatos";
+		// Determinar el tipo de Dieta barf (perro o gato)
+		String tipoDietaBarf = tipo.equalsIgnoreCase("Perro") ? "Dieta Barf para Perros" : "Dieta Barf para Gatos";
 
-		// Creaion de la tienda y de los productos dieta bar.
+		// Creaion de la tienda y de los productos dieta barf.
 		Tienda tienda = new Tienda(new Empleado("Albert", 22, 555, 1323, "West Elm", Empleado.Especialidad.VENDEDOR));
-		Producto[] productosBar = {
-			new Producto("Dieta Bar Alto en Proteinas para " + tipo + " (Gramo)" , 45f, "Dieta", "Alimento para " + tipo , 1000),
-			new Producto("Dieta Bar Alto en Grasas para " + tipo + " (Gramo)" , 45f, "Dieta", "Alimento para " + tipo, 1000),
-			new Producto("Dieta Bar Alto en Carbohidratos para " + tipo + " (Gramo)" , 45, "Dieta", "Alimento para " + tipo , 1000)
+		Producto[] productosBarf = {
+			new Producto("Dieta Barf Alto en Proteinas para " + tipo + " (Gramo)" , 45f, "Dieta", "Alimento para " + tipo , 1000),
+			new Producto("Dieta Barf Alto en Grasas para " + tipo + " (Gramo)" , 45f, "Dieta", "Alimento para " + tipo, 1000),
+			new Producto("Dieta Barf Alto en Carbohidratos para " + tipo + " (Gramo)" , 45, "Dieta", "Alimento para " + tipo , 1000)
 		};
 
-		for (Producto producto : productosBar) {
+		for (Producto producto : productosBarf) {
 			Tienda.agregarProducto(producto);
 		}
 
-		// Compra de Dieta bar
-		System.out.println("\n¿Desea adquirir Dieta Bar para su mascota? [si/no]:");
+		// Compra de Dieta barf
+		System.out.println("\n¿Desea adquirir Dieta Barf para su mascota? [si/no]:");
 		
 		while (true) {
 				String respuesta = Main.leerCadena();
 				if (respuesta.equalsIgnoreCase("si")) { 
-				// Mostrar opciones de Dieta BAR desde el inventario
-				System.out.println("\nSabores disponibles de " + tipoDietaBar + ":");
+				// Mostrar opciones de Dieta BARF desde el inventario
+				System.out.println("\nSabores disponibles de " + tipoDietaBarf + ":");
 				System.out.println(tienda.filtrar("Dieta"));
 				System.out.println("Ingrese el número del sabor que desea:");
 				int opcionSabor = Main.leerEntero();

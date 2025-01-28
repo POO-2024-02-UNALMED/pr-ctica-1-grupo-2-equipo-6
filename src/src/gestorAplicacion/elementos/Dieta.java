@@ -121,11 +121,11 @@ public String toString() {
 
 
     public void menu() {
-    try (PrintWriter writer = new PrintWriter("menu_dieta.txt")) {
+    try (PrintWriter writer = new PrintWriter("./src/src/basedatos/dietas/dieta_" + mascota.getNombre() + ".txt")) {
         // Datos de la mascota
         writer.println(this.toString());
 
-        System.out.println("menu_dieta.txt creado con éxito.");
+        System.out.println("Archivo de texto creado con éxito.\nAbrelo en la carpeta basedatos/dietas.");
     } catch (Exception e) {
         System.out.println("Error al crear el archivo de menú: " + e.getMessage());
     }

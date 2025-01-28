@@ -190,6 +190,31 @@ public static long leerEnteroLargo() {
 		return scanner.nextLine();
 	}
 
+	public static ArrayList<Object> capturarDatosCliente() {
+		try {Scanner sc = new Scanner(System.in);
+		System.out.println("--------------------");
+		System.out.println("\n- Ingrese sus datos");
+		System.out.print("\n- Nombre Completo: ");
+		String nombreC = sc.nextLine();
+		System.out.print("- Edad: ");
+		int edadC = sc.nextInt();
+		sc.nextLine();
+		System.out.print("- Cédula: ");
+		long cedula = sc.nextLong();
+		sc.nextLine();
+		System.out.println("\n--------------------");
+		
+		ArrayList<Object> datos = new ArrayList<>();
+        datos.add(nombreC);
+        datos.add(edadC);
+        datos.add(cedula);
+        
+        return datos;
+
+		} finally {sc.close();}
+    
+	}
+
 	public static void emergenciaVeterinaria() {
 	
 		System.out.println("--------------------");
@@ -1376,21 +1401,7 @@ public static void tienda() {
 
 public static void planificacionDieta() {
 
-	//registro del cliente
-	System.out.println("--------------------");
-	System.out.println("\n- Ingrese sus datos");
-	System.out.print("\n- Nombre Completo: ");
-	String nombreC = sc.nextLine();
-	System.out.print("- Edad: ");
-	int edadC = sc.nextInt(); 
-	sc.nextLine();
-	System.out.print("- Cédula: ");
-	long cedula = sc.nextLong();
-	sc.nextLine();
-	System.out.println("\n--------------------");
-	
-	Cliente cliente = new Cliente(nombreC, edadC, cedula);
-	cliente.agregarPuntos(0);
+	Cliente cliente = Cliente.registro();
 
 	//ingresar datos de la mascota
 		System.out.println("\nIngresa los datos de su mascota:");
@@ -1441,6 +1452,7 @@ public static void planificacionDieta() {
 		//consumir la mascota, dependiendo de su debe subir o bajar de peso.
 		dieta.calcularPesoIdeal();
         dieta.planDieta();
+		dieta.menu();
 		//imprime la dieta planificada
 
 		System.out.println("\n--------------------\n");

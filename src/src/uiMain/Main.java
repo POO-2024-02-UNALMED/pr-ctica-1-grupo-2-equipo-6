@@ -11,6 +11,7 @@ import gestorAplicacion.elementos.Empleado.Especialidad;
 import gestorAplicacion.elementos.Fallecido;
 import gestorAplicacion.elementos.Mascota;
 import gestorAplicacion.elementos.Mascota.EstadoSalud;
+import gestorAplicacion.elementos.Producto;
 import gestorAplicacion.gestion.Cita;
 import gestorAplicacion.gestion.Memorial;
 import gestorAplicacion.gestion.Tienda;
@@ -100,7 +101,7 @@ public class Main implements Serializable {
             		break;
             	case 5:
 					System.out.println("\n--------------------");
-					System.out.println("\nBienvenido al Sistema de planificacion de Dieta.");
+					System.out.println("\nBienvenido al Sistema de planificacion de Dieta.\n");
             		planificacionDieta();
             		break;
             	case 6:
@@ -1400,6 +1401,23 @@ public static void tienda() {
 }//FINAL MÉTODO TIENDA
 
 public static void planificacionDieta() {
+
+	//registro del cliente
+	System.out.println("--------------------");
+	System.out.println("\n- Ingrese sus datos");
+	System.out.print("\n- Nombre Completo: ");
+	String nombreC = sc.nextLine();
+	System.out.print("- Edad: ");
+	int edadC = sc.nextInt(); 
+	sc.nextLine();
+	System.out.print("- Cédula: ");
+	long cedula = sc.nextLong();
+	sc.nextLine();
+	System.out.println("\n--------------------");
+	
+	Cliente cliente = new Cliente(nombreC, edadC, cedula);
+	cliente.agregarPuntos(0);
+
 	//ingresar datos de la mascota
 		System.out.println("\nIngresa los datos de su mascota:");
 		System.out.println("Nombre:");
@@ -1426,7 +1444,7 @@ public static void planificacionDieta() {
 			sexo = Main.leerCadena();
 			if (sexo.equalsIgnoreCase("M") || sexo.equalsIgnoreCase("F")) {
 				break;
-			} else { System.out.println("Entrada no valida, intentalo de nuevo."); }
+			} else { System.out.println(""); }
 		}
 		
 		System.out.println("Tamaño (1-4): \n1. Miniatura \n2. Pequeño \n3. Mediano \n4. Grande");
@@ -1450,36 +1468,56 @@ public static void planificacionDieta() {
 		dieta.calcularPesoIdeal();
         dieta.planDieta();
 		//imprime la dieta planificada
+
+		System.out.println("\n--------------------\n");
+
 		System.out.println(dieta.toString());
-		//agrega recomendaciones de productos.
-		if (mascota.getEspecie().toLowerCase().equals("gato")) {
-			System.out.println(""); //Productos recomendados para gato
-		} else {
-			System.out.println(""); //Productos recomendados para perro
-		}
-		//serializa el objeto dieta creado
 
+		System.out.println("\n--------------------");
+
+
+		//Mini tienda de productos dieteticos
 		
+		// Determinar el tipo de Dieta bar (perro o gato)
+		String tipoDietaBar = tipo.equalsIgnoreCase("Perro") ? "Dieta Bar para Perros" : "Dieta Bar para Gatos";
 
-		//pregunta al usuario que desea hacer
-		System.out.println("\n¿Desea volver al menu principal o redirigirse a la tienda? [Menu/Tienda]: ");
-			String respuesta = " ";
-			while (true) {
-				respuesta = leerCadena();
-				respuesta.toLowerCase();
-				if (respuesta.equals("menu")||respuesta.equals("tienda")) {
-					break; 
-				}else {
-					System.out.println("Por favor, ingresa una respuesta válida [Menu/Tienda]");
+		// Creaion de la tienda y de los productos dieta bar.
+		Tienda tienda = new Tienda(new Empleado("Albert", 22, 555, 1323, "West Elm", Empleado.Especialidad.VENDEDOR));
+		Producto[] productosBar = {
+			new Producto("Dieta Bar Alto en Proteinas para " + tipo + " (Gramo)" , 45f, "Dieta", "Alimento para " + tipo , 1000),
+			new Producto("Dieta Bar Alto en Grasas para " + tipo + " (Gramo)" , 45f, "Dieta", "Alimento para " + tipo, 1000),
+			new Producto("Dieta Bar Alto en Carbohidratos para " + tipo + " (Gramo)" , 45, "Dieta", "Alimento para " + tipo , 1000)
+		};
+
+		for (Producto producto : productosBar) {
+			Tienda.agregarProducto(producto);
+		}
+
+		// Compra de Dieta bar
+		System.out.println("\n¿Desea adquirir Dieta Bar para su mascota? [si/no]:");
+		
+		while (true) {
+				String respuesta = Main.leerCadena();
+				if (respuesta.equalsIgnoreCase("si")) { 
+				// Mostrar opciones de Dieta BAR desde el inventario
+				System.out.println("\nSabores disponibles de " + tipoDietaBar + ":");
+				System.out.println(tienda.filtrar("Dieta"));
+				System.out.println("Ingrese el número del sabor que desea:");
+				int opcionSabor = Main.leerEntero();
+				System.out.println("Ingrese la cantidad en gramos que desea comprar:");
+				int cantidadGramos = Main.leerEntero();
+
+				String resultadoCompra = tienda.compra(opcionSabor, cantidadGramos, cliente);
+				System.out.println(resultadoCompra);
+				System.out.println("Desear seguir comprando? [Si/No]");
+				} else if (respuesta.equalsIgnoreCase("no")) {
+					System.out.println("\nGracias por ingresar a la interaz de planeacion de dieta!\nRedireccionandote al menu principal...\n");
+					break;
+				} else {
+				System.out.println("");
 				}
-			}
-				if (respuesta.equals("menu")) {
-					System.out.println("Gracias por ingresar a la interaz de planeacion de dieta!\nRedireccionandote al menu principal...");
-				}
-				else {
-					System.out.println("Gracias por ingresar a la interaz de planeacion de dieta!\nRedireccionandote a la Tienda...");
-					tienda();
-				}
+		}
+
 }//Fin de Planeacion Dieta
 
 }

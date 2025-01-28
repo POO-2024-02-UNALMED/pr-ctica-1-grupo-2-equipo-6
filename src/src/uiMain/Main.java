@@ -1016,9 +1016,9 @@ public static long leerEnteroLargo() {
 		int opcion = 0;
 		while (opcion != 4) {
 			System.out.println("\nGestion del Memorial:");
-			System.out.println("1. Añadir fallecido");
+			System.out.println("1. Añadir memorial");
 			System.out.println("2. Ver memorial");
-			System.out.println("3. Añadir flores");
+			System.out.println("3. Decorar memorial");
 			System.out.println("4. Volver al menu principal");
 			
 			opcion = leerEntero();

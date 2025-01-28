@@ -154,5 +154,4 @@ public class Mascota implements Serializable {
 		
 		return ie;
 	}
-	
 }

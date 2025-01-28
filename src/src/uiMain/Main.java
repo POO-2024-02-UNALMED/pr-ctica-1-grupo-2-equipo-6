@@ -1257,7 +1257,7 @@ public static void tienda() {
 				println(t1.inventario()); // SE LLAMA AL MÉTODO INVENTARIO DE TIENDA, PARA QUE DEVULVA TODOS LOS PRODUCTOS SIN MÁS
 			}
 			else { // DE LO CONTRARIO, SE LE VOLVERÁ A PEDIR UNA scanner PARA QUE INDIQUE POR QUE TIPO DE Mascota QUIERE VER 
-				print("\n¿Por qué tipo de Mascota te gustaría ver? [Perros, gatos, aves o conejos]: ");
+				print("\n¿Por qué tipo de Mascota te gustaría ver? [perros, gatos, aves o conejos]: ");
 				while (true) { //BUCLE PARA CONTROLAR ÉSTE NUEVO MENÚ
 					try {
 						String tipo = leerCadena(); // SE LEE EL STRING 
@@ -1314,53 +1314,53 @@ public static void tienda() {
 			boolean control = true;
 			while (control) {
 				try {
-						print("Digite el índice del producto a comprar: ");
-						int indice = leerEntero(); //INDICE PARA LOCALIZAR EL PRODUCTO QUE QUIERE EL USUARIO 
+					print("Digite el índice del producto a comprar: ");
+					int indice = leerEntero(); //INDICE PARA LOCALIZAR EL PRODUCTO QUE QUIERE EL USUARIO 
 		
-						print("Indique cuantas unidades necesita del producto: ");
-						int unidades = leerEntero(); //CANTIDAD DE UNIDADES QUE EL USUARIO VA A COMPRAR
+					print("Indique cuantas unidades necesita del producto: ");
+					int unidades = leerEntero(); //CANTIDAD DE UNIDADES QUE EL USUARIO VA A COMPRAR
 						
-						//  REGISTRO DEL USUARIO PARA REALIZAR LA COMPRA-------------------------------------
+					//  REGISTRO DEL USUARIO PARA REALIZAR LA COMPRA-------------------------------------
 						
-						if (unidades==1) { //SI SOLO VA A COMPRAR UNA UNIDAD
-							println("\nSus datos serán tomados para registrar la compra.");
-							print("Ingrese su cédula: ");
-							long cedula = scanner.nextLong();
-							print("Ingrese su edad: ");
-							int edad = scanner.nextInt();
-							print("Ingrese su nombre: ");
-							scanner.nextLine();
-							String nombre = leerCadena();
+					if (unidades==1) { //SI SOLO VA A COMPRAR UNA UNIDAD
+						println("\nSus datos serán tomados para registrar la compra.");
+						print("Ingrese su cédula: ");
+						long cedula = scanner.nextLong();
+						print("Ingrese su edad: ");
+						int edad = scanner.nextInt();
+						print("Ingrese su nombre: ");
+						scanner.nextLine();
+						String nombre = leerCadena();
 							
-							//SE REGISTA EL USUARIO, CREANDO UN OBJETO DEL TIPO CLIENTE Y PASANDOLO AL MÉTODO COMPRA DE TIENDA 
-							Cliente cliente = new Cliente(nombre, edad, cedula);
-							println("\n"+t1.compra(indice, cliente)); 
-							//ESTE FILTRO DE: UNIDADES == 1, ES PORQUE EL MÉTODO COMPRA QUE RECIBE DOS PARÁMETROS RETORNA ALGO MÁS ADECUADO PARA ESTE CASO 
-						}
-						else { // CUANDO EL USUARIO VA A COMPRAR MÁS DE UNA UNIDAD 
-							println("\nSus datos serán tomados para registrar la compra.");
-							print("Ingrese su cédula: ");
-							long cedula = scanner.nextLong();
-							print("Ingrese su edad: ");
-							int edad = scanner.nextInt();
-							print("Ingrese su nombre: ");
-							scanner.nextLine();
-							String nombre = leerCadena();
-							print("Ingrese su número de teléfono: ");
-							long telefono = scanner.nextLong();
-							print("Ingrese su dirección: ");
-							scanner.nextLine();
-							String direccion = leerCadena();
+						//SE REGISTA EL USUARIO, CREANDO UN OBJETO DEL TIPO CLIENTE Y PASANDOLO AL MÉTODO COMPRA DE TIENDA 
+						Cliente cliente = new Cliente(nombre, edad, cedula);
+						println("\n"+t1.compra(indice, cliente)); 
+						//ESTE FILTRO DE: UNIDADES == 1, ES PORQUE EL MÉTODO COMPRA QUE RECIBE DOS PARÁMETROS RETORNA ALGO MÁS ADECUADO PARA ESTE CASO 
+					}
+					else { // CUANDO EL USUARIO VA A COMPRAR MÁS DE UNA UNIDAD 
+						println("\nSus datos serán tomados para registrar la compra.");
+						print("Ingrese su cédula: ");
+						long cedula = scanner.nextLong();
+						print("Ingrese su edad: ");
+						int edad = scanner.nextInt();
+						print("Ingrese su nombre: ");
+						scanner.nextLine();
+						String nombre = leerCadena();
+						print("Ingrese su número de teléfono: ");
+						long telefono = scanner.nextLong();
+						print("Ingrese su dirección: ");
+						scanner.nextLine();
+						String direccion = leerCadena();
 							
-							// SE REGISTA EL USUARIO, CREANDO UN OBJETO DEL TIPO CLIENTE Y PASANDOLO AL MÉTODO COMPRA DE TIENDA
-							// SE LE AGREGA TAMBIEN, LA CANTIDAD DE UNIDADES AL MÉTODO COMPRA 
-							Cliente cliente = new Cliente(nombre, edad, cedula, telefono, direccion);
-							println("\n"+t1.compra(indice, unidades, cliente));
-						}
+						// SE REGISTA EL USUARIO, CREANDO UN OBJETO DEL TIPO CLIENTE Y PASANDOLO AL MÉTODO COMPRA DE TIENDA
+						// SE LE AGREGA TAMBIEN, LA CANTIDAD DE UNIDADES AL MÉTODO COMPRA 
+						Cliente cliente = new Cliente(nombre, edad, cedula, telefono, direccion);
+						println("\n"+t1.compra(indice, unidades, cliente));
+					}
 						
-						// --------------------------------------------------------------------------------
+					// --------------------------------------------------------------------------------
 						
-						control = false;
+					control = false;
 					
 				}
 				catch(InputMismatchException e) {

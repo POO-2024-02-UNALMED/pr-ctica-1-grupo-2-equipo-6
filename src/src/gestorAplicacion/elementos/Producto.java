@@ -67,6 +67,6 @@ public class Producto implements Serializable {
 
     //---> Metodo ToString <---
     public String toString(){
-        return "\nProducto: "+getNombre()+"\n"+"Precio: "+getPrecio()+"\n"+"Usado en: "+getTipoUso()+"\n"+"Proposito: "+getTipoAnimal()+"\n"+ "Cantidad unidades: "+getCantidadUnidades()+"\n";        
+        return "\nProducto: "+getNombre()+"\n"+"Precio: "+getPrecio()+"\n"+"Destinado a: "+getTipoAnimal()+"\n"+"Tipo del Producto: "+getTipoUso()+"\n"+ "Cantidad unidades: "+getCantidadUnidades()+"\n";        
     }
 }

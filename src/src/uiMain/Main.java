@@ -40,7 +40,7 @@ public class Main implements Serializable {
 		int opcion = 0;
 		
 		System.out.println("\n - - Bienvenido al Centro Veterinario Virtual: UNamascota. - - \n");
-		System.out.println("--------------------");
+		/*System.out.println("--------------------");
 		System.out.println("\n- Ingrese sus datos");
 		System.out.print("\n- Nombre Completo: ");
 		String nombre = sc.nextLine();
@@ -52,7 +52,7 @@ public class Main implements Serializable {
 		System.out.println("--------------------");
 		
 		Cliente cliente = new Cliente(nombre, edad, cedula);
-		cliente.agregarPuntos(50000);
+		cliente.agregarPuntos(50000);*/
 		
 		while (opcion != 6) {
 			
@@ -80,7 +80,7 @@ public class Main implements Serializable {
             	case 1:
 					System.out.println("\n--------------------");
             		System.out.println("\nBienvenido a Emergencia Veterinaria.");
-            		emergenciaVeterinaria(cliente);
+            		emergenciaVeterinaria();
             		break;
             	case 2:
 					System.out.println("\n--------------------");
@@ -95,12 +95,12 @@ public class Main implements Serializable {
             	case 4:
 					System.out.println("\n--------------------");
             		System.out.println("\nBienvenido al servicio memorial.");
-            		gestionarMemorial(cliente);
+            		//gestionarMemorial(cliente);
             		break;
             	case 5:
 					System.out.println("\n--------------------");
 					System.out.println("\nBienvenido al Sistema de planificacion de Dieta.");
-            		planificacionDieta(cliente);
+            		//planificacionDieta(cliente);
             		break;
             	case 6:
 					System.out.println("\n--------------------");
@@ -188,23 +188,41 @@ public static long leerEnteroLargo() {
 		return scanner.nextLine();
 	}
 
-	public static void emergenciaVeterinaria(Cliente cliente) {
+	public static void emergenciaVeterinaria() {
 	
+		System.out.println("--------------------");
+		System.out.println("\n- Ingrese sus datos");
+		System.out.print("\n- Nombre Completo: ");
+		String nombre = sc.nextLine();
+		System.out.print("- Edad: ");
+		int edad = sc.nextInt(); 
+		sc.nextLine();
+		System.out.print("- Cédula: ");
+		long cedula = sc.nextLong();
+		sc.nextLine();
+		System.out.println("--------------------");
+		
+		Cliente cliente = new Cliente(nombre, edad, cedula);
+		cliente.agregarPuntos(50000);
+		
 		//Veterinarios en en centro de adopción. Agregar más
-		centro.agregarVeterinario(new Empleado("Alberto", 27, 125734625, 321215589, null, Especialidad.VETERINARIO));
-		centro.agregarVeterinario(new Empleado("Ricardo", 38, 125846225, 321765589, null, Especialidad.VETERINARIO));
+		centro.agregarVeterinario(new Empleado("Ana", 30, 439872356, 310543216, null, Especialidad.VETERINARIO));
+		centro.agregarVeterinario(new Empleado("Carlos", 45, 957634298, 312674389, null, Especialidad.VETERINARIO));
+		centro.agregarVeterinario(new Empleado("Laura", 26, 742698534, 320118675, null, Especialidad.VETERINARIO));
+		centro.agregarVeterinario(new Empleado("Marta", 34, 872346123, 321439876, null, Especialidad.VETERINARIO));
+		centro.agregarVeterinario(new Empleado("Pedro", 40, 263547891, 310987654, null, Especialidad.VETERINARIO));
 		//---------------------------------------------------
 		
 		//Pedir datos de la mascota al usuario
 		System.out.println("\nIngrese los datos de su mascota:");
 		System.out.print("Nombre: ");
-		String nombre = sc.nextLine();
+		String nombreMascota = sc.nextLine();
 		
 		System.out.print("Especie: ");
 		String tipo = sc.nextLine();
 		
 		System.out.print("Edad: ");
-		int edad = sc.nextInt();
+		int edadMascota = sc.nextInt();
 		sc.nextLine();
 		
 		System.out.print("Sexo (M/F): ");
@@ -225,7 +243,7 @@ public static long leerEnteroLargo() {
 		//---------------------------------------------------
 		
 		//Crear instancia de Mascota con los datos que ingresó el usuario
-		Mascota mascota = new Mascota(nombre, tipo, edad, sexo, EstadoSalud.ENFERMO, tamano, peso);
+		Mascota mascota = new Mascota(nombreMascota, tipo, edadMascota, sexo, EstadoSalud.ENFERMO, tamano, peso);
 		centro.agregarHospitalizado(mascota);
 		//---------------------------------------------------
 		

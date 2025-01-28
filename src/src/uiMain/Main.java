@@ -43,7 +43,7 @@ public class Main implements Serializable {
 	static CentroAdopcion centro = new CentroAdopcion("POO");
 	private static Scanner scanner = new Scanner(System.in);
 	public static ArrayList<CentroAdopcion> centroAdopcions;
-	private static Memorial memorial = new Memorial();
+	//private static Memorial memorial = new Memorial(centro);
 	
 	
 	public static void main(String[] args) {
@@ -1018,7 +1018,7 @@ public static Cliente obtenerDatosCliente() {
 		
 		Cliente cliente = new Cliente(nombre, edad, cedula);
 		
-		System.out.println("\n¿En dónde desea que su mascota sea atendida? (1-4):");
+		System.out.println("\n¿En dónde desea ser atendido? (1-4):");
 		centro.mostrarSedes();
 		System.out.print("Ingrese el número correspondiente a la sede: ");
 		int sede = sc.nextInt();
@@ -1033,6 +1033,8 @@ public static Cliente obtenerDatosCliente() {
 		String nombreSede  = Sedes.values()[sede-1].toString(); 
 		nombreSede = nombreSede.substring(0,1).toUpperCase() + nombreSede.substring(1).toLowerCase();
 		System.out.println("\nLa sede seleccionada es: " + nombreSede);
+		
+		Memorial memorial = new Memorial(centro);
 		
 		int opcion = 0;
 		while (opcion != 4) {
@@ -1073,7 +1075,7 @@ public static Cliente obtenerDatosCliente() {
 			    int duracion = sc.nextInt();
 			    sc.nextLine();
 
-			    float precio = 0;
+			    int precio = 0;
 			    String tiempo = null;
 			    if (duracion == 1) {
 			        tiempo = "Forever";
@@ -1088,6 +1090,8 @@ public static Cliente obtenerDatosCliente() {
 			        }
 			        tiempo = anos + " años";
 			        precio = (anos / 5) * 50000;
+			        
+			        
 			    } else {
 			        System.out.println("Opcion no valida.");
 			        break;
@@ -1110,8 +1114,13 @@ public static Cliente obtenerDatosCliente() {
 
 			    if (memorial.cupos(tipo)) {
 			        if (memorial.anadirFallecido(fallecido, tipo)) {
-			            System.out.println("Memorial añadido con éxito.");
+			            //System.out.println("Memorial añadido con éxito.");
 			            System.out.println("Precio del servicio: $" + precio);
+						System.out.println("\nGestionando pago. Seleccione el método de pago (1-3):\n");
+						for(int i = 0; i < centro.mostrarOpcionesPago().length; i++){
+							System.out.println(i+1 + ". " + centro.mostrarOpcionesPago()[i]);
+																															
+						}
 			        } else {
 			            System.out.println("De momento no contamos con este tipo de servicio.");
 			        }

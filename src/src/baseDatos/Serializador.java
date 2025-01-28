@@ -125,7 +125,7 @@ public class Serializador {
 
         //Agregar mascotas difuntas
         
-        /*Mascota mascotaF1 = new Mascota("Copérnico", "Perro", 10, null, null, 0, 0);
+        Mascota mascotaF1 = new Mascota("Copérnico", "Perro", 10, null, null, 0, 0);
         Mascota mascotaF2 = new Mascota("Zack", "Perro", 6, null, null, 0, 0);
         Mascota mascotaF3 = new Mascota("Mia", "Gato", 12, null, null, 0, 0);
         Mascota mascotaF4 = new Mascota("Lola", "Hámster", 2, null, null, 0, 0);
@@ -155,11 +155,11 @@ public class Serializador {
         memorial.anadirArbol(new Fallecido(mascotaF10, "2020-07-01", null, null, "Forever", "Arbol"));
         
         memorial.anadirOsario(new Fallecido(mascotaF11, "2020-07-01", null, null, "Forever", "Osario"));
-        memorial.anadirArbol(new Fallecido(mascotaF12, "2020-07-01", null, null, "Forever", "Arbol")); */
+        memorial.anadirArbol(new Fallecido(mascotaF12, "2020-07-01", null, null, "Forever", "Arbol")); 
         
         try {
             // Define la ruta del archivo
-            String filePath = "src/src/baseDatos/temp/productos.txt";
+            String filePath = "src/src/baseDatos/temp/memoriales.txt";
             File outputFile = new File(filePath);
 
             // Crea los directorios si no existen
@@ -170,7 +170,10 @@ public class Serializador {
             // Serializa el objeto
             FileOutputStream f = new FileOutputStream(outputFile);
             ObjectOutputStream o = new ObjectOutputStream(f);
-            o.writeObject(Tienda.productos);
+            o.writeObject(Memorial.arboles);
+            o.writeObject(Memorial.cenizas);
+            o.writeObject(Memorial.osarios);
+            o.writeObject(Memorial.sepulcros);
             o.close();
             f.close();
             System.out.println("Archivo creado y datos serializados exitosamente.");

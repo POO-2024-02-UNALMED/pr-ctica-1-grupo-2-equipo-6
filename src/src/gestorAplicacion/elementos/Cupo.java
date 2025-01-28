@@ -3,6 +3,7 @@ package gestorAplicacion.elementos;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
     // LÓPEZ GONZÁLEZ, ALEJANDRO
     // BETANCUR URIBE, EMMANUEL
@@ -52,6 +53,56 @@ public class Cupo implements Serializable {
     	
     	this.disponible=booleano;
     }
+
+    static public void actualizarCupo(ArrayList <Cupo> Array_dia){
+        LocalDate fecha_Actual = LocalDate.now(); 
+    		
+    		//Se comprueba que la fecha sea anterior a la actual.
+    		if (Array_dia.get(0).getDia().isBefore(fecha_Actual)) {
+    			
+    			
+    			//Si el dia coincide con el actual, se habilian los cupos para hoy.
+    			if (fecha_Actual.getDayOfWeek().getValue() == Array_dia.get(0).getDia().getDayOfWeek().getValue()) {
+    				
+					Array_dia.clear(); 
+				
+		    		Array_dia.add(new Cupo(fecha_Actual, "8:00","10:00", true));
+		    		Array_dia.add(new Cupo(fecha_Actual, "10:00","12:00", true));
+		    		Array_dia.add(new Cupo(fecha_Actual, "14:00","16:00", true));
+		    		Array_dia.add(new Cupo(fecha_Actual, "16:00","18:00", true));	
+		    		
+    			}
+    			
+    			else {
+    				
+    				 fecha_Actual = LocalDate.now();
+    							 
+    				 int num_dia=Array_dia.get(0).getDia().getDayOfWeek().getValue();
+    				
+    				 boolean continuar = true;	
+    			
+    			    while(continuar) {
+    			    	
+    			    	//Si el dia no coincide, buscamos entre los proximos.
+    			    		
+    				      fecha_Actual = fecha_Actual.plusDays(1); //Pasamos al dia siguiente.
+    				       				
+     				     if (fecha_Actual.getDayOfWeek().getValue() == num_dia)  {	    				    	
+    				    	
+    				       Array_dia.clear();
+    					
+    					   //Llenamos el dia por delante
+    		    		   Array_dia.add(new Cupo(fecha_Actual, "8:00","10:00", true));
+    		    		   Array_dia.add(new Cupo(fecha_Actual, "10:00","12:00", true));
+    		    		   Array_dia.add(new Cupo(fecha_Actual, "14:00","16:00", true));
+    		    		   Array_dia.add(new Cupo(fecha_Actual, "16:00","18:00", true));
+    		    		
+    		    		   continuar = false;
+    			        }
+     				}
+    			}
+    		}
+    	}
 
     @Override
     public String toString() {

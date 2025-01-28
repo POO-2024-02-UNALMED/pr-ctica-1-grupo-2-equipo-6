@@ -1,12 +1,12 @@
 package gestorAplicacion.gestion;
-//import java.io.Serializable;
+import java.io.Serializable;
 import java.util.ArrayList;
 import gestorAplicacion.elementos.CentroAdopcion;
 import gestorAplicacion.elementos.Fallecido;
 
-public class Memorial{
+public class Memorial implements Serializable{
 	
-	//private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	private CentroAdopcion centro;
 	public static ArrayList<Fallecido> sepulcros = new ArrayList<> ();
 	public static ArrayList<Fallecido> osarios = new ArrayList<> ();

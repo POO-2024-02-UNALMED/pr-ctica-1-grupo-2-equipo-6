@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import gestorAplicacion.elementos.CentroAdopcion;
+import gestorAplicacion.elementos.Fallecido;
 import gestorAplicacion.elementos.Producto;
 
 public class Deserializador {

@@ -5,7 +5,9 @@ import gestorAplicacion.elementos.Cliente;
 import gestorAplicacion.elementos.Empleado;
 import gestorAplicacion.elementos.Mascota;
 import gestorAplicacion.elementos.Producto;
+import gestorAplicacion.elementos.Fallecido;
 import gestorAplicacion.gestion.Tienda;
+import gestorAplicacion.gestion.Memorial;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -121,6 +123,40 @@ public class Serializador {
         Tienda.agregarProducto(producto14);
         Tienda.agregarProducto(producto15);
 
+        //Agregar mascotas difuntas
+        
+        /*Mascota mascotaF1 = new Mascota("Copérnico", "Perro", 10, null, null, 0, 0);
+        Mascota mascotaF2 = new Mascota("Zack", "Perro", 6, null, null, 0, 0);
+        Mascota mascotaF3 = new Mascota("Mia", "Gato", 12, null, null, 0, 0);
+        Mascota mascotaF4 = new Mascota("Lola", "Hámster", 2, null, null, 0, 0);
+        Mascota mascotaF5 = new Mascota("Apollo", "Perro", 13, null, null, 0, 0);
+        Mascota mascotaF6 = new Mascota("Daisy", "Perro", 9, null, null, 0, 0);
+        Mascota mascotaF7 = new Mascota("Copérnico", "Gato", 14, null, null, 0, 0);
+        Mascota mascotaF8 = new Mascota("Copérnico", "Hamster", 1, null, null, 0, 0);
+        Mascota mascotaF9 = new Mascota("Copérnico", "Conejo", 3, null, null, 0, 0);
+        Mascota mascotaF10 = new Mascota("Copérnico", "Gato", 12, null, null, 0, 0);
+        Mascota mascotaF11 = new Mascota("Copérnico", "Conejo", 3, null, null, 0, 0);
+        Mascota mascotaF12 = new Mascota("Copérnico", "Hámster", 4, null, null, 0, 0); 
+        
+        //Agregar mascotas difuntas a los memoriales
+        
+        Memorial memorial = new Memorial();
+        memorial.anadirOsario(new Fallecido(mascotaF1, "2023-01-12", "Siempre en mis recuerdos.", null, "Forever", "Osario"));
+        memorial.anadirArbol(new Fallecido(mascotaF2, "2024-11-24", null, null, "Forever", "Arbol"));
+        memorial.anadirCenizas(new Fallecido(mascotaF3, "2001-06-01", "Siempre en mis recuerdos.", null, "30 años", "Cenizas"));
+        memorial.anadirOsario(new Fallecido(mascotaF4, "2016-04-23", "Nunca te olvidare.", null, "Forever", "Osario"));
+        
+        memorial.anadirArbol(new Fallecido(mascotaF5, "2005-02-21", null, null, "45 años", "Arbol"));
+        memorial.anadirCenizas(new Fallecido(mascotaF6, "2014-10-25", ":(", null, "Forever", "Cenizas"));
+        memorial.anadirCenizas(new Fallecido(mascotaF7, "2025-01-28", "Gracias por tu compañia.", null, "Forever", "Cenizas"));
+        
+        memorial.anadirSepulcro(new Fallecido(mascotaF8, "2020-07-01", null, null, "Forever", "Sepulcro"));
+        memorial.anadirSepulcro(new Fallecido(mascotaF9, "2018-12-09", "Siempre en mi corazon", null, "Forever", "Sepulcro"));
+        memorial.anadirArbol(new Fallecido(mascotaF10, "2020-07-01", null, null, "Forever", "Arbol"));
+        
+        memorial.anadirOsario(new Fallecido(mascotaF11, "2020-07-01", null, null, "Forever", "Osario"));
+        memorial.anadirArbol(new Fallecido(mascotaF12, "2020-07-01", null, null, "Forever", "Arbol")); */
+        
         try {
             // Define la ruta del archivo
             String filePath = "src/src/baseDatos/temp/productos.txt";

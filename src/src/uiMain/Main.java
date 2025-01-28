@@ -32,7 +32,7 @@ public class Main implements Serializable {
 	static CentroAdopcion centro = new CentroAdopcion("POO");
 	private static Scanner scanner = new Scanner(System.in);
 	public static ArrayList<CentroAdopcion> centroAdopcions;
-	private static Memorial memorial = new Memorial(centro);
+	//private static Memorial memorial = new Memorial(centro);
 	
 	
 	public static void main(String[] args) {
@@ -1022,6 +1022,7 @@ public static long leerEnteroLargo() {
 
 	
 	public static void gestionarMemorial() {
+		final Memorial memorial = new Memorial();
 		
 		System.out.println("--------------------");
 		System.out.println("\n- Ingrese sus datos");
@@ -1036,6 +1037,22 @@ public static long leerEnteroLargo() {
 		System.out.println("--------------------");
 		
 		Cliente cliente = new Cliente(nombre, edad, cedula);
+		
+		/*System.out.println("\n¿En dónde desea que su mascota sea atendida? (1-4):");
+		centro.mostrarSedes();
+		System.out.print("Ingrese el número correspondiente a la sede: ");
+		int sede = sc.nextInt();
+		sc.nextLine();
+		while (sede < 1 || sede > Sedes.values().length) {
+			System.out.println("scanner inválida. Por favor, ingrese un número entre 1 y " + Sedes.values().length + ":");
+			sede = sc.nextInt();
+			sc.nextLine(); 
+		}
+		
+		centro.setSede(Sedes.values()[sede-1].name());
+		String nombreSede  = Sedes.values()[sede-1].toString(); 
+		nombreSede = nombreSede.substring(0,1).toUpperCase() + nombreSede.substring(1).toLowerCase();
+		System.out.println("\nLa sede seleccionada es: " + nombreSede); */
 		
 		int opcion = 0;
 		while (opcion != 4) {
@@ -1070,7 +1087,7 @@ public static long leerEnteroLargo() {
 			    } else {
 			        mensaje = "Descansa en paz " + nombreFallecido;
 			    }
-			    System.out.println("Por cuanto tiempo desea usar nuestros servicios:");
+			    System.out.println("Por cuanto tiempo desea usar nuestros servicios(1/2):");
 			    System.out.println("1. Para siempre.");
 			    System.out.println("2. Tiempo limitado.");
 			    int duracion = sc.nextInt();
@@ -1082,7 +1099,7 @@ public static long leerEnteroLargo() {
 			        tiempo = "Forever";
 			        precio = 1000000;
 			    } else if (duracion == 2) {
-			        System.out.println("Ingrese el tiempo que desea usar nuestros servicios (En multiplos de 5):");
+			        System.out.println("Ingrese la cantidad de años que desea usar nuestros servicios (En multiplos de 5):");
 			        int anos = sc.nextInt();
 			        sc.nextLine();
 			        if (anos % 5 != 0) {
@@ -1096,8 +1113,18 @@ public static long leerEnteroLargo() {
 			        break;
 			    }
 
-			    System.out.println("Ingrese el tipo de memorial que desea (Sepulcro/Osario/Cremacion/Arbol):");
-			    String tipo = sc.nextLine();
+			    String tipo;
+			    while (true) {
+			        System.out.println("Ingrese el tipo de memorial que desea (Sepulcro/Osario/Cremacion/Arbol):");
+			        tipo = sc.nextLine();
+
+			        if (tipo.equalsIgnoreCase("Sepulcro") || tipo.equalsIgnoreCase("Osario") || 
+			            tipo.equalsIgnoreCase("Cremacion") || tipo.equalsIgnoreCase("Arbol")) {
+			            break;
+			        } else {
+			            System.out.println("Opción no válida. Por favor, ingrese una de las opciones válidas: Sepulcro, Osario, Cremacion, Arbol.");
+			        }
+			    }
 
 			    Fallecido fallecido = new Fallecido(mascota, fecha, mensaje, cliente, tiempo, tipo);
 
@@ -1112,21 +1139,13 @@ public static long leerEnteroLargo() {
 			        System.out.println("No hay cupos disponibles para " + tipo + ".");
 			    }
 			}
-
-				//System.out.println("Memorial añadido con éxito.");
-				//System.out.println("Precio del servicio: $" + precio);
-				
-				//Producto servicioMemorial = new Producto("Memorial - " + tipo, precio, "Todos", "Servicio memorial", 1);
-				//System.out.println("Se ha registrado el prodcuto: " + servicioMemorial);
 				
 			case 2 -> {
 			    System.out.println("Ingrese el tipo de memorial que desea ver (Sepulcro/Osario/Cenizas/Arbol):");
 			    String tipo = sc.nextLine();
 
-			    // Use obtenerFallecidosPorTipo to fetch the list based on tipo
 			    ArrayList<Fallecido> listaFallecidos = memorial.obtenerFallecidosPorTipo(tipo);
-
-			    // Check if the list is empty or null and display the results
+			
 			    if (listaFallecidos == null || listaFallecidos.isEmpty()) {
 			        System.out.println("No hay registros en esta categoría.");
 			    } else {
@@ -1139,28 +1158,24 @@ public static long leerEnteroLargo() {
 			    System.out.println("Ingrese el tipo de memorial al cual desea agregar flores (Sepulcro/Osario/Cenizas/Arbol):");
 			    String tipo = sc.nextLine();
 
-			    // Use obtenerFallecidosPorTipo to get the list of fallecidos for the given type
 			    ArrayList<Fallecido> listaFallecidos = memorial.obtenerFallecidosPorTipo(tipo);
 
 			    if (listaFallecidos == null || listaFallecidos.isEmpty()) {
 			        System.out.println("No hay registros en este tipo de memorial.");
 			    } else {
 			        System.out.println("Lista de memoriales disponibles en " + tipo + ":");
-			        // Use visitaMemorial to display the list in a formatted way
 			        System.out.println(memorial.visitaMemorial(listaFallecidos));
 
 			        System.out.println("Ingrese el número del memorial al cual desea agregar flores:");
 			        int seleccion = sc.nextInt();
-			        sc.nextLine(); // Consume the newline character
+			        sc.nextLine();
 
 			        if (seleccion >= 1 && seleccion <= listaFallecidos.size()) {
-			            // Select the Fallecido based on the user's choice
 			            Fallecido seleccionado = listaFallecidos.get(seleccion - 1);
 
 			            System.out.println("Ingrese el nombre de la flor que desea agregar:");
 			            String flor = sc.nextLine();
 
-			            // Use ponerFlor from the Fallecido class to add the flower
 			            String resultado = seleccionado.ponerFlor(flor);
 			            System.out.println(resultado);
 			        } else {
@@ -1170,6 +1185,7 @@ public static long leerEnteroLargo() {
 			}
 
 			case 4 -> System.out.println("Volviendo al menu principal...4");
+			default -> System.out.println("Opción no válida.");
 			}
 		}
 	}

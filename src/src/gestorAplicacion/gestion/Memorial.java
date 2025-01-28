@@ -1,20 +1,19 @@
 package gestorAplicacion.gestion;
-import java.io.Serializable;
+//import java.io.Serializable;
 import java.util.ArrayList;
 import gestorAplicacion.elementos.CentroAdopcion;
 import gestorAplicacion.elementos.Fallecido;
 
-public class Memorial implements Serializable {
+public class Memorial{
 	
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	private CentroAdopcion centro;
 	public static ArrayList<Fallecido> sepulcros = new ArrayList<> ();
 	public static ArrayList<Fallecido> osarios = new ArrayList<> ();
 	public static ArrayList<Fallecido> arboles = new ArrayList<> ();
 	public static ArrayList<Fallecido> cenizas = new ArrayList<> ();
 	
-	public Memorial (CentroAdopcion centro) {
-		this.centro = centro;
+	public Memorial () {
 	}
 	
 	public CentroAdopcion getCentro() {
@@ -43,18 +42,6 @@ public class Memorial implements Serializable {
 	public ArrayList<Fallecido> getCenizas() {
 		return cenizas;
 	}
-		
-	 /*public String visita(String tipo) {
-	    String resultado = "";
-	    ArrayList<Fallecido> lista = (tipo.equals("Sepulcro")) ? sepulcros : restos;
-
-	    for (int i = 0; i < lista.size(); i++) {
-	        int indice = i + 1;
-	        resultado += indice + ", " + lista.get(i).toString() + '\n';
-	    }
-
-	    return resultado;
-	} */
 	
 	public String visita(String tipo) {
 		String resultado = "";

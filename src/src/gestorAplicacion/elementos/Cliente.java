@@ -1,6 +1,8 @@
 package gestorAplicacion.elementos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import uiMain.Main;
 
 // LÓPEZ GONZÁLEZ, ALEJANDRO
 	// BETANCUR URIBE, EMMANUEL
@@ -55,6 +57,14 @@ public class Cliente extends Persona implements Serializable {
 		return this.puntos;
 	}
 	
+	public static Cliente registro(){
+		ArrayList<Object> datos = Main.capturarDatosCliente();
+		Cliente cliente = new Cliente((String) datos.get(0), (int) datos.get(1), (long) datos.get(2));
+		cliente.agregarPuntos(50000);
+
+		return cliente;
+
+	}
 	
 	public void setMascota(Mascota mascota){
 		this.mascota=mascota;

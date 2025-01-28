@@ -1029,9 +1029,9 @@ public static long leerEnteroLargo() {
 		int opcion = 0;
 		while (opcion != 4) {
 			System.out.println("\nGestion del Memorial:");
-			System.out.println("1. Añadir fallecido");
+			System.out.println("1. Añadir memorial");
 			System.out.println("2. Ver memorial");
-			System.out.println("3. Añadir flores");
+			System.out.println("3. Decorar memorial");
 			System.out.println("4. Volver al menu principal");
 			
 			opcion = leerEntero();
@@ -1165,21 +1165,7 @@ public static long leerEnteroLargo() {
 
 public static void planificacionDieta() {
 
-	//registro del cliente
-	System.out.println("--------------------");
-	System.out.println("\n- Ingrese sus datos");
-	System.out.print("\n- Nombre Completo: ");
-	String nombreC = sc.nextLine();
-	System.out.print("- Edad: ");
-	int edadC = sc.nextInt(); 
-	sc.nextLine();
-	System.out.print("- Cédula: ");
-	long cedula = sc.nextLong();
-	sc.nextLine();
-	System.out.println("\n--------------------");
-	
-	Cliente cliente = new Cliente(nombreC, edadC, cedula);
-	cliente.agregarPuntos(0);
+	Cliente cliente = Cliente.registro();
 
 	//ingresar datos de la mascota
 		System.out.println("\nIngresa los datos de su mascota:");
@@ -1230,6 +1216,7 @@ public static void planificacionDieta() {
 		//consumir la mascota, dependiendo de su debe subir o bajar de peso.
 		dieta.calcularPesoIdeal();
         dieta.planDieta();
+		dieta.menu();
 		//imprime la dieta planificada
 
 		System.out.println("\n--------------------\n");
@@ -1282,7 +1269,30 @@ public static void planificacionDieta() {
 		}
 
 }//Fin de Planeacion Dieta
+public static ArrayList<Object> capturarDatosCliente() {
+	try {Scanner sc = new Scanner(System.in);
+	System.out.println("--------------------");
+	System.out.println("\n- Ingrese sus datos");
+	System.out.print("\n- Nombre Completo: ");
+	String nombreC = sc.nextLine();
+	System.out.print("- Edad: ");
+	int edadC = sc.nextInt();
+	sc.nextLine();
+	System.out.print("- Cédula: ");
+	long cedula = sc.nextLong();
+	sc.nextLine();
+	System.out.println("\n--------------------");
+	
+	ArrayList<Object> datos = new ArrayList<>();
+	datos.add(nombreC);
+	datos.add(edadC);
+	datos.add(cedula);
+	
+	return datos;
 
+	} finally {sc.close();}
+
+}
 public static void emergenciaVeterinaria() {
 	
 	System.out.println("--------------------");

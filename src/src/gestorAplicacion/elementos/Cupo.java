@@ -1,5 +1,6 @@
 package gestorAplicacion.elementos;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -12,9 +13,9 @@ import java.time.format.DateTimeFormatter;
     //DESCRIPCIÓN FUNCIONALIDAD:
     //Representa un bloque de tiempo disponible para citas por cada empleado.. Incluye información sobre el día, la hora de inicio y fin, y si está disponible.
 
-public class Cupo {
+public class Cupo implements Serializable {
 	
-	//private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	private LocalDate dia;
     private String horaInicio;
     private String horaFin;

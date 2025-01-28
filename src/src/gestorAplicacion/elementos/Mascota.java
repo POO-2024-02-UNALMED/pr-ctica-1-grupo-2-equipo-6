@@ -1,5 +1,7 @@
 package gestorAplicacion.elementos;
-    
+
+import java.io.Serializable;
+
 // LÓPEZ GONZÁLEZ, ALEJANDRO
 // BETANCUR URIBE, EMMANUEL
 // MARTÍNEZ RÍOS, SANTIAGO
@@ -10,9 +12,9 @@ package gestorAplicacion.elementos;
 //Representa a los animales disponibles para adopción, incluye atributos como nombre, tipo, edad, sexo y estado de salud, 
 //de igual forma representa a las mascotas que un usuario registre para recibir un servicio o agendar una cita.
 
-public class Mascota {
+public class Mascota implements Serializable {
 
-	// private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	 public static enum EstadoSalud {
 		SANO, ENFERMO, ENTRATAMIENTO
 	 }

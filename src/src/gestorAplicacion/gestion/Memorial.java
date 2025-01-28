@@ -73,7 +73,7 @@ public class Memorial implements Serializable {
 		return resultado;
 	}
 	
-	private String visitaMemorial(ArrayList<Fallecido> lista) {
+	public String visitaMemorial(ArrayList<Fallecido> lista) {
 		String resultado = "";
 		for (int i = 0; i < lista.size(); i++) {
 			int indice = i + 1;

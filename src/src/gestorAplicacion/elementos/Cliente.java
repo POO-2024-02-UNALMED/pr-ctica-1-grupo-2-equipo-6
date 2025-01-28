@@ -60,7 +60,7 @@ public class Cliente extends Persona implements Serializable {
 	public static Cliente registro(){
 		ArrayList<Object> datos = Main.capturarDatosCliente();
 		Cliente cliente = new Cliente((String) datos.get(0), (int) datos.get(1), (long) datos.get(2));
-		cliente.agregarPuntos(50000);
+		cliente.agregarPuntos(0);
 
 		return cliente;
 

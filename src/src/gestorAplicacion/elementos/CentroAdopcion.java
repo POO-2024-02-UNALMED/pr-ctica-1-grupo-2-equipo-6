@@ -151,7 +151,7 @@ public class CentroAdopcion implements Serializable {
 	            disponibles.add(veterinario);
 	        }
 	    }
-	    return disponibles.isEmpty() ? null : disponibles; // Si no hay veterinarios disponibles, retorna null
+	    return disponibles.isEmpty() ? null : disponibles;
 	}
 
 	
@@ -160,10 +160,6 @@ public class CentroAdopcion implements Serializable {
 	}
 	
 	public String[] mostrarOpcionesPago() {
-        /*System.out.println("Opciones de pago disponibles: ");
-        System.out.println("1. Tarjeta de crédito/débito");
-        System.out.println("2. Efectivo");
-        System.out.println("3. Puntos acumulados.");*/
 		String[] opciones = {"Tarjeta de crédito", "Efectivo", "Puntos acumulados"};
 		return opciones;
     }
@@ -191,12 +187,11 @@ public class CentroAdopcion implements Serializable {
         }
     }
 	
-	public void generarFactura(Cliente cliente, Mascota mascota, int monto) {
-        System.out.println("\n--------- Factura ---------");
-        System.out.println("*|* Cliente     *|* " + (cliente != null ? cliente : "No registrado"));
-        System.out.println("*|* Animal      *|* " + mascota);
-        System.out.println("*|* Monto total *|* " + monto);
-        System.out.println("-----------------------------\n");
+	public String generarFactura(Cliente cliente, Mascota mascota, int monto) {
+		
+		return "\n--------- Factura --------- " + "\n*|* Cliente     *|* " + (cliente != null ? cliente : "No registrado") + 
+				"\n*|* Animal      *|* " + mascota + "\n*|* Monto total *|* " + monto + "\n-----------------------------\n";
+
     }
 	
 	public void asignarVeterinario(Mascota mascota, Empleado veterinario) {

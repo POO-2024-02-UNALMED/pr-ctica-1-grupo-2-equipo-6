@@ -135,7 +135,7 @@ public class Tienda implements Serializable{
                     	productos.remove(indice); // SI LAS UNIDADES QUEDAN EN CERO, SE ELIMINA EL PRODUCTO DE LA LISTA 
                     }
                     
-                    cliente = CentroAdopcion.EsCliente(cliente); // SE COMPRUEBA SI EL CLIENTE EXISTE 
+                    cliente = CentroAdopcion.esCliente(cliente); // SE COMPRUEBA SI EL CLIENTE EXISTE 
                     float precio = productos.get(indice).getPrecio(); // SE GUARDA EL PRECIO PARA LA FUTURA FACTURA 
                     int puntos = cliente.getPuntos(); //SE TOMAN LOS PUNTOS DEL CLIENTE
                     
@@ -179,7 +179,7 @@ public class Tienda implements Serializable{
                     	
                     }
                     
-                    cliente = CentroAdopcion.EsCliente(cliente); // SE COMPRUEBA SI EL CLIENTE EXISTE 
+                    cliente = CentroAdopcion.esCliente(cliente); // SE COMPRUEBA SI EL CLIENTE EXISTE 
                     float precio = productos.get(indice).getPrecio(); // SE GUARDA EL PRECIO PARA GENERAR DESPUES FACTURA 
                     int puntos = cliente.getPuntos(); // SE TOMAN LOS PUNTOS 
                     

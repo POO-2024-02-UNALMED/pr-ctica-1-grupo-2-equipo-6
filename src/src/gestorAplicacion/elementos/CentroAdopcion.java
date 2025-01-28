@@ -22,7 +22,7 @@ public class CentroAdopcion implements Serializable {
 		this.nombre = nombre;
 		this.animalesHospitalizados = new ArrayList<>();
 		this.veterinarios = new ArrayList<>();
-		this.clientes = new ArrayList<>();
+		CentroAdopcion.clientes = new ArrayList<>();
 	}
 	
 	//GETTERS Y SETTERS
@@ -52,7 +52,7 @@ public class CentroAdopcion implements Serializable {
 	}
 	
 	public void setClientes(List<Cliente> clientes) {
-		this.clientes = clientes;
+		CentroAdopcion.clientes = clientes;
 	}
 	
 	public List<Cliente> getClientes(){
@@ -86,7 +86,53 @@ public class CentroAdopcion implements Serializable {
 		}
 	}
 	
-	public boolean verificarHospitalizacion(Mascota mascota) {
+	public boolean verificarHospitalizacion(Mascota mascota, String[] listaSintomas, CentroAdopcion centro) {
+		
+		int gravedad = 0;
+		int compatibilidad = 0;
+		
+		//Asignar valores de gravedad y compatibilidad a los síntomas
+		for (String sintoma : listaSintomas) {
+            switch (sintoma.toLowerCase()) {
+                case "fiebre":
+                    gravedad += 2;
+                    compatibilidad += 3;
+                    break;
+                case "vomito":
+                case "vómito":
+                    gravedad += 3;
+                    compatibilidad += 2;
+                    break;
+                case "picazon":
+                case "picazón":
+                    gravedad += 2;
+                    compatibilidad += 1;
+                    break;
+                case "enrojecimiento":
+                    gravedad += 1;
+                    compatibilidad += 2;
+                    break;
+                case "inflamacion":
+                case "inflamación":
+                    gravedad += 2;
+                    compatibilidad += 2;
+                    break;
+                case "y":
+                	break;
+                default:
+                    //System.out.println("\nSintoma desconocido: " + sintoma);
+                    break;
+            }
+        }
+		
+		if (mascota.indiceEmergencia(gravedad, compatibilidad) < 7.0) {
+			return false;
+		}
+		
+		if (centro.gestionarVeterinario().isEmpty()) {
+			return false;
+		}
+		
 		if (!hayCapacidad()) {
 			return false;
 		}
@@ -100,15 +146,15 @@ public class CentroAdopcion implements Serializable {
 	}
 	
 	public List<Empleado> gestionarVeterinario() {
-		List <Empleado> disponibles = new ArrayList<>();
-        for (Empleado veterinario : veterinarios) {
-            if (veterinario.tieneCupos()) {
-                disponibles.add(veterinario);
-            	return disponibles;
-            }
-        }
-        return null;
-    }
+	    List<Empleado> disponibles = new ArrayList<>();
+	    for (Empleado veterinario : veterinarios) {
+	        if (veterinario.tieneCupos()) {
+	            disponibles.add(veterinario);
+	        }
+	    }
+	    return disponibles.isEmpty() ? null : disponibles; // Si no hay veterinarios disponibles, retorna null
+	}
+
 	
 	public void agregarHospitalizado(Mascota mascota) {
 		animalesHospitalizados.add(mascota);
@@ -174,7 +220,7 @@ public class CentroAdopcion implements Serializable {
 	}
 	
 //Metodo para verificar si es un cliente nuevo o ya esta registrado.
-	public static Cliente EsCliente(Cliente cliente){
+	public static Cliente esCliente(Cliente cliente){
 		
 		Cliente clienteNuevo = null; 
 		
@@ -191,7 +237,7 @@ public class CentroAdopcion implements Serializable {
 			
 			//Si no existe se agrega como nuevo cliente.
 			clienteNuevo = cliente;
-			clientes.add(clienteNuevo);
+			registrarCliente(clienteNuevo);
 		}
 		else {
 			//Si existe, entonces se actualizan los datos.

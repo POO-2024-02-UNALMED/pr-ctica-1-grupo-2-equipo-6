@@ -96,12 +96,12 @@ public class Main implements Serializable {
             	case 4:
 					System.out.println("\n--------------------");
             		System.out.println("\nBienvenido al servicio memorial.");
-            		//gestionarMemorial(cliente);
+            		gestionarMemorial();
             		break;
             	case 5:
 					System.out.println("\n--------------------");
 					System.out.println("\nBienvenido al Sistema de planificacion de Dieta.");
-            		//planificacionDieta(cliente);
+            		planificacionDieta();
             		break;
             	case 6:
 					System.out.println("\n--------------------");
@@ -398,7 +398,7 @@ public static long leerEnteroLargo() {
 			}
 			else {
 				System.out.println("Su mascota no requiere hospitalización. Redirigiendo a Planificación de Dieta.");
-				//planificacionDieta();
+				planificacionDieta();
 			}
 			
 		}
@@ -1020,7 +1020,21 @@ public static long leerEnteroLargo() {
 //>>--------------------------------------------------------------------------------------------------------------------------------------<<
 
 	
-	public static void gestionarMemorial(Cliente cliente) {
+	public static void gestionarMemorial() {
+		
+		System.out.println("--------------------");
+		System.out.println("\n- Ingrese sus datos");
+		System.out.print("\n- Nombre Completo: ");
+		String nombre = sc.nextLine();
+		System.out.print("- Edad: ");
+		int edad = sc.nextInt(); 
+		sc.nextLine();
+		System.out.print("- Cédula: ");
+		long cedula = sc.nextLong();
+		sc.nextLine();
+		System.out.println("--------------------");
+		
+		Cliente cliente = new Cliente(nombre, edad, cedula);
 		
 		int opcion = 0;
 		while (opcion != 4) {
@@ -1392,7 +1406,7 @@ public static void tienda() {
 	}//BUCLE INICIAL
 }//FINAL MÉTODO TIENDA
 
-public static void planificacionDieta(Cliente cliente) {
+public static void planificacionDieta() {
 	//ingresar datos de la mascota
 		System.out.println("\nIngresa los datos de su mascota:");
 		System.out.println("Nombre:");

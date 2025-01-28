@@ -73,7 +73,7 @@ public class Tienda implements Serializable{
             return empleados;
         }
 
-        public void agregarProducto(Producto producto){ 
+        public static void agregarProducto(Producto producto){ 
             if(empleados!=null){     // SI HAY UN EMPLEADO, SE AGREGA EL PRODUCTO DEL PARÁMETRO
                 productos.add(producto);
             }

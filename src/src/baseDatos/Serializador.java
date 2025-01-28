@@ -1,16 +1,17 @@
 package baseDatos;
 
+import gestorAplicacion.elementos.CentroAdopcion;
+import gestorAplicacion.elementos.Cliente;
+import gestorAplicacion.elementos.Empleado;
+import gestorAplicacion.elementos.Mascota;
+import gestorAplicacion.elementos.Producto;
+import gestorAplicacion.gestion.Tienda;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-
-import gestorAplicacion.elementos.CentroAdopcion;
-import gestorAplicacion.elementos.Cliente;
-import gestorAplicacion.elementos.Empleado;
-import gestorAplicacion.elementos.Mascota;
 
 public class Serializador {
 
@@ -81,6 +82,44 @@ public class Serializador {
         centrosAdopcion.add(centro2);
         centrosAdopcion.add(centro3);
         centrosAdopcion.add(centro4);
+
+
+        //Productos para Tienda UNamascota
+        
+            // Crear objetos de tipo Producto
+        Producto producto1 = new Producto("Croquetas de Pollo para perro", 50000, "Perro", "Alimentación", 100);
+        Producto producto2 = new Producto("Croquetas de Pollo para gato", 45000, "Gato", "Alimentación", 50);
+        Producto producto3 = new Producto("Chips de zanahoria para Conejo", 15000, "Conejo", "Alimentacion", 30);
+        Producto producto4 = new Producto("Alpiste", 30000, "Ave", "Alimento", 30);
+        Producto producto5 = new Producto("Cama para perro", 100000, "Perro", "Hogar", 20);
+        Producto producto6 = new Producto("Cama para gato", 90000, "Gato", "Hogar", 15);
+        Producto producto7 = new Producto("Cama para conejo", 80000, "Conejo", "Hogar", 10);
+        Producto producto8 = new Producto("Caseta para ave", 70000, "Ave", "Hogar", 5);
+        Producto producto9 = new Producto("Collar para perro", 25000, "Perro", "Accesorio", 50);
+        Producto producto10 = new Producto("Collar para gato", 20000, "Gato", "Accesorio", 40);
+        Producto producto11 = new Producto("Moño de Conejo", 15000, "Conejo", "Accesorio", 30);
+        Producto producto12 = new Producto("Sombreritos para Aves", 10000, "Ave", "Accesorio", 20);
+        Producto producto13 = new Producto("Juguete para Perro", 10000, "Perro", "Entretenimiento", 20);
+        Producto producto14 = new Producto("Juguete para Gato", 8000, "Gato", "Entretenimiento", 15);
+        Producto producto15 = new Producto("Juguete para Conejo", 6000, "Conejo", "Entretenimiento", 10);
+
+        // Agregar productos al inventario de la Tienda
+        
+        Tienda.agregarProducto(producto1);
+        Tienda.agregarProducto(producto2);
+        Tienda.agregarProducto(producto3);
+        Tienda.agregarProducto(producto4);
+        Tienda.agregarProducto(producto5);
+        Tienda.agregarProducto(producto6);
+        Tienda.agregarProducto(producto7);
+        Tienda.agregarProducto(producto8);
+        Tienda.agregarProducto(producto9);
+        Tienda.agregarProducto(producto10);
+        Tienda.agregarProducto(producto11);
+        Tienda.agregarProducto(producto12);
+        Tienda.agregarProducto(producto13);
+        Tienda.agregarProducto(producto14);
+        Tienda.agregarProducto(producto15);
 
         try {
             // Define la ruta del archivo

@@ -123,7 +123,7 @@ public class Serializador {
 
         try {
             // Define la ruta del archivo
-            String filePath = "src/src/baseDatos/temp/sedes.txt";
+            String filePath = "src/src/baseDatos/temp/productos.txt";
             File outputFile = new File(filePath);
 
             // Crea los directorios si no existen
@@ -134,7 +134,7 @@ public class Serializador {
             // Serializa el objeto
             FileOutputStream f = new FileOutputStream(outputFile);
             ObjectOutputStream o = new ObjectOutputStream(f);
-            o.writeObject(centrosAdopcion);
+            o.writeObject(Tienda.productos);
             o.close();
             f.close();
             System.out.println("Archivo creado y datos serializados exitosamente.");

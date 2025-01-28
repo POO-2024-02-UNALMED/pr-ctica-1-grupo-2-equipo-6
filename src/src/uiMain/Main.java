@@ -36,6 +36,7 @@ public class Main implements Serializable {
 	
 	public static void main(String[] args) {
 		centroAdopcions = Deserializador.deserializarCentrosAdopcion();
+		Tienda.productos = Deserializador.deserializarProductos();
 		Scanner sc = new Scanner(System.in);
 		int opcion = 0;
 		

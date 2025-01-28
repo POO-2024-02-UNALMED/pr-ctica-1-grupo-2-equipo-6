@@ -1346,12 +1346,15 @@ public static void tienda() {
 							print("Ingrese su nombre: ");
 							scanner.nextLine();
 							String nombre = leerCadena();
+							print("Ingrese su número de teléfono: ");
+							long telefono = scanner.nextLong();
 							print("Ingrese su dirección: ");
 							scanner.nextLine();
+							String direccion = leerCadena();
 							
 							// SE REGISTA EL USUARIO, CREANDO UN OBJETO DEL TIPO CLIENTE Y PASANDOLO AL MÉTODO COMPRA DE TIENDA
 							// SE LE AGREGA TAMBIEN, LA CANTIDAD DE UNIDADES AL MÉTODO COMPRA 
-							Cliente cliente = new Cliente(nombre, edad, cedula);
+							Cliente cliente = new Cliente(nombre, edad, cedula, telefono, direccion);
 							println("\n"+t1.compra(indice, unidades, cliente));
 						}
 						

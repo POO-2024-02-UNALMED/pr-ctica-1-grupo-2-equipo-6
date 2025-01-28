@@ -1257,7 +1257,7 @@ public static void tienda() {
 				println(t1.inventario()); // SE LLAMA AL MÉTODO INVENTARIO DE TIENDA, PARA QUE DEVULVA TODOS LOS PRODUCTOS SIN MÁS
 			}
 			else { // DE LO CONTRARIO, SE LE VOLVERÁ A PEDIR UNA scanner PARA QUE INDIQUE POR QUE TIPO DE Mascota QUIERE VER 
-				print("\n🐈🐾¿Por qué tipo de Mascota te gustaría ver? [Perros, gatos, aves, hamsters o conejos]: 🐕🐾");
+				print("\n¿Por qué tipo de Mascota te gustaría ver? [Perros, gatos, aves, hamsters o conejos]: ");
 				while (true) { //BUCLE PARA CONTROLAR ÉSTE NUEVO MENÚ
 					try {
 						String tipo = leerCadena(); // SE LEE EL STRING 

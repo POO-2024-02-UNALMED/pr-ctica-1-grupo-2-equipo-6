@@ -1268,43 +1268,43 @@ public static void tienda() {
 						switch (tipo.toLowerCase()) {
 							case "perros":
 								println("\nProductos disponibles: \n");
-								println(t1.filtrar("perros"));
+								println(t1.filtrar("Perros"));
 								break;
 							case "perro":
 								println("\nProductos disponibles: \n");
-								println(t1.filtrar("perros"));
+								println(t1.filtrar("Perros"));
 								break;
 							case "gatos":
 								println("\nProductos disponibles: \n");
-								println(t1.filtrar("gatos"));
+								println(t1.filtrar("Gatos"));
 								break;
 							case "gato":
 								println("\nProductos disponibles: \n");
-								println(t1.filtrar("gatos"));
+								println(t1.filtrar("Gatos"));
 								break;
 							case "aves":
 								println("\nProductos disponibles: \n");
-								println(t1.filtrar("aves"));
+								println(t1.filtrar("Aves"));
 								break;
 							case "ave":
 								println("\nProductos disponibles: \n");
-								println(t1.filtrar("aves"));
+								println(t1.filtrar("Aves"));
 								break;
 							case "hamsters":
 								println("\nProductos disponibles: \n");
-								println(t1.filtrar("hamsters"));
+								println(t1.filtrar("Hamsters"));
 								break;
 							case "hamster":
 								println("\nProductos disponibles: \n");
-								println(t1.filtrar("hamsters"));
+								println(t1.filtrar("Hamsters"));
 								break;
 							case "conejos":
 								println("\nProductos disponibles: \n");
-								println(t1.filtrar("conejos"));
+								println(t1.filtrar("Conejos"));
 								break;
 							case "conejo":
 								println("\nProductos disponibles: \n");
-								println(t1.filtrar("conejos"));
+								println(t1.filtrar("Conejos"));
 								break;
 							default:
 								println("Por favor, ingrese el tipo del Mascota en minúsculas [Perros, gatos, aves o hamsters]");

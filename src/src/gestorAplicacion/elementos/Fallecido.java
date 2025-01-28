@@ -32,6 +32,7 @@ public class Fallecido implements Serializable{
 		this.mensaje = mensaje;
 		this.tiempo = tiempo;
 		this.tipo = tipo;
+		flores.add("Sin Flores.");
 	}
 	
 	//---> Metodos Getters And Setters <---

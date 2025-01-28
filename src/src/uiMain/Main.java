@@ -1190,12 +1190,12 @@ public static void tienda() {
 	boolean bucle = true; // VARIABLE PARA EL SEGUNDO MENÚ
 	
 	println("\n - - ¡Bienvenido a la tienda de mascotas del Centro de cuidado Mascota: UNamascota! - - ");
-	println("Aquí encontrarás los mejores productos para el cuidado y la diversión de tu compañero peludo.");
+	println("Aquí encontrarás los mejores productos para el cuidado y la diversión de tu compañero peludo.\n");
 	
 	while (true) { 
 	
 		println("-----------------------------");
-		println("¿Qué te trae por estos lares amante de los peluditos?");
+		println("\n¿Qué te trae por estos lares amante de los peluditos?");
 		println("1. Ir de compras");
 		println("2. Salir\n");
 		print("Ingrese el número de la opción que desea [1-2]: ");

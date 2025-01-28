@@ -19,14 +19,10 @@ public class Producto implements Serializable {
 
     //---> Constructores <---
     public Producto(String nombre, float precio, String tipoAnimal, String tipoUso, int cantidadUnidades){
-        this(nombre, precio, tipoUso, cantidadUnidades);
-        this.tipoAnimal = tipoAnimal;
-        this.tipoUso = tipoUso;
-    }
-    
-    public Producto(String nombre, float precio, String tipoUso, int cantidadUnidades){
         this.nombre = nombre;
         this.precio = precio;
+        this.tipoAnimal = tipoAnimal;
+        this.tipoUso = tipoUso;
         this.cantidadUnidades = cantidadUnidades;
     }
 

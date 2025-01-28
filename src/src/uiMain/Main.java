@@ -1112,7 +1112,7 @@ public static Cliente obtenerDatosCliente() {
 			        if (memorial.anadirFallecido(fallecido, tipo)) {
 			            System.out.println("Memorial añadido con éxito.");
 			            System.out.println("Precio del servicio: $" + precio);
-																																					
+			            
 			        } else {
 			            System.out.println("De momento no contamos con este tipo de servicio.");
 			        }

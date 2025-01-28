@@ -1314,20 +1314,8 @@ public static ArrayList<Object> capturarDatosCliente() {
 }
 public static void emergenciaVeterinaria() {
 	
-	/*System.out.println("--------------------");
-	System.out.println("\n- Ingrese sus datos");
-	System.out.print("\n- Nombre Completo: ");
-	String nombre = leerCadena();
-	System.out.print("- Edad: ");
-	int edad = leerEntero(); 
-	//sc.nextLine();
-	System.out.print("- Cédula: ");
-	long cedula = leerEnteroLargo();
-	//sc.nextLine();
-	System.out.println("--------------------");*/
 	
 	Cliente cliente = Cliente.registro();
-	//Cliente cliente = new Cliente(nombre, edad, cedula);
 	
 	//Veterinarios en en centro de adopción. Agregar más
 	centro.agregarVeterinario(new Empleado("Ana", 30, 439872356, 310543216, null, Especialidad.VETERINARIO));
@@ -1487,8 +1475,8 @@ public static void emergenciaVeterinaria() {
 	}
 	
 	else {
-		System.out.println("Su mascota no requiere hospitalización. Redirigiendo a menú principal.");
-		//planificacionDieta();
+		System.out.println("Su mascota no requiere hospitalización. Redirigiendo a Planificación de Dietas.");
+		planificacionDieta();
 	}
 }
 	private static void salirDelSistema() {

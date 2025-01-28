@@ -1,5 +1,6 @@
 package uiMain;
 
+import baseDatos.Deserializador;
 import gestorAplicacion.elementos.CentroAdopcion;
 import gestorAplicacion.elementos.CentroAdopcion.Sedes;
 import gestorAplicacion.elementos.Cliente;
@@ -10,10 +11,10 @@ import gestorAplicacion.elementos.Empleado.Especialidad;
 import gestorAplicacion.elementos.Fallecido;
 import gestorAplicacion.elementos.Mascota;
 import gestorAplicacion.elementos.Mascota.EstadoSalud;
-import gestorAplicacion.elementos.Producto;
 import gestorAplicacion.gestion.Cita;
 import gestorAplicacion.gestion.Memorial;
 import gestorAplicacion.gestion.Tienda;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -21,77 +22,90 @@ import java.util.Scanner;
 
 		
 
-public class Main {
+public class Main implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	static CentroAdopcion sede1;
 	
 	static Scanner sc = new Scanner(System.in);
 	static CentroAdopcion centro = new CentroAdopcion("POO");
 	private static Scanner scanner = new Scanner(System.in);
-	private static ArrayList<CentroAdopcion> sedes = new ArrayList<>();
+	public static ArrayList<CentroAdopcion> centroAdopcions;
 	private static Memorial memorial = new Memorial(centro);
-		
+	
 	
 	public static void main(String[] args) {
-		
+		centroAdopcions = Deserializador.deserializarCentrosAdopcion();
+		Tienda.productos = Deserializador.deserializarProductos();
 		Scanner sc = new Scanner(System.in);
 		int opcion = 0;
 		
-		System.out.println("Bienvenido a la veterinaria virtual.");
-		System.out.println("\nIngrese sus datos");
-		System.out.println("\nNombre:");
+		System.out.println("\n - - Bienvenido al Centro Veterinario Virtual: UNamascota. - - \n");
+		/*System.out.println("--------------------");
+		System.out.println("\n- Ingrese sus datos");
+		System.out.print("\n- Nombre Completo: ");
 		String nombre = sc.nextLine();
-		System.out.println("Edad:");
+		System.out.print("- Edad: ");
 		int edad = sc.nextInt(); 
 		sc.nextLine();
-		System.out.println("Cédula:");
+		System.out.print("- Cédula: ");
 		long cedula = sc.nextLong();
+		System.out.println("--------------------");
 		
 		Cliente cliente = new Cliente(nombre, edad, cedula);
-		cliente.agregarPuntos(50000);
+		cliente.agregarPuntos(50000);*/
 		
 		while (opcion != 6) {
 			
-            System.out.println("\n¿Qué desea hacer?");
+			System.out.println("--------------------");
+            System.out.println("\n - - ¿Qué desea hacer el día de hoy? - -");
             System.out.println("\n1. Emergencia Veterinaria");
-            System.out.println("2. (Funcionalidad 2)");
-            System.out.println("3. Tienda UNamascota");
-            System.out.println("4. Servicio memorial"); //memorial
-            System.out.println("5. Planificacion de Dieta");
-            System.out.println("6. Salir");
+            System.out.println("2. Adquirir Servicios: PetTraining");
+			System.out.println("3. Tienda: UNamascota");
+            System.out.println("4. Servicio de Memorial"); //memorial
+            System.out.println("5. Planificador de Dieta");
+            System.out.println("6. (┬┬~~┬┬) Salir");
+			System.out.println("\n--------------------");
+			System.out.print("Ingrese el número de la opción que desea [1-6]: ");
             
             if (sc.hasNextInt()) {
                 opcion = sc.nextInt();
                 sc.nextLine();
             } else {
-                System.out.println("scanner no válida. Por favor, ingrese un número del 1 al 6.\n");
+                System.out.println("Scanner no válida. Por favor, ingrese un número válido [1-6].\n");
                 sc.nextLine();
                 continue;
             }
             
             switch (opcion) {
             	case 1:
+					System.out.println("\n--------------------");
             		System.out.println("\nBienvenido a Emergencia Veterinaria.");
-            		emergenciaVeterinaria(cliente);
+            		emergenciaVeterinaria();
             		break;
             	case 2:
-            		System.out.println("Bienvenido a la funcionalidad 2.");
+					System.out.println("\n--------------------");
+            		System.out.println("\nBienvenido a PetTraining.");
 					agendarservicioSSeleccionado();
             		break;
             	case 3:
-            		System.out.println("Bienvenido a la funcionalidad 3.");
+					System.out.println("\n--------------------");
+            		System.out.println("\nBienvenido a Tienda UNamascota.");
 					tienda();
             		break;
             	case 4:
-            		System.out.println("Bienvenido al servicio memorial.");
-            		gestionarMemorial(cliente);
+					System.out.println("\n--------------------");
+            		System.out.println("\nBienvenido al servicio memorial.");
+            		gestionarMemorial();
             		break;
             	case 5:
-					System.out.println("Bienvenido al Sistema de planificacion de Dieta.");
-            		planificacionDieta(cliente);
+					System.out.println("\n--------------------");
+					System.out.println("\nBienvenido al Sistema de planificacion de Dieta.");
+            		planificacionDieta();
             		break;
             	case 6:
-                    System.out.println("Saliendo del sistema.");
+					System.out.println("\n--------------------");
+                    System.out.println("\nSaliendo del sistema.");
                     break;
             	default:
             		System.out.println("Opción no válida. Por favor, intente de nuevo.\n");
@@ -175,51 +189,69 @@ public static long leerEnteroLargo() {
 		return scanner.nextLine();
 	}
 
-	public static void emergenciaVeterinaria(Cliente cliente) {
+	public static void emergenciaVeterinaria() {
+	
+		System.out.println("--------------------");
+		System.out.println("\n- Ingrese sus datos");
+		System.out.print("\n- Nombre Completo: ");
+		String nombre = sc.nextLine();
+		System.out.print("- Edad: ");
+		int edad = sc.nextInt(); 
+		sc.nextLine();
+		System.out.print("- Cédula: ");
+		long cedula = sc.nextLong();
+		sc.nextLine();
+		System.out.println("--------------------");
 		
-		
+		Cliente cliente = new Cliente(nombre, edad, cedula);
+		cliente.agregarPuntos(50000);
 		
 		//Veterinarios en en centro de adopción. Agregar más
-		centro.agregarVeterinario(new Empleado("Alberto", 27, 125734625, 321215589, null, Especialidad.VETERINARIO));
-		centro.agregarVeterinario(new Empleado("Ricardo", 38, 125846225, 321765589, null, Especialidad.VETERINARIO));
+		centro.agregarVeterinario(new Empleado("Ana", 30, 439872356, 310543216, null, Especialidad.VETERINARIO));
+		centro.agregarVeterinario(new Empleado("Carlos", 45, 957634298, 312674389, null, Especialidad.VETERINARIO));
+		centro.agregarVeterinario(new Empleado("Laura", 26, 742698534, 320118675, null, Especialidad.VETERINARIO));
+		centro.agregarVeterinario(new Empleado("Marta", 34, 872346123, 321439876, null, Especialidad.VETERINARIO));
+		centro.agregarVeterinario(new Empleado("Pedro", 40, 263547891, 310987654, null, Especialidad.VETERINARIO));
 		//---------------------------------------------------
 		
 		//Pedir datos de la mascota al usuario
 		System.out.println("\nIngrese los datos de su mascota:");
-		System.out.println("Nombre:");
-		String nombre = sc.nextLine();
+		System.out.print("Nombre: ");
+		String nombreMascota = sc.nextLine();
 		
-		System.out.println("Especie:");
+		System.out.print("Especie: ");
 		String tipo = sc.nextLine();
 		
-		System.out.println("Edad:");
-		int edad = sc.nextInt();
+		System.out.print("Edad: ");
+		int edadMascota = sc.nextInt();
 		sc.nextLine();
 		
-		System.out.println("Sexo (M/F):");
+		System.out.print("Sexo (M/F): ");
 		String sexo = sc.nextLine();
 		
-		System.out.println("Tamaño (1-4): \n1. Miniatura \n2. Pequeño \n3. Mediano \n4. Grande");
+		System.out.print("Tamaño (1-4): \n1. Miniatura \n2. Pequeño \n3. Mediano \n4. Grande \nIngrese el número correspondiente: ");
 		int tamano = sc.nextInt();
 		sc.nextLine();
 		
-		System.out.println("Peso en kg:");
+		System.out.print("Peso en kg: ");
 		double peso = sc.nextDouble();
 		sc.nextLine();
 		
-		System.out.println("Síntomas (sin comas):");
+		System.out.println("\nDe la siguiente lista: fiebre, vómito, picazón, enrojecimiento, inflamación");
+		System.out.print("Síntomas (sin comas): ");
 		String sintomas = sc.nextLine();
 		String[] listaSintomas = sintomas.split(" ");
 		//---------------------------------------------------
 		
 		//Crear instancia de Mascota con los datos que ingresó el usuario
-		Mascota mascota = new Mascota(nombre, tipo, edad, sexo, EstadoSalud.ENFERMO, tamano, peso);
+		Mascota mascota = new Mascota(nombreMascota, tipo, edadMascota, sexo, EstadoSalud.ENFERMO, tamano, peso);
 		centro.agregarHospitalizado(mascota);
 		//---------------------------------------------------
 		
 		//Pedirle al usuario que elija la sede y asignarla a la instancia de centro de adopción
 		System.out.println("\n¿En dónde desea que su mascota sea atendida? (1-4):");
 		centro.mostrarSedes();
+		System.out.print("Ingrese el número correspondiente a la sede: ");
 		int sede = sc.nextInt();
 		sc.nextLine();
 		while (sede < 1 || sede > Sedes.values().length) {
@@ -285,6 +317,7 @@ public static long leerEnteroLargo() {
 					System.out.println(i+1 + ". " + centro.gestionarVeterinario().get(i));
 				}
 				
+				System.err.print("Ingrese el número correspondiente al veterinario que desea: ");
 				int opcion = sc.nextInt();
 				sc.nextLine();
 				
@@ -365,7 +398,7 @@ public static long leerEnteroLargo() {
 			}
 			else {
 				System.out.println("Su mascota no requiere hospitalización. Redirigiendo a Planificación de Dieta.");
-				//planificacionDieta();
+				planificacionDieta();
 			}
 			
 		}
@@ -419,10 +452,10 @@ public static long leerEnteroLargo() {
 				} while (sedeSeleccionada < 1 || sedeSeleccionada > 4);
 		
 			// mostrar los servicioSSeleccionados disponibles según la sede seleccionada
-			System.out.println("\n📋 servicioSSeleccionados Disponibles 📋");
+			System.out.println("\n📋 Servicios Disponibles 📋");
 			switch (sedeSeleccionada) {
 				case 1:
-					System.out.println("SEDE MEDELLIN - servicio Disponiibles: \n1. Entrenamiento \n2. Veterinaria");
+					System.out.println("SEDE MEDELLIN - servicio Disponibles: \n1. Entrenamiento \n2. Veterinaria");
 					break;
 				case 2:
 					System.out.println("SEDE BOGOTA - servicio Disponibles: \n1. Peluquería");
@@ -587,10 +620,11 @@ public static long leerEnteroLargo() {
 			if (!servicioSeleccionadoDisponible) {
 				System.out.println("\nNos disculpamos, pero el servicioSSeleccionado que desea no está disponible para su tipo de mascota. Agradecemos su comprensión.\n");
 				repetir = false;
+				continue;
 			}
 		
 			// obtener la sede seleccionada y los empleados disponibles
-			CentroAdopcion sede = sedes.get(sedeSeleccionada - 1);
+			CentroAdopcion sede = centroAdopcions.get(sedeSeleccionada - 1);
 			ArrayList<Empleado> empleadosDisponibles = sede.tieneEmpleados();
 		
 			// si no hay empleados disponibles, se termina el proceso
@@ -734,7 +768,48 @@ public static long leerEnteroLargo() {
 							
 							citasAgendadas.add(nuevaCita);//AGREGAR LA CITA AL ARRAY DE CITAS QUE EL USUARIO ESTÁ AGENDANDO
 							
-							
+							// si hay citas agendadas
+							if (citasAgendadas.size() != 0) {
+								boolean aplicarDescuento = false;
+					
+								// si el cliente tiene más de 15 puntos, se le ofrece un descuento
+								if (cliente.getPuntos() > 15) {
+									System.out.println("\nSr./Sra. " + cliente.getNombre() + " en estos momentos cuenta con " + cliente.getPuntos() + " puntos."
+											+ "\n¿Desea hacer uso de 15 puntos para obtener un descuento del 10%?");
+									String scanner;
+									do {
+										System.out.print("Responda si / no: ");
+										scanner = leerCadena();
+					
+										if (!scanner.equalsIgnoreCase("si") && !scanner.equalsIgnoreCase("no")) {
+											System.out.println("Proporcione una respuestata válida.\n");
+										}
+									} while (!scanner.equalsIgnoreCase("si") && !scanner.equalsIgnoreCase("no"));
+					
+									// si acepta el descuento, se aplica a todas las citas agendadas y se descuentan los puntos
+									if (scanner.equalsIgnoreCase("si")) {
+										aplicarDescuento = true;
+					
+										for (Cita cita : citasAgendadas) {
+											cita.aplicarDescuento();
+											cliente.disminuir_Puntos(15);
+										}
+					
+										System.out.println("¡Descuento aplicado exitosamente! Se han descontado 15 puntos de su cuenta.");
+									} else {
+										System.out.println("No se aplicó el descuento.");
+									}
+								}
+						
+								// mostrar los detalles de las citas agendadas
+							System.out.println("\n🗓️ DETALLES DE LAS CITAS AGENDADAS 🗓️");
+				
+							for (Cita cita : citasAgendadas) {
+								System.out.println(cita);
+								System.out.println("-----------------\n");
+							}
+			
+		
 							println("\n¡Cita agendada exitosamente!");
 							
 							
@@ -763,115 +838,76 @@ public static long leerEnteroLargo() {
 						}   	    	    	
 					}    
 				}
-			}while(repetir);
-				// si hay citas agendadas
-				if (citasAgendadas.size() != 0) {
-					boolean aplicarDescuento = false;
+			}
+		}while(repetir);
 		
-					// si el cliente tiene más de 15 puntos, se le ofrece un descuento
-					if (cliente.getPuntos() > 15) {
-						System.out.println("\nSr./Sra. " + cliente.getNombre() + " en estos momentos cuenta con " + cliente.getPuntos() + " puntos."
-								+ "\n¿Desea hacer uso de 15 puntos para obtener un descuento del 10%?");
-						String scanner;
-						do {
-							System.out.print("Responda si / no: ");
-							scanner = leerCadena();
+	}
+				
+			// función para obtener los datos del cliente
+		public static Cliente obtenerDatosCliente() {
+			System.out.println("\nAntes de continuar, le informamos que para hacer uso del servicio seleccionado la persona encargada de la mascota debe ser mayor de edad.\n");
+	
+			String nombre;
+			int edad = 0;
+			long cedula = 0;
 		
-							if (!scanner.equalsIgnoreCase("si") && !scanner.equalsIgnoreCase("no")) {
-								System.out.println("Proporcione una respuestata válida.\n");
-							}
-						} while (!scanner.equalsIgnoreCase("si") && !scanner.equalsIgnoreCase("no"));
-		
-						// si acepta el descuento, se aplica a todas las citas agendadas y se descuentan los puntos
-						if (scanner.equalsIgnoreCase("si")) {
-							aplicarDescuento = true;
-		
-							for (Cita cita : citasAgendadas) {
-								cita.aplicarDescuento();
-								cliente.disminuir_Puntos(15);
-							}
-		
-							System.out.println("¡Descuento aplicado exitosamente! Se han descontado 15 puntos de su cuenta.");
-						} else {
-							System.out.println("No se aplicó el descuento.");
-						}
+			System.out.println("Proporcione la siguiente información. ");
+			System.out.print("Ingrese su nombre: ");
+			nombre = leerCadena();
+			while (edad <= 0) {
+				try {
+					System.out.print("Ingrese su edad: ");
+					edad = leerEntero();
+					if (edad <= 0) {
+						System.out.println("Proporcione una respuestata válida.\n");
 					}
-		
-					// mostrar los detalles de las citas agendadas
-					System.out.println("\n🗓️ DETALLES DE LAS CITAS AGENDADAS 🗓️");
-		
-					for (Cita cita : citasAgendadas) {
-						System.out.println(cita);
-						System.out.println("-----------------\n");
-					}
+				} catch (RuntimeException e) {
+					System.out.println("Proporcione una respuestata válida.\n");
+				} finally {
+					leerCadena(); // consumir salto de línea
 				}
 			}
-			// función para obtener los datos del cliente
-			public static Cliente obtenerDatosCliente() {
-				System.out.println("\nAntes de continuar, le informamos que para hacer uso del servicioSSeleccionado la persona encargada de la mascota debe ser mayor de edad.\n");
-		
-				String nombre;
-				int edad = 0;
-				long cedula = 0;
-		
-				System.out.println("Proporcione la siguiente información. ");
-				System.out.print("Ingrese su nombre: ");
-				nombre = leerCadena();
-				while (edad <= 0) {
+				// si el usuario es menor de edad, se piden los datos de un adulto responsable
+			if (edad < 18) {
+				System.out.println("El interesado en hacer uso del servicioSSeleccionado es menor de edad.\n");
+				do {
+					System.out.println("Proporcione los datos de un adulto responsable: ");
+					System.out.print("Ingrese su nombre: ");
+					nombre = leerCadena();
+	
 					try {
 						System.out.print("Ingrese su edad: ");
 						edad = leerEntero();
+	
 						if (edad <= 0) {
-							System.out.println("Proporcione una respuestata válida.\n");
+							System.out.println("Proporcione una edad válida.\n");
 						}
+		
+						if (edad > 0 && edad < 18) {
+							System.out.println("La edad ingresada no corresponde a la de un adulto.\n");
+						}
+	
 					} catch (RuntimeException e) {
 						System.out.println("Proporcione una respuestata válida.\n");
 					} finally {
 						leerCadena(); // consumir salto de línea
 					}
-				}
+				} while (edad < 18);
+			}
 		
-				// si el usuario es menor de edad, se piden los datos de un adulto responsable
-				if (edad < 18) {
-					System.out.println("El interesado en hacer uso del servicioSSeleccionado es menor de edad.\n");
-					do {
-						System.out.println("Proporcione los datos de un adulto responsable: ");
-						System.out.print("Ingrese su nombre: ");
-						nombre = leerCadena();
-		
-						try {
-							System.out.print("Ingrese su edad: ");
-							edad = leerEntero();
-		
-							if (edad <= 0) {
-								System.out.println("Proporcione una edad válida.\n");
-							}
-		
-							if (edad > 0 && edad < 18) {
-								System.out.println("La edad ingresada no corresponde a la de un adulto.\n");
-							}
-		
-						} catch (RuntimeException e) {
-							System.out.println("Proporcione una respuestata válida.\n");
-						} finally {
-							leerCadena(); // consumir salto de línea
-						}
-					} while (edad < 18);
-				}
-		
-				while (cedula <= 0) {
-					try {
-						System.out.print("Ingrese su número de identificación: ");
-						cedula = leerEnteroLargo();
-						if (cedula <= 0) {
-							System.out.println("Proporcione una respuestata válida.\n");
-							cedula = 0;
-						}
-					} catch (InputMismatchException e) {
+			while (cedula <= 0) {
+				try {
+					System.out.print("Ingrese su número de identificación: ");
+					cedula = leerEnteroLargo();
+					if (cedula <= 0) {
 						System.out.println("Proporcione una respuestata válida.\n");
-						leerCadena();
+						cedula = 0;
 					}
+				} catch (InputMismatchException e) {
+					System.out.println("Proporcione una respuestata válida.\n");
+					leerCadena();
 				}
+			}
 		
 				Cliente cliente = new Cliente(nombre, edad, cedula);
 				return cliente;
@@ -980,7 +1016,26 @@ public static long leerEnteroLargo() {
 				return mascota;	
 			}
 
-	public static void gestionarMemorial(Cliente cliente) {
+
+//>>--------------------------------------------------------------------------------------------------------------------------------------<<
+
+	
+	public static void gestionarMemorial() {
+		
+		System.out.println("--------------------");
+		System.out.println("\n- Ingrese sus datos");
+		System.out.print("\n- Nombre Completo: ");
+		String nombre = sc.nextLine();
+		System.out.print("- Edad: ");
+		int edad = sc.nextInt(); 
+		sc.nextLine();
+		System.out.print("- Cédula: ");
+		long cedula = sc.nextLong();
+		sc.nextLine();
+		System.out.println("--------------------");
+		
+		Cliente cliente = new Cliente(nombre, edad, cedula);
+		
 		int opcion = 0;
 		while (opcion != 4) {
 			System.out.println("\nGestion del Memorial:");
@@ -993,146 +1048,126 @@ public static long leerEnteroLargo() {
 			
 			switch (opcion) {
 			case 1 -> {
-				System.out.println("Ingrese el nombre del fallecido:");
-				String nombreFallecido = sc.nextLine();
-				System.out.println("Ingrese la especie de la mascota:");
-				String especieFallecido = sc.nextLine();
-				System.out.println("Ingrese la edad que tenia al fallecer");
-				int edadMascota = sc.nextInt();
-				sc.nextLine();
-				Mascota mascota = new Mascota(nombreFallecido, especieFallecido, edadMascota, null, null, 0, 0);
+			    System.out.println("Ingrese el nombre del fallecido:");
+			    String nombreFallecido = sc.nextLine();
+			    System.out.println("Ingrese la especie de la mascota:");
+			    String especieFallecido = sc.nextLine();
+			    System.out.println("Ingrese la edad que tenia al fallecer");
+			    int edadMascota = sc.nextInt();
+			    sc.nextLine();
+			    Mascota mascota = new Mascota(nombreFallecido, especieFallecido, edadMascota, null, null, 0, 0);
+
+			    System.out.println("Ingrese la fecha de fallecimiento (YYYY-MM-DD)");
+			    String fecha = sc.nextLine();
+			    System.out.println("¿Deseas dejar un mensaje? (si/no)");
+			    String respuesta = sc.nextLine();
+
+			    String mensaje;
+			    if (respuesta.equalsIgnoreCase("Si")) {
+			        System.out.println("Ingrese su mensaje:");
+			        mensaje = sc.nextLine();
+			    } else {
+			        mensaje = "Descansa en paz " + nombreFallecido;
+			    }
+			    System.out.println("Por cuanto tiempo desea usar nuestros servicios:");
+			    System.out.println("1. Para siempre.");
+			    System.out.println("2. Tiempo limitado.");
+			    int duracion = sc.nextInt();
+			    sc.nextLine();
+
+			    float precio = 0;
+			    String tiempo = null;
+			    if (duracion == 1) {
+			        tiempo = "Forever";
+			        precio = 1000000;
+			    } else if (duracion == 2) {
+			        System.out.println("Ingrese el tiempo que desea usar nuestros servicios (En multiplos de 5):");
+			        int anos = sc.nextInt();
+			        sc.nextLine();
+			        if (anos % 5 != 0) {
+			            System.out.println("El tiempo debe de ser en multiplos de 5 años. Redondearemos al múltiplo más cercano.");
+			            anos = ((anos + 4) / 5) * 5;
+			        }
+			        tiempo = anos + " años";
+			        precio = (anos / 5) * 50000;
+			    } else {
+			        System.out.println("Opcion no valida.");
+			        break;
+			    }
+
+			    System.out.println("Ingrese el tipo de memorial que desea (Sepulcro/Osario/Cremacion/Arbol):");
+			    String tipo = sc.nextLine();
+
+			    Fallecido fallecido = new Fallecido(mascota, fecha, mensaje, cliente, tiempo, tipo);
+
+			    if (memorial.cupos(tipo)) {
+			        if (memorial.anadirFallecido(fallecido, tipo)) {
+			            System.out.println("Memorial añadido con éxito.");
+			            System.out.println("Precio del servicio: $" + precio);
+			        } else {
+			            System.out.println("De momento no contamos con este tipo de servicio.");
+			        }
+			    } else {
+			        System.out.println("No hay cupos disponibles para " + tipo + ".");
+			    }
+			}
+
+				//System.out.println("Memorial añadido con éxito.");
+				//System.out.println("Precio del servicio: $" + precio);
 				
-				System.out.println("Ingrese la fecha de fallecimiento (YYYY-MM-DD)");
-				String fecha = sc.nextLine();
-				System.out.println("¿Deseas dejar un mensaje? (si/no)");
-				String respuesta = sc.nextLine();
-				
-				String mensaje;
-				if (respuesta.equalsIgnoreCase("Si")) {
-					System.out.println("Ingrese su mensaje:");
-					mensaje = sc.nextLine();
-					}
-				else {
-					mensaje = "Descansa en paz" + nombreFallecido;
-					}
-				System.out.println("Por cuanto tiempo desea usar nuestros servicios:");
-				System.out.println("1. Para siempre.");
-				System.out.println("2. Tiempo limitado.");
-				int duracion = sc.nextInt();
-				sc.nextLine();
-				
-				float precio = 0;
-				String tiempo = null;
-				if(duracion == 1) {
-					tiempo = "Forever";
-					precio = 1000000;
-				}
-				else if (duracion == 2) {
-					System.out.println("Ingrese el tiempo que desea usar nuestros servicios (En multiplos de 5):");
-					int anos = sc.nextInt();
-					sc.nextLine();
-					if (anos % 5 != 0) {
-						System.out.println("El tiempo debe de ser en multiplos de 5años. Redondearemos al múltiplo más cercano.");
-						anos = ((anos + 4) / 5) * 5;
-					}
-					tiempo = anos + " años";
-					precio = (anos / 5) * 50000;
-				}
-				else {
-					System.out.println("Opcion no valida.");
-					break;
-				}
-				
-				System.out.println("Ingrese el tipo de memorial que desea (Sepulcro/Osario/Cremacion/Arbol):");
-				String tipo = sc.nextLine();
-				
-				Fallecido fallecido = new Fallecido(mascota, fecha, mensaje, cliente, tiempo, tipo);
-				
-				switch (tipo) {
-				case "Sepulcro" -> memorial.anadirSepulcro(fallecido);
-				case "Osario" -> memorial.anadirOsario(fallecido);
-				case "Cenizas" -> memorial.anadirCenizas(fallecido);
-				case "Arbol" -> memorial.anadirArbol(fallecido);
-				default -> System.out.println("De momento no contamos con este tipo de servicio.");
-				
-					}
-				
-				System.out.println("Memorial añadido con éxito.");
-				System.out.println("Precio del servicio: $" + precio);
-				
-				Producto servicioMemorial = new Producto("Memorial - " + tipo, precio, "Todos", "Servicio memorial", 1);
+				//Producto servicioMemorial = new Producto("Memorial - " + tipo, precio, "Todos", "Servicio memorial", 1);
 				//System.out.println("Se ha registrado el prodcuto: " + servicioMemorial);
-				}
-			
-			case 2 -> {
-				System.out.println("Ingrese el tipo de memorial que desea ver (Sepulcro/Osario/Cenizas/Arbol):");
-				String tipo = sc.nextLine();
-				//String resultado = memorial.visita(tipo);
-				//System.out.println(resultado.isEmpty() ? "No hay registros en esta categoria.": resultado);
-				ArrayList<Fallecido> listaFallecidos = new ArrayList<>();
-				switch(tipo) {
-				case "Sepulcro" -> listaFallecidos = memorial.getSepulcros();
-				case "Osario" -> listaFallecidos = memorial.getOsarios();
-				case "Cenizas" -> listaFallecidos = memorial.getCenizas();
-				case "Arbol" -> listaFallecidos = memorial.getArboles();
-				default -> System.out.println("Tipo de memorial no disponoible.");
-				}
-				if (listaFallecidos.isEmpty()) {
-					System.out.println("No hay mascotas en este tipo de memorial.");
-				}
-				else {
-					System.out.println("Lista de mascotas en " + tipo + ":");
-					for (int i = 0; i < listaFallecidos.size(); i++) {
-						Fallecido fallecido = listaFallecidos.get(i);
-						Mascota mascota = fallecido.getMascota();
-						
-						System.out.println((i + 1) + ".Nombre: " + mascota.getNombre());
-						System.out.println("  Especie: " + mascota.getEspecie());
-						System.out.println("  Edad: " + mascota.getEdad());
-						System.out.println("  Fecha de fallecimiento: " + fallecido.getFecha());
-						System.out.println("  Mensaje: " + fallecido.getMensaje());
-						System.out.println(fallecido.mostrarFlores());
-					}
-				}		        
-			}
-			case 3 -> {
-				System.out.println("Ingrese el tipo de memorial al cual desea agregar flores (Sepulcro/Osario/Cenizas/Arbol):");
-				String tipo = sc.nextLine();
-				ArrayList<Fallecido> listaFallecidos = memorial.obtenerFallecidosPorTipo(tipo);
-				switch(tipo) {
-				case "Sepulcro" -> listaFallecidos = memorial.getSepulcros();
-				case "Osario" -> listaFallecidos = memorial.getOsarios();
-				case "Cenizas" -> listaFallecidos = memorial.getCenizas();
-				case "Arbol" -> listaFallecidos = memorial.getArboles();
-				default -> System.out.println("Tipo de memorial no disponoible.");
-				}
 				
-				if (listaFallecidos.isEmpty()) {
-					System.out.println("No hay mascotas en este tipo de memorial.");
-				}
-				else {
-					System.out.println("Lista de memoriales:");
-					for (int i = 0; i < listaFallecidos.size(); i++) {
-						System.out.println((i + 1) + ". " + listaFallecidos.get(i).getMascota().getNombre());
-					}
-					
-					System.out.println("Ingrese el numero del memorial que desea ver:");
-					int seleccion = sc.nextInt();
-					sc.nextLine();
-					if (seleccion >= 1 && seleccion <= listaFallecidos.size()) {
-						Fallecido seleccionado = listaFallecidos.get(seleccion - 1);
-						
-						System.out.println("Ingrese el nombre de la flor que desea agregar:");
-						String flor = sc.nextLine();
-						
-						String resultado = seleccionado.ponerFlor(flor);
-						System.out.println(resultado);
-					}
-					else {
-						System.out.println("Seleccion no valida.");
-					}
-				}
+			case 2 -> {
+			    System.out.println("Ingrese el tipo de memorial que desea ver (Sepulcro/Osario/Cenizas/Arbol):");
+			    String tipo = sc.nextLine();
+
+			    // Use obtenerFallecidosPorTipo to fetch the list based on tipo
+			    ArrayList<Fallecido> listaFallecidos = memorial.obtenerFallecidosPorTipo(tipo);
+
+			    // Check if the list is empty or null and display the results
+			    if (listaFallecidos == null || listaFallecidos.isEmpty()) {
+			        System.out.println("No hay registros en esta categoría.");
+			    } else {
+			        System.out.println("Lista de registros en " + tipo + ":");
+			        System.out.println(memorial.visitaMemorial(listaFallecidos));
+			    }
 			}
+
+			case 3 -> {
+			    System.out.println("Ingrese el tipo de memorial al cual desea agregar flores (Sepulcro/Osario/Cenizas/Arbol):");
+			    String tipo = sc.nextLine();
+
+			    // Use obtenerFallecidosPorTipo to get the list of fallecidos for the given type
+			    ArrayList<Fallecido> listaFallecidos = memorial.obtenerFallecidosPorTipo(tipo);
+
+			    if (listaFallecidos == null || listaFallecidos.isEmpty()) {
+			        System.out.println("No hay registros en este tipo de memorial.");
+			    } else {
+			        System.out.println("Lista de memoriales disponibles en " + tipo + ":");
+			        // Use visitaMemorial to display the list in a formatted way
+			        System.out.println(memorial.visitaMemorial(listaFallecidos));
+
+			        System.out.println("Ingrese el número del memorial al cual desea agregar flores:");
+			        int seleccion = sc.nextInt();
+			        sc.nextLine(); // Consume the newline character
+
+			        if (seleccion >= 1 && seleccion <= listaFallecidos.size()) {
+			            // Select the Fallecido based on the user's choice
+			            Fallecido seleccionado = listaFallecidos.get(seleccion - 1);
+
+			            System.out.println("Ingrese el nombre de la flor que desea agregar:");
+			            String flor = sc.nextLine();
+
+			            // Use ponerFlor from the Fallecido class to add the flower
+			            String resultado = seleccionado.ponerFlor(flor);
+			            System.out.println(resultado);
+			        } else {
+			            System.out.println("Selección no válida.");
+			        }
+			    }
+			}
+
 			case 4 -> System.out.println("Volviendo al menu principal...4");
 			}
 		}
@@ -1154,14 +1189,16 @@ public static void tienda() {
 	
 	boolean bucle = true; // VARIABLE PARA EL SEGUNDO MENÚ
 	
-	println("\n🐾🐕¡Bienvenido a la tienda de mascotas del Centro de cuidado Mascota: UNamascota!🐾🐈"+"\n Aquí encontrarás los mejores productos para el cuidado y la diversión de tu compañero peludo."+"\n");
+	println("\n - - ¡Bienvenido a la tienda de mascotas del Centro de cuidado Mascota: UNamascota! - - ");
+	println("Aquí encontrarás los mejores productos para el cuidado y la diversión de tu compañero peludo.\n");
 	
 	while (true) { 
 	
-		println("¿Qué te trae por estos lares?");
+		println("-----------------------------");
+		println("\n¿Qué te trae por estos lares amante de los peluditos?");
 		println("1. Ir de compras");
 		println("2. Salir\n");
-		println("Ingrese el número de la opción que desea [1-2]: ");
+		print("Ingrese el número de la opción que desea [1-2]: ");
 		
 		int menu = 0; // ENTERO QUE EL USUARIO VA A INGREASAR, PARA ESCOGER OPCION 
 		while (menu==0) { //MIENTRAS EL ENTERO SEA CERO (PARA CONTROLAR QUE EL USUARIO LE DÉ UN VALOR)
@@ -1171,13 +1208,13 @@ public static void tienda() {
 					break;
 				}
 				else {
-					println("🚫¡Oh no!, Ingrese un número válido por favor🚫");
+					println("¡Oh no!, Ingrese un número válido por favor");
 					menu = 0;
 					continue;
 				}
 			}
 			catch(InputMismatchException e) {
-				println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
+				println("Por favor ingrese un índice disponible (Pista: Entre 1 y 2)");
 			}
 			finally {
 					scanner.nextLine();//SALTO DE LINEA
@@ -1188,7 +1225,7 @@ public static void tienda() {
 		while (bucle==true) { //UTILIZAMOS LA VARIABLE BUCLE INICIADA ANTES DEL PRIMER WHILE
 			
 			println("\n--------------------------------------------------------");
-			println("\n🐾🐕¿Cómo desea que se le muestren los productos?🐾🐈");
+			println("\n¿Cómo desea que se le muestren los productos?");
 			println("1. Mostrar todo");
 			println("2. Filtrar por tipo\n");
 			print("Ingrese el número de la opción que desea [1-2]: \n");
@@ -1202,13 +1239,13 @@ public static void tienda() {
 						break;
 					}
 					else {
-						println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
+						println("Por favor ingrese un índice disponible (Pista: Entre 1 y 2)");
 						menuTienda = 0;
 						continue;
 					}
 				}
 				catch(InputMismatchException e) {
-					println("🚫Por favor ingrese un índice disponible (Pista: Entre 1 y 2)🚫");
+					println("Por favor ingrese un índice disponible (Pista: Entre 1 y 2)");
 				}
 				finally {
 					scanner.nextLine();//SALTO DE LINEA
@@ -1220,7 +1257,7 @@ public static void tienda() {
 				println(t1.inventario()); // SE LLAMA AL MÉTODO INVENTARIO DE TIENDA, PARA QUE DEVULVA TODOS LOS PRODUCTOS SIN MÁS
 			}
 			else { // DE LO CONTRARIO, SE LE VOLVERÁ A PEDIR UNA scanner PARA QUE INDIQUE POR QUE TIPO DE Mascota QUIERE VER 
-				print("\n🐈🐾¿Por qué tipo de Mascota te gustaría ver? [Perros, gatos, aves, hamsters o conejos]: 🐕🐾");
+				print("\n¿Por qué tipo de Mascota te gustaría ver? [perros, gatos, aves o conejos]: ");
 				while (true) { //BUCLE PARA CONTROLAR ÉSTE NUEVO MENÚ
 					try {
 						String tipo = leerCadena(); // SE LEE EL STRING 
@@ -1228,38 +1265,48 @@ public static void tienda() {
 						
 						//LUEGO LO COMPARAMOS EN ESTE GRUPO DE CONDICIONALES SIMPLES 
 						
-						if (tipo.equals("perros") || tipo.equals("perro")) { 
-							println("\nProductos disponibles: 🐕\n");
-							println(t1.filtrar("perros")); //DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
-							break;
+						switch (tipo.toLowerCase()) {
+							case "perros":
+								println("\nProductos disponibles: \n");
+								println(t1.filtrar("Perro"));
+								break;
+							case "perro":
+								println("\nProductos disponibles: \n");
+								println(t1.filtrar("Perro"));
+								break;
+							case "gatos":
+								println("\nProductos disponibles: \n");
+								println(t1.filtrar("Gato"));
+								break;
+							case "gato":
+								println("\nProductos disponibles: \n");
+								println(t1.filtrar("Gato"));
+								break;
+							case "aves":
+								println("\nProductos disponibles: \n");
+								println(t1.filtrar("Ave"));
+								break;
+							case "ave":
+								println("\nProductos disponibles: \n");
+								println(t1.filtrar("Ave"));
+								break;
+							case "conejos":
+								println("\nProductos disponibles: \n");
+								println(t1.filtrar("Conejo"));
+								break;
+							case "conejo":
+								println("\nProductos disponibles: \n");
+								println(t1.filtrar("Conejo"));
+								break;
+							default:
+								println("Por favor, ingrese el tipo del Mascota en minúsculas [perros, gatos, aves o conejos]");
+								continue;
 						}
-						else if (tipo.equals("gatos") || tipo.equals("gato")) {
-							println("\nProductos disponibles: 🐈\n");
-							println(t1.filtrar("gatos")); //DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA 
-							break;
-						}
-						else if (tipo.equals("aves") || tipo.equals("ave")) {
-							println("\nProductos disponibles: 🐦\n");
-							println(t1.filtrar("aves"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
-							break;
-						}	
-						else if (tipo.equals("hamsters") || tipo.equals("hamster")) {
-							println("\nProductos disponibles: 🐹\n");
-							println(t1.filtrar("hamsters"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
-							break;
-						}
-						else if (tipo.equals("conejos") || tipo.equals("conejo")) {
-							println("\nProductos disponibles: 🐇\n");
-							println(t1.filtrar("conejos"));//DEPENDIENDO DEL TIPO QUE INGRESÓ EL USUARIO, SE FILTRA DE UNA FORMA U OTRA
-							break;
-						}
-						else {
-							println("🚫Por favor, ingrese el tipo del Mascota en minúsculas [Perros, gatos, aves o hamsters]🚫");
-							continue;
-						}
+
+						break;
 					}
 					catch(InputMismatchException e) {
-						println("🚫Por favor, coloque un tipo valido de Mascota🚫");
+						println("Por favor, coloque un tipo valido de Mascota");
 					}
 				}
 			}
@@ -1269,48 +1316,53 @@ public static void tienda() {
 			boolean control = true;
 			while (control) {
 				try {
-						print("Digite el índice del producto a comprar: ");
-						int indice = leerEntero(); //INDICE PARA LOCALIZAR EL PRODUCTO QUE QUIERE EL USUARIO 
+					print("Digite el índice del producto a comprar: ");
+					int indice = leerEntero(); //INDICE PARA LOCALIZAR EL PRODUCTO QUE QUIERE EL USUARIO 
 		
-						print("Indique cuantas unidades necesita del producto: ");
-						int unidades = leerEntero(); //CANTIDAD DE UNIDADES QUE EL USUARIO VA A COMPRAR
+					print("Indique cuantas unidades necesita del producto: ");
+					int unidades = leerEntero(); //CANTIDAD DE UNIDADES QUE EL USUARIO VA A COMPRAR
 						
-						//  REGISTRO DEL USUARIO PARA REALIZAR LA COMPRA-------------------------------------
+					//  REGISTRO DEL USUARIO PARA REALIZAR LA COMPRA-------------------------------------
 						
-						if (unidades==1) { //SI SOLO VA A COMPRAR UNA UNIDAD
-							println("\nSus datos serán tomados para registrar la compra.");
-							print("Ingrese su cédula: ");
-							long cedula = scanner.nextLong();
-							print("Ingrese su edad: ");
-							int edad = scanner.nextInt();
-							print("Ingrese su nombre: ");
-							scanner.nextLine();
-							String nombre = leerCadena();
+					if (unidades==1) { //SI SOLO VA A COMPRAR UNA UNIDAD
+						println("\nSus datos serán tomados para registrar la compra.");
+						print("Ingrese su cédula: ");
+						long cedula = scanner.nextLong();
+						print("Ingrese su edad: ");
+						int edad = scanner.nextInt();
+						print("Ingrese su nombre: ");
+						scanner.nextLine();
+						String nombre = leerCadena();
 							
-							//SE REGISTA EL USUARIO, CREANDO UN OBJETO DEL TIPO CLIENTE Y PASANDOLO AL MÉTODO COMPRA DE TIENDA 
-							Cliente cliente = new Cliente(nombre, edad, cedula);
-							println("\n"+t1.compra(indice, cliente)); 
-							//ESTE FILTRO DE: UNIDADES == 1, ES PORQUE EL MÉTODO COMPRA QUE RECIBE DOS PARÁMETROS RETORNA ALGO MÁS ADECUADO PARA ESTE CASO 
-						}
-						else { // CUANDO EL USUARIO VA A COMPRAR MÁS DE UNA UNIDAD 
-							println("\nSus datos serán tomados para registrar la compra.");
-							print("Ingrese su cédula: ");
-							long cedula = scanner.nextLong();
-							print("Ingrese su edad: ");
-							int edad = scanner.nextInt();
-							print("Ingrese su nombre: ");
-							scanner.nextLine();
-							String nombre = leerCadena();
+						//SE REGISTA EL USUARIO, CREANDO UN OBJETO DEL TIPO CLIENTE Y PASANDOLO AL MÉTODO COMPRA DE TIENDA 
+						Cliente cliente = new Cliente(nombre, edad, cedula);
+						println("\n"+t1.compra(indice, cliente)); 
+						//ESTE FILTRO DE: UNIDADES == 1, ES PORQUE EL MÉTODO COMPRA QUE RECIBE DOS PARÁMETROS RETORNA ALGO MÁS ADECUADO PARA ESTE CASO 
+					}
+					else { // CUANDO EL USUARIO VA A COMPRAR MÁS DE UNA UNIDAD 
+						println("\nSus datos serán tomados para registrar la compra.");
+						print("Ingrese su cédula: ");
+						long cedula = scanner.nextLong();
+						print("Ingrese su edad: ");
+						int edad = scanner.nextInt();
+						print("Ingrese su nombre: ");
+						scanner.nextLine();
+						String nombre = leerCadena();
+						print("Ingrese su número de teléfono: ");
+						long telefono = scanner.nextLong();
+						print("Ingrese su dirección: ");
+						scanner.nextLine();
+						String direccion = leerCadena();
 							
-							//SE REGISTA EL USUARIO, CREANDO UN OBJETO DEL TIPO CLIENTE Y PASANDOLO AL MÉTODO COMPRA DE TIENDA
-							// SE LE AGREGA TAMBIEN, LA CANTIDAD DE UNIDADES AL MÉTODO COMPRA 
-							Cliente cliente = new Cliente(nombre, edad, cedula);
-							println("\n"+t1.compra(indice, unidades, cliente));
-						}
+						// SE REGISTA EL USUARIO, CREANDO UN OBJETO DEL TIPO CLIENTE Y PASANDOLO AL MÉTODO COMPRA DE TIENDA
+						// SE LE AGREGA TAMBIEN, LA CANTIDAD DE UNIDADES AL MÉTODO COMPRA 
+						Cliente cliente = new Cliente(nombre, edad, cedula, telefono, direccion);
+						println("\n"+t1.compra(indice, unidades, cliente));
+					}
 						
-						// --------------------------------------------------------------------------------
+					// --------------------------------------------------------------------------------
 						
-						control = false; //SI SE COMPLETÓ EL BLOQUE TRY, SE CAMBIA EL ESTADO A FALSO PARA ROMPER EL CICLO 
+					control = false;
 					
 				}
 				catch(InputMismatchException e) {
@@ -1321,18 +1373,18 @@ public static void tienda() {
 			
 			// SE LE PIDE SI DESEA VOLVER A REINICIAR EL CICLO DESDE EL MENÚ DE COMPRA 
 			print("\n¿Desea volver al catálogo? [si/no]: ");
-			String respuestata = " ";
+			String respuesta = " ";
 			while (true) {//CONTROL CON UN WHILE SOLAMENTE, HASTA QUE NO RECIBA UNA respuestaTA VÁLIDA.
-				respuestata = scanner.nextLine();
-				respuestata.toLowerCase();
-				if (respuestata.equals("si")||respuestata.equals("no")) {
+				respuesta = scanner.nextLine();
+				respuesta.toLowerCase();
+				if (respuesta.equals("si")||respuesta.equals("no")) {
 					break; 
 				}else {
 					println("Por favor, ingrese una respuestata válida [si/no]");
 					continue;
 				}
 			}
-				if (respuestata.equals("si")) {
+				if (respuesta.equals("si")) {
 					continue; //VOLVER A INICIAR CICLO DE COMPRA
 				}
 				else {
@@ -1347,7 +1399,7 @@ public static void tienda() {
 	}//BUCLE INICIAL
 }//FINAL MÉTODO TIENDA
 
-public static void planificacionDieta(Cliente cliente) {
+public static void planificacionDieta() {
 	//ingresar datos de la mascota
 		System.out.println("\nIngresa los datos de su mascota:");
 		System.out.println("Nombre:");
@@ -1371,43 +1423,19 @@ public static void planificacionDieta(Cliente cliente) {
 		System.out.println("Sexo (M/F):");
 		String sexo = "";
 		while (true) {//validar que el dato introducido sea valido.
-			
-			sexo = Main.leerCadena(); // Leer el valor del usuario
-		switch (sexo) {
-			case "m":
-				break; // Tamaño válido, salir del switch y del bucle
-			case "f":
+			sexo = Main.leerCadena();
+			if (sexo.equalsIgnoreCase("M") || sexo.equalsIgnoreCase("F")) {
 				break;
-			case "M":
-				break;
-			case "F":
-				break;
-			default:
-				System.out.println("Ingrese un valor M/F.");
-				continue; // Volver al inicio del bucle para pedir nuevamente
+			} else { System.out.println("Entrada no valida, intentalo de nuevo."); }
 		}
-		break; // Salir del bucle si la entrada es válida
-
-		}
-
+		
 		System.out.println("Tamaño (1-4): \n1. Miniatura \n2. Pequeño \n3. Mediano \n4. Grande");
-		int tamano = 0;
-	while (true) {
-    tamano = Main.leerEntero(); // Leer el valor del usuario
-		switch (tamano) {
-			case 1:
-				break; // Tamaño válido, salir del switch y del bucle
-			case 2:
+		int tamano = 3;
+		while (true) {//validar que el dato introducido sea valido.
+			tamano = Main.leerEntero();
+			if (tamano > 0 && tamano < 5) {
 				break;
-			case 3:
-				break;
-			case 4:
-				break;
-			default:
-				System.out.println("Entrada no válida. Por favor, ingrese un número entre 1 y 4.");
-				continue; // Volver al inicio del bucle para pedir nuevamente
-		}
-		break; // Salir del bucle si la entrada es válida
+			} else { System.out.println("Entrada no valida, intentalo de nuevo."); }
 		}
 		
 		System.out.println("Peso en kg:");
@@ -1437,7 +1465,8 @@ public static void planificacionDieta(Cliente cliente) {
 		System.out.println("\n¿Desea volver al menu principal o redirigirse a la tienda? [Menu/Tienda]: ");
 			String respuesta = " ";
 			while (true) {
-				respuesta = leerCadena().toLowerCase();
+				respuesta = leerCadena();
+				respuesta.toLowerCase();
 				if (respuesta.equals("menu")||respuesta.equals("tienda")) {
 					break; 
 				}else {

@@ -1,14 +1,16 @@
 package gestorAplicacion.elementos;
 
+import java.io.Serializable;
+
 // BULA FUENTES, MELANIE
 // OSPINA GAVIRIA, TOMAS
 
 //Descripción De La Clase:
 //Representa los arti­culos en venta en la tienda, incluyendo nombre, precio, tipo de animal, tipo de Uso y cantidad disponible. 
 
-public class Producto {
+public class Producto implements Serializable {
 	//---> Atributos <---
-
+    private static final long serialVersionUID = 1L;
     private String nombre; //Nombre del producto.
     private float precio; //Precio individual del producto.
     private String tipoAnimal; //Tipo de animal que puede usar el producto.
@@ -17,17 +19,20 @@ public class Producto {
 
     //---> Constructores <---
     public Producto(String nombre, float precio, String tipoAnimal, String tipoUso, int cantidadUnidades){
-        this(nombre, precio, tipoUso, cantidadUnidades);
-        this.tipoAnimal = tipoAnimal;
+        this(nombre, precio, tipoUso, cantidadUnidades); // Reutiliza el segundo constructor
+        this.tipoAnimal = tipoAnimal; // Se inicializa correctamente aquí
     }
     
     public Producto(String nombre, float precio, String tipoUso, int cantidadUnidades){
         this.nombre = nombre;
         this.precio = precio;
+        this.tipoUso = tipoUso; // Asignación que faltaba
         this.cantidadUnidades = cantidadUnidades;
+        this.tipoUso = tipoUso;
     }
 
     //---> Metodos Getters And Setters <---
+
     public void setNombre(String nombre){
         this.nombre = nombre;
     }
@@ -49,8 +54,8 @@ public class Producto {
         return this.tipoAnimal;
     }
 
-    public void setTipoUso(String tipo){
-        this.tipoUso = tipo;
+    public void setTipoUso(String tipoUso){
+        this.tipoUso = tipoUso;
     }
     public String getTipoUso(){
         return this.tipoUso;
@@ -64,7 +69,9 @@ public class Producto {
     }
 
     //---> Metodo ToString <---
+    
+    @Override
     public String toString(){
-        return "\nProducto: "+getNombre()+"\n"+"Precio: "+getPrecio()+"\n"+"Usado en: "+getTipoUso()+"\n"+"Proposito: "+getTipoAnimal()+"\n"+ "Cantidad unidades: "+getCantidadUnidades()+"\n";        
+        return "\nProducto: "+getNombre()+"\n"+"Precio: "+getPrecio()+"\n"+"Destinado a: "+getTipoAnimal()+"\n"+"Tipo del Producto: "+getTipoUso()+"\n"+ "Cantidad unidades: "+getCantidadUnidades()+"\n";        
     }
 }

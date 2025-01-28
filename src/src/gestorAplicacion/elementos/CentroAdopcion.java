@@ -1,11 +1,13 @@
 package gestorAplicacion.elementos;
 
 import gestorAplicacion.elementos.Mascota.EstadoSalud;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CentroAdopcion {
-	
+public class CentroAdopcion implements Serializable {
+	private static final long serialVersionUID = 1L;
 	public static enum Sedes {
 		MEDELLIN, BOGOTA, CALI, CARTAGENA
 	}
@@ -72,7 +74,7 @@ public class CentroAdopcion {
 		veterinarios.add(veterinario);
 	}
 	
-	public void registrarCliente(Cliente cliente) {
+	public static void registrarCliente(Cliente cliente) {
 		clientes.add(cliente);
 	}
 	
@@ -185,10 +187,10 @@ public class CentroAdopcion {
 				}
 			}
 		
-		if (cliente == null) {	
+		if (clienteNuevo == null) {	
 			
 			//Si no existe se agrega como nuevo cliente.
-			cliente = clienteNuevo;
+			clienteNuevo = cliente;
 			clientes.add(clienteNuevo);
 		}
 		else {

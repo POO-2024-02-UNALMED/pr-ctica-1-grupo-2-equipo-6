@@ -1,6 +1,8 @@
 package gestorAplicacion.elementos;
 
-	// LÓPEZ GONZÁLEZ, ALEJANDRO
+import java.io.Serializable;
+
+// LÓPEZ GONZÁLEZ, ALEJANDRO
 	// BETANCUR URIBE, EMMANUEL
 	// MARTÍNEZ RÍOS, SANTIAGO
 	// BULA FUENTES, MELANIE
@@ -10,9 +12,9 @@ package gestorAplicacion.elementos;
 //Representa a los usuarios que buscan adoptar animales y que pueden utilizar otros servicios del centro, como la tienda y citas.
 
 
-public class Cliente extends Persona {
+public class Cliente extends Persona implements Serializable {
 
-	//private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	//ATRIBUTOS	
 

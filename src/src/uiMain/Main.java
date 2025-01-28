@@ -25,7 +25,17 @@ import java.util.Scanner;
 
 public class Main implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	//COLORES
+	public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+	
 	static CentroAdopcion sede1;
 	
 	static Scanner sc = new Scanner(System.in);
@@ -41,20 +51,19 @@ public class Main implements Serializable {
 		Scanner sc = new Scanner(System.in);
 		int opcion = 0;
 		
-		System.out.println("\n - - Bienvenido al Centro Veterinario Virtual: UNamascota. - - \n");
+		System.out.println(ANSI_WHITE+"\n - - Bienvenido al Centro Veterinario Virtual: UNamascota ^-^. - - \n"+ANSI_RESET);
 		
 		while (opcion != 6) {
-			
-			System.out.println("--------------------");
-            System.out.println("\n - - ¿Qué desea hacer el día de hoy? - -");
-            System.out.println("\n1. Tienda: UNamascota");
-            System.out.println("2. Adquirir Servicios: PetTraining");
-			System.out.println("3. Servicio de Memorial");
-            System.out.println("4. Planificador de Dieta");
-            System.out.println("5. Emergencia Veterinaria");
-            System.out.println("6. (┬┬~~┬┬) Salir");
-			System.out.println("\n--------------------");
-			System.out.print("Ingrese el número de la opción que desea [1-6]: ");
+			System.out.println(ANSI_BLACK+"*******************************************************************"+ANSI_RESET);
+            System.out.println(ANSI_WHITE+"\n - - ¿Qué desea hacer el día de hoy? - -"+ANSI_RESET);
+            System.out.println(ANSI_CYAN+"\n1. Tienda: UNamascota"+ANSI_RESET);
+            System.out.println(ANSI_GREEN+"2. Adquirir Servicios"+ANSI_RESET);
+			System.out.println(ANSI_PURPLE+"3. Servicio de Memorial"+ANSI_RESET);
+            System.out.println(ANSI_YELLOW+"4. Planificador de Dieta"+ANSI_RESET);
+            System.out.println(ANSI_RED+"5. Emergencia Veterinaria"+ANSI_RESET);
+            System.out.println(ANSI_BLUE+"6. (┬┬~~┬┬) Salir"+ANSI_RESET);
+			System.out.println(ANSI_BLACK+"\n---------------------------------------------"+ANSI_RESET);
+			System.out.print(ANSI_BLACK+"Ingrese el número de la opción que desea [1-6]: "+ANSI_RESET);
             
             if (sc.hasNextInt()) {
                 opcion = sc.nextInt();

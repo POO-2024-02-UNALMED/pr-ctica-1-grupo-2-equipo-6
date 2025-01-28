@@ -121,7 +121,7 @@ public String toString() {
 
 
     public void menu() {
-    try (PrintWriter writer = new PrintWriter("./src/src/basedatos/dietas/dieta_" + mascota.getNombre() + ".txt")) {
+    try (PrintWriter writer = new PrintWriter("./src/src/basedatos/dieta_" + mascota.getNombre() + ".txt")) {
         // Datos de la mascota
         writer.println(this.toString());
 

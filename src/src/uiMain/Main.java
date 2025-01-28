@@ -1268,35 +1268,35 @@ public static void tienda() {
 						switch (tipo.toLowerCase()) {
 							case "perros":
 								println("\nProductos disponibles: \n");
-								println(t1.filtrar("Perros"));
+								println(t1.filtrar("Perro"));
 								break;
 							case "perro":
 								println("\nProductos disponibles: \n");
-								println(t1.filtrar("Perros"));
+								println(t1.filtrar("Perro"));
 								break;
 							case "gatos":
 								println("\nProductos disponibles: \n");
-								println(t1.filtrar("Gatos"));
+								println(t1.filtrar("Gato"));
 								break;
 							case "gato":
 								println("\nProductos disponibles: \n");
-								println(t1.filtrar("Gatos"));
+								println(t1.filtrar("Gato"));
 								break;
 							case "aves":
 								println("\nProductos disponibles: \n");
-								println(t1.filtrar("Aves"));
+								println(t1.filtrar("Ave"));
 								break;
 							case "ave":
 								println("\nProductos disponibles: \n");
-								println(t1.filtrar("Aves"));
+								println(t1.filtrar("Ave"));
 								break;
 							case "conejos":
 								println("\nProductos disponibles: \n");
-								println(t1.filtrar("Conejos"));
+								println(t1.filtrar("Conejo"));
 								break;
 							case "conejo":
 								println("\nProductos disponibles: \n");
-								println(t1.filtrar("Conejos"));
+								println(t1.filtrar("Conejo"));
 								break;
 							default:
 								println("Por favor, ingrese el tipo del Mascota en minúsculas [perros, gatos, aves o conejos]");

@@ -110,7 +110,7 @@ public class Mascota implements Serializable {
 		return tamano;
 	}
 
-	public String getTamanoString(){ 
+	public String getTamano(String string){ //Si al llamar al metodo se acompaña de una string, devolvera el atributo en formato string
 		return switch (tamano) {
 			case 1 -> "Miniatura";
 			case 2 -> "Pequeño";
@@ -133,10 +133,10 @@ public class Mascota implements Serializable {
 	@Override
 	public String toString() {
 		if (estadoSalud!=null) {
-		return "Nombre: " + getNombre() + ", Especie: " + getEspecie() + ", Edad: " + getEdad() + ", Sexo: " + getSexo() + ", Estado de salud: " + getEstadoSalud() + ", Tamaño: " + getTamanoString() + ", Peso: " + getPeso() + "kg";
+		return "Nombre: " + getNombre() + ", Especie: " + getEspecie() + ", Edad: " + getEdad() + ", Sexo: " + getSexo() + ", Estado de salud: " + getEstadoSalud() + ", Tamaño: " + getTamano("") + ", Peso: " + getPeso() + "kg";
 		}
 		else {
-			return "Nombre: " + getNombre() + ", Especie: " + getEspecie() + ", Edad: " + getEdad() + ", Sexo: " + getSexo() + ", Tamaño: " + getTamanoString() + ", Peso: " + getPeso() + "kg";
+			return "Nombre: " + getNombre() + ", Especie: " + getEspecie() + ", Edad: " + getEdad() + ", Sexo: " + getSexo() + ", Tamaño: " + getTamano("") + ", Peso: " + getPeso() + "kg";
 			
 		}
 	}

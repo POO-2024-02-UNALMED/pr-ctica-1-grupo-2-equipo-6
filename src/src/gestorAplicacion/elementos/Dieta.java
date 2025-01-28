@@ -105,7 +105,7 @@ public String toString() {
     return "Nombre de la mascota: " + mascota.getNombre() + "\n" +
            "Peso Actual: " + mascota.getPeso() + " kg\n" +
            "Edad: " + mascota.getEdad() + " años\n" +
-           "Tamaño: " + mascota.getTamanoString() + "\n" +
+           "Tamaño: " + mascota.getTamano("") + "\n" +
            "Peso ideal: " + Math.round(this.pesoIdeal * 100) / 100d + " kg\n" +
            "Cantidad de Gramos de alimento diarios: " + Math.round(this.gramosDiarios * 100) / 100d + " g\n" +
            estadoPeso + "\n\n" +

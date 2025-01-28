@@ -1257,7 +1257,7 @@ public static void tienda() {
 				println(t1.inventario()); // SE LLAMA AL MÉTODO INVENTARIO DE TIENDA, PARA QUE DEVULVA TODOS LOS PRODUCTOS SIN MÁS
 			}
 			else { // DE LO CONTRARIO, SE LE VOLVERÁ A PEDIR UNA scanner PARA QUE INDIQUE POR QUE TIPO DE Mascota QUIERE VER 
-				print("\n¿Por qué tipo de Mascota te gustaría ver? [Perros, gatos, aves, hamsters o conejos]: ");
+				print("\n¿Por qué tipo de Mascota te gustaría ver? [Perros, gatos, aves o conejos]: ");
 				while (true) { //BUCLE PARA CONTROLAR ÉSTE NUEVO MENÚ
 					try {
 						String tipo = leerCadena(); // SE LEE EL STRING 
@@ -1290,14 +1290,6 @@ public static void tienda() {
 								println("\nProductos disponibles: \n");
 								println(t1.filtrar("Aves"));
 								break;
-							case "hamsters":
-								println("\nProductos disponibles: \n");
-								println(t1.filtrar("Hamsters"));
-								break;
-							case "hamster":
-								println("\nProductos disponibles: \n");
-								println(t1.filtrar("Hamsters"));
-								break;
 							case "conejos":
 								println("\nProductos disponibles: \n");
 								println(t1.filtrar("Conejos"));
@@ -1307,7 +1299,7 @@ public static void tienda() {
 								println(t1.filtrar("Conejos"));
 								break;
 							default:
-								println("Por favor, ingrese el tipo del Mascota en minúsculas [Perros, gatos, aves o hamsters]");
+								println("Por favor, ingrese el tipo del Mascota en minúsculas [perros, gatos, aves o conejos]");
 								continue;
 						}
 					}

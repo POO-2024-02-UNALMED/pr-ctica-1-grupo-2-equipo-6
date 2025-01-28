@@ -1,7 +1,5 @@
 package gestorAplicacion.gestion;
 
-import java.io.Serializable;
-
 import gestorAplicacion.elementos.Cliente;
 import gestorAplicacion.elementos.Cupo;
 import gestorAplicacion.elementos.Empleado;
@@ -10,9 +8,9 @@ import gestorAplicacion.elementos.Mascota;
 //DESCRIPCIÓN DE LA CLASE:
 //Almacena información sobre las citas agendadas para servicios como veterinaria, entrenamiento o peluquería, incluyendo el Mascota, cliente, empleado y costo.
 
-public class Cita implements Serializable{
+public class Cita {
 
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 
     private Mascota Mascota;
     private Cupo cupo;

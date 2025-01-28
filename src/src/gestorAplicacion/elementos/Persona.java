@@ -1,15 +1,13 @@
 package gestorAplicacion.elementos;
 
-import java.io.Serializable;
-
 // BULA FUENTES, MELANIE
 // OSPINA GAVIRIA, TOMAS
 
 //Descripción De La Clase:
 //Representa a las personas vinculadas con el centro de cuidado animal, ya sean clientes o empleados.En esta se almacena información basica de la persona.
 
-public abstract class Persona implements Serializable {
-	private static final long serialVersionUID = 1L;
+public abstract class Persona {
+
     //---> Atributos <---
 	protected String nombre;
 	protected int edad;

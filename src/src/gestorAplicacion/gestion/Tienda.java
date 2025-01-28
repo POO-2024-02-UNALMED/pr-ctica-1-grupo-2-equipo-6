@@ -73,7 +73,7 @@ public class Tienda implements Serializable{
             return empleados;
         }
 
-        public static void agregarProducto(Producto producto){ 
+        public void agregarProducto(Producto producto){ 
             if(empleados!=null){     // SI HAY UN EMPLEADO, SE AGREGA EL PRODUCTO DEL PARÁMETRO
                 productos.add(producto);
             }
@@ -143,9 +143,9 @@ public class Tienda implements Serializable{
                     	cliente.disminuir_Puntos(puntos); // SE LE QUITAN LOS 15 PUNTOS 
                     	precio -= precio*0.1; // SE MODIFICA EL PRECIO ORIGINAL 
                     	// EN EL RETURN DEVOLVEMOS LO IMPORTADO 
-                    	 return "-------------------------------------------\n"+"Muchas gracias por tu compra, adquiriste: "+nombre+" - Dirigido a: "+tipo+"\n"+"Total a pagar: "+precio+" $"+"\n"+"Han sido descontados 15 puntos para un 10% de descuento\n"+"Puntos restantes en tu cartera de puntos: "+cliente.getPuntos()+"\n-------------------------------------------";
+                    	 return "-------------------------------------------\n"+"✅Muchas gracias por tu compra, adquiriste: "+nombre+" para "+tipo+"\n"+"Total a pagar: "+precio+" $"+"\n"+"✅Han sido descontados 15 puntos para un 10% de descuento\n"+"Puntos restantes en tu cartera de puntos: "+cliente.getPuntos()+"\n-------------------------------------------";
                     }else {
-                    	return "-------------------------------------------\n"+"Muchas gracias por tu compra, adquiriste: "+nombre+" - Dirigido a: "+tipo+"\n"+"Total a pagar: "+precio+" $"+"\n"+"No cuentas con los suficientes puntos como para un descuento\n"+"-------------------------------------------";
+                    	return "-------------------------------------------\n"+"✅Muchas gracias por tu compra, adquiriste: "+nombre+" para "+tipo+"\n"+"Total a pagar: "+precio+" $"+"\n"+"🚫No cuentas con los suficientes puntos como para un descuento\n"+"-------------------------------------------";
                     }
                 }
                 else{
@@ -186,9 +186,9 @@ public class Tienda implements Serializable{
                     if (puntos>=15) { // SI TIENE MÁS DE 15 PUNTOS ACOMULADOS, SE LE HACE UN DESCUENTO AUTOMÁTICAMENTE
                     	cliente.disminuir_Puntos(puntos); // SE RESTAN LOS 15 PUNTOS QUE SE USARON COMO DESCUENTO
                     	precio -= precio*unidades*0.1; // SE CALCULA EL PRECIO CON EL 10% DE DESCUENTO
-                    	 return "-------------------------------------------\n"+"Has comprado "+unidades+" unidades de: "+nombre+" - Dirigido a: "+tipo+"\n"+"Total a pagar: "+precio+" $"+"\n"+"Han sido descontados 15 puntos para un 10% de descuento\n"+"Puntos restantes en tu cartera de puntos: "+cliente.getPuntos()+"\n-------------------------------------------";
+                    	 return "-------------------------------------------\n"+"✅ Has comprado "+unidades+" unidades de: "+nombre+" para "+tipo+"\n"+"Total a pagar: "+precio+" $"+"\n"+"✅Han sido descontados 15 puntos para un 10% de descuento\n"+"Puntos restantes en tu cartera de puntos: "+cliente.getPuntos()+"\n-------------------------------------------";
                     }else { // RETORNA ÚNICAMENTE EL PRECIO PORQUE NO TIENE LOS PUNTOS SUFUCIENTES
-                    	return "-------------------------------------------\n"+"Has comprado "+unidades+" unidades de: "+nombre+" - Dirigido a: "+tipo+"\n"+"Total a pagar: "+precio*unidades+" $"+"\n"+"No cuentas con los suficientes puntos como para un descuento\n"+"-------------------------------------------";
+                    	return "-------------------------------------------\n"+"✅ Has comprado "+unidades+" unidades de: "+nombre+" para "+tipo+"\n"+"Total a pagar: "+precio*unidades+" $"+"\n"+"No cuentas con los suficientes puntos como para un descuento\n"+"-------------------------------------------";
                     }
                 }
                 else{

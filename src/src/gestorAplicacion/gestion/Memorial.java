@@ -43,7 +43,23 @@ public class Memorial implements Serializable {
 	public ArrayList<Fallecido> getCenizas() {
 		return cenizas;
 	}
+	
+	public boolean cupoSepulcro() {
+		return sepulcros.size() <= 20;
+		}
 		
+	public boolean cupoOsario() {
+		return osarios.size() <= 20;
+		}
+	
+	public boolean cupoArboles() {
+		return arboles.size() <= 30;
+	}
+	
+	public boolean cupoSenizas() {
+		return cenizas.size() <= 30;
+	} 
+	
 	 /*public String visita(String tipo) {
 	    String resultado = "";
 	    ArrayList<Fallecido> lista = (tipo.equals("Sepulcro")) ? sepulcros : restos;
@@ -61,7 +77,7 @@ public class Memorial implements Serializable {
 		if (tipo.equals("Sepulcro")) {
 			resultado = visitaMemorial(sepulcros);
 		}
-		else if (tipo.equals("Osarios")) {
+		else if (tipo.equals("Restos")) {
 			resultado = visitaMemorial(osarios);
 		}
 		else if (tipo.equals("Arbol")) {
@@ -73,7 +89,7 @@ public class Memorial implements Serializable {
 		return resultado;
 	}
 	
-	public String visitaMemorial(ArrayList<Fallecido> lista) {
+	private String visitaMemorial(ArrayList<Fallecido> lista) {
 		String resultado = "";
 		for (int i = 0; i < lista.size(); i++) {
 			int indice = i + 1;
@@ -119,28 +135,5 @@ public class Memorial implements Serializable {
 			break;
 		}
 		return lista;
-	}
-	
-	public boolean cupos(String tipo) {
-	    switch (tipo) {
-	        case "Sepulcro": return sepulcros.size() < 20;
-	        case "Osario": return osarios.size() < 20;
-	        case "Cenizas": return cenizas.size() < 20;
-	        case "Arbol": return arboles.size() < 30;
-	        default: throw new IllegalArgumentException("Tipo de memorial no válido.");
-	    }
-	}
-	
-	public boolean anadirFallecido(Fallecido fallecido, String tipo) {
-	    switch (tipo) {
-	        case "Sepulcro" -> anadirSepulcro(fallecido);
-	        case "Osario" -> anadirOsario(fallecido);
-	        case "Cenizas" -> anadirCenizas(fallecido);
-	        case "Arbol" -> anadirArbol(fallecido);
-	        default -> {
-	            return false; // Indicate that the type is invalid.
-	        }
-	    }
-	    return true; // Indicate success.
 	}
 }

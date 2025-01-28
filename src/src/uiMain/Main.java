@@ -1112,13 +1112,9 @@ public static Cliente obtenerDatosCliente() {
 
 			    if (memorial.cupos(tipo)) {
 			        if (memorial.anadirFallecido(fallecido, tipo)) {
-			            //System.out.println("Memorial añadido con éxito.");
+			            System.out.println("Memorial añadido con éxito.");
 			            System.out.println("Precio del servicio: $" + precio);
-						System.out.println("\nGestionando pago. Seleccione el método de pago (1-3):\n");
-						for(int i = 0; i < centro.mostrarOpcionesPago().length; i++){
-							System.out.println(i+1 + ". " + centro.mostrarOpcionesPago()[i]);
-																															
-						}
+																																					
 			        } else {
 			            System.out.println("De momento no contamos con este tipo de servicio.");
 			        }

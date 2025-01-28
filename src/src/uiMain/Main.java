@@ -851,7 +851,7 @@ public static Cliente obtenerDatosCliente() {
     }
 
     // si el usuario es menor de edad, se piden los datos de un adulto responsable
-    if (edad < 18) {
+    if (edad < Cliente.EDAD_MINIMA) {
         System.out.println("El interesado en hacer uso del servicio seleccionado es menor de edad.\n");
         do {
             System.out.println("Proporcione los datos de un adulto responsable: ");

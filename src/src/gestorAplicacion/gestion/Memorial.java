@@ -1,8 +1,8 @@
 package gestorAplicacion.gestion;
-import java.io.Serializable;
-import java.util.ArrayList;
 import gestorAplicacion.elementos.CentroAdopcion;
 import gestorAplicacion.elementos.Fallecido;
+import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Memorial implements Serializable{
 	

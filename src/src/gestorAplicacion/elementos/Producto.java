@@ -51,8 +51,8 @@ public class Producto implements Serializable {
         return this.tipoAnimal;
     }
 
-    public void setTipoUso(String tipo){
-        this.tipoUso = tipo;
+    public void setTipoUso(String tipoUso){
+        this.tipoUso = tipoUso;
     }
     public String getTipoUso(){
         return this.tipoUso;

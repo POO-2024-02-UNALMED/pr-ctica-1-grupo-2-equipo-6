@@ -1,6 +1,7 @@
 package uiMain;
 
 import baseDatos.Deserializador;
+import baseDatos.Serializador;
 import gestorAplicacion.elementos.CentroAdopcion;
 import gestorAplicacion.elementos.CentroAdopcion.Sedes;
 import gestorAplicacion.elementos.Cliente;
@@ -48,6 +49,9 @@ public class Main implements Serializable {
 	public static void main(String[] args) {
 		centroAdopcions = Deserializador.deserializarCentrosAdopcion();
 		Tienda.productos = Deserializador.deserializarProductos();
+		Memorial.arboles = Deserializador.deserializarArboles();
+		Memorial.cenizas = Deserializador.deserializarCenizas();
+		Memorial.osarios = Deserializador.deserializarOsarios();
 		Scanner sc = new Scanner(System.in);
 		int opcion = 0;
 		
@@ -57,7 +61,7 @@ public class Main implements Serializable {
 			System.out.println(ANSI_BLACK+"*******************************************************************"+ANSI_RESET);
             System.out.println(ANSI_WHITE+"\n - - ¿Qué desea hacer el día de hoy? - -"+ANSI_RESET);
             System.out.println(ANSI_CYAN+"\n1. Tienda: UNamascota"+ANSI_RESET);
-            System.out.println(ANSI_GREEN+"2. Adquirir Servicios"+ANSI_RESET);
+            System.out.println(ANSI_GREEN+"2. Agendar: UNServicio"+ANSI_RESET);
 			System.out.println(ANSI_PURPLE+"3. Servicio de Memorial"+ANSI_RESET);
             System.out.println(ANSI_YELLOW+"4. Planificador de Dieta"+ANSI_RESET);
             System.out.println(ANSI_RED+"5. Emergencia Veterinaria"+ANSI_RESET);
@@ -103,6 +107,7 @@ public class Main implements Serializable {
             	case 6:
 					System.out.println("\n--------------------");
                     System.out.println("\nSaliendo del sistema.");
+					salirDelSistema();
                     break;
             	default:
             		System.out.println("Opción no válida. Por favor, intente de nuevo.\n");
@@ -116,19 +121,6 @@ public class Main implements Serializable {
 	//scannerS DE DATOS POR TIPO
 	static byte readByte() {
 		return scanner.nextByte();
-	}
-	
-	static int readInt() {
-		return scanner.nextInt();
-	}
-	
-	static String readString() {	
-		String string = scanner.nextLine();
-		return string;
-	}
-	
-	static long readLong() {
-		return scanner.nextLong();
 	}
 	
 	static boolean readBoolean() {
@@ -414,13 +406,12 @@ public static long leerEnteroLargo() {
 
 	//>>-----------------------------------------------------------------------------------------------------------------<<
 
-			
-	// función para agendar un servicioSeleccionado
+	//Funcionalidad para agendar un servicioSeleccionado
 	static void agendarservicioSeleccionado(){
 		ArrayList<Cita> citasAgendadas = new ArrayList<>();
-		System.out.println("\n\n🐾 ¡Bienvenido a PetTraining! 🐾");
-		System.out.println("Gracias por elegirnos para cuidar y entrenar a tu peludito.");			
-		System.out.println("Por favor, sigue las instrucciones a continuación para que podamos atenderlo de la mejor manera.\n");
+		System.out.println(ANSI_GREEN+"\n\n🐾 ¡Bienvenido a UNServicio! 🐾"+ANSI_RESET);
+		System.out.println(ANSI_WHITE+"Gracias por elegirnos para cuidar y entrenar a tu peludito.");			
+		System.out.println("Por favor, sigue las instrucciones a continuación para que podamos atenderlo de la mejor manera.\n"+ANSI_RESET);
 		
 		boolean repetir = false;
 		boolean clienteConocido = false;
@@ -431,56 +422,56 @@ public static long leerEnteroLargo() {
 			int servicioSeleccionado = 0;
 		
 			// selección de sede
-			System.out.println("📍 Selección de Sede 📍");
-			System.out.println("1. SEDE MEDELLIN");
-			System.out.println("2. SEDE BOGOTA");
-			System.out.println("3. SEDE CALI");
-			System.out.println("4. SEDE CARTAGENA\n");
+			System.out.println(ANSI_RED+"📍 Selección de Sede 📍"+ANSI_RESET);
+			System.out.println(ANSI_BLUE+"1. SEDE MEDELLIN"+ANSI_RESET);
+			System.out.println(ANSI_PURPLE+"2. SEDE BOGOTA"+ANSI_RESET);
+			System.out.println(ANSI_YELLOW+"3. SEDE CALI"+ANSI_RESET);
+			System.out.println(ANSI_WHITE+"4. SEDE CARTAGENA\n"+ANSI_RESET);
 		
 			// pedir al usuario que seleccione una sede
 			do {
-				System.out.print("Ingrese su elección dentro del rango [1-4]: ");
+				System.out.print(ANSI_BLACK+"Ingrese su elección dentro del rango [1-4]: ");
 				try {
 					sedeSeleccionada = leerEntero();
 					if (sedeSeleccionada < 1 || sedeSeleccionada > 4) {
-						System.out.println("Proporcione una respuestata válida.\n");
+						System.out.println(ANSI_WHITE+"Proporcione una respuestata válida.\n");
 					}
 					} catch (InputMismatchException e) {
-						System.out.println("Proporcione una respuestata válida.\n");
+						System.out.println("Proporcione una respuestata válida.\n"+ANSI_RESET);
 					} finally {
 						leerCadena();
 					}
 				} while (sedeSeleccionada < 1 || sedeSeleccionada > 4);
 		
 			// mostrar los servicioSeleccionados disponibles según la sede seleccionada
-			System.out.println("\n📋 Servicios Disponibles 📋");
+			System.out.println(ANSI_CYAN+"\n📋 Servicios Disponibles 📋"+ANSI_RESET);
 			switch (sedeSeleccionada) {
 				case 1:
-					System.out.println("SEDE MEDELLIN - servicio Disponibles: \n1. Entrenamiento \n2. Veterinaria");
+					System.out.println(ANSI_WHITE+"SEDE MEDELLIN - servicio Disponibles: "+ANSI_GREEN+"\n1. Entrenamiento "+ANSI_PURPLE+"\n2. Veterinaria");
 					break;
 				case 2:
-					System.out.println("SEDE BOGOTA - servicio Disponibles: \n1. Peluquería");
+					System.out.println(ANSI_WHITE+"SEDE BOGOTA - servicio Disponibles: "+ANSI_YELLOW+"\n1. Peluquería");
 					break;
 				case 3:
-					System.out.println("SEDE CALI - servicio Disponibles: \n1. Veterinaria \n2. Entrenamiento");
+					System.out.println(ANSI_WHITE+"SEDE CALI - servicio Disponibles: "+ANSI_PURPLE+"\n1. Veterinaria "+ANSI_GREEN+"\n2. Entrenamiento");
 					break;
 				case 4:
-					System.out.println("SEDE CARTAGENA - servicio Disponibles: \n1. Entrenamiento");
+					System.out.println(ANSI_WHITE+"SEDE CARTAGENA - servicio Disponibles: "+ANSI_GREEN+"\n1. Entrenamiento");
 					break;
 			}
 		
-			System.out.println("3. Cambiar de sede\n");
+			System.out.println(ANSI_WHITE+"3. Cancelar Selección\n");
 		
 			// pedir al usuario que seleccione un servicioSeleccionado o cambiar de sede
 			do {
-				System.out.print("Ingrese su elección dentro del rango [1-3]: ");
+				System.out.print(ANSI_BLACK+"Ingrese su elección dentro del rango [1-3]:"+ANSI_RESET);
 				try {
 					servicioSeleccionado = leerEntero();
 					if (servicioSeleccionado < 1 || servicioSeleccionado > 3) {
-						System.out.println("Proporcione una respuestata válida.\n");
+						System.out.println(ANSI_WHITE+"Proporcione una respuestata válida.\n");
 					}
 				} catch (InputMismatchException e) {
-					System.out.println("Proporcione una respuestata válida.\n");
+					System.out.println("Proporcione una respuestata válida.\n"+ANSI_RESET);
 				} finally {
 					leerCadena();
 				}
@@ -515,7 +506,7 @@ public static long leerEnteroLargo() {
 						break;
 					} else if (servicioSeleccionado == 2) {
 						String respuestata1;
-						System.out.println("\nEl servicio de veterinaria está disponible para perros, gatos, conejos y hámsters.");
+						System.out.println("\nEl servicio de veterinaria está disponible para perros, gatos, conejos y Aves.");
 						do {
 							println("¿Su mascota pertenece a alguna de estas especies?");
 							print("Responda si / no: ");
@@ -557,7 +548,7 @@ public static long leerEnteroLargo() {
 				case 3:
 					if (servicioSeleccionado == 1) {
 						String respuestata3;
-						System.out.println("\nEl servicio de veterinaria está disponible para perros, gatos, conejos y hámsters.");
+						System.out.println("\nEl servicio de veterinaria está disponible para perros, gatos, conejos y Aves.");
 						do {
 							println("¿Su mascota pertenece a alguna de estas especies?");
 							print("Responda si / no: ");
@@ -752,177 +743,14 @@ public static long leerEnteroLargo() {
 						
 						if (clienteConocido!=true) {
 							
-							//Datos del Cliente
-							System.out.println("\nAntes de continuar, le informamos que para hacer uso del servicio seleccionado la persona encargada de la mascota debe ser mayor de edad.\n");
-	
-							String nombre;
-							int edad = 0;
-							long cedula = 0;
-						
-							System.out.println("Proporcione la siguiente información. ");
-							System.out.print("Ingrese su nombre: ");
-							nombre = leerCadena();
-							while (edad <= 0) {
-								try {
-									System.out.print("Ingrese su edad: ");
-									edad = leerEntero();
-									if (edad <= 0) {
-										System.out.println("Proporcione una respuestata válida.\n");
-									}
-								} catch (RuntimeException e) {
-									System.out.println("Proporcione una respuestata válida.\n");
-								} finally {
-									leerCadena(); // consumir salto de línea
-								}
-							}
-								// si el usuario es menor de edad, se piden los datos de un adulto responsable
-							if (edad < 18) {
-								System.out.println("El interesado en hacer uso del servicioSeleccionado es menor de edad.\n");
-								do {
-									System.out.println("Proporcione los datos de un adulto responsable: ");
-									System.out.print("Ingrese su nombre: ");
-									nombre = leerCadena();
-					
-									try {
-										System.out.print("Ingrese su edad: ");
-										edad = leerEntero();
-					
-										if (edad <= 0) {
-											System.out.println("Proporcione una edad válida.\n");
-										}
-						
-										if (edad > 0 && edad < 18) {
-											System.out.println("La edad ingresada no corresponde a la de un adulto.\n");
-										}
-					
-									} catch (RuntimeException e) {
-										System.out.println("Proporcione una respuestata válida.\n");
-									} finally {
-										leerCadena(); // consumir salto de línea
-									}
-								} while (edad < 18);
-							}
-						
-							while (cedula <= 0) {
-								try {
-									System.out.print("Ingrese su número de identificación: ");
-									cedula = leerEnteroLargo();
-									if (cedula <= 0) {
-										System.out.println("Proporcione una respuestata válida.\n");
-										cedula = 0;
-									}
-								} catch (InputMismatchException e) {
-									System.out.println("Proporcione una respuestata válida.\n");
-									leerCadena();
-								}
-							}
-						
-							Cliente cli = new Cliente(nombre, edad, cedula);
-							cliente = CentroAdopcion.esCliente(cli); //COMPROBAR SI EL CLIENTE YA ESTÁ REGISTRADO
+							cliente = obtenerDatosCliente(); //DATOS DEL CLIENTE
+        	    	    
+							cliente = CentroAdopcion.esCliente(cliente); //COMPROBAR SI EL CLIENTE YA ESTÁ REGISTRADO
 							leerCadena();
 							}
 							
-							//DATOS DE LA MASCOTA.
-							
-							leerCadena();//CONSUMIR SALTO DE LÍNEA
-				
-							String nombre = null;
-							int edad = 0;
-							String especie = null;
-							String sexo = null;
-							
-							println("\nProporcione la siguiente información sobre su mascota.");
-							
-							print("Ingrese el nombre: ");
-							nombre= leerCadena();
-							
-							do {
-								try {
-									print("Ingrese la edad (meses): ");
-									edad= leerEntero();
-								
-									if (edad<=0) {
-										println("Proporcione una  respuesta válida.\n");
-										}
-									}catch(InputMismatchException e) {
-										println("proporcione una respuesta válida.\n");
-										leerCadena();
-										}		
-							}while(edad<=0);
-							
-							int eleccion=0;
-							int opciones=0;
-							
-							println("\nSeleccione la especie de su mascota.");
-							if (servicioSeleccionado==1 || servicioSeleccionado==3) {
-								opciones=2;
-								println("1. Perro \n2. Gato");
-							}
-							
-							if (servicioSeleccionado==2) {
-								opciones=4;
-								println("1. Perro \n2. Gato\n3. Conejo \n4. Hámster");
-							}
-					
-							do {		
-								try {
-									print("Ingrese su elección dentro del rango [1-"+ opciones +"]: ");
-									eleccion=leerEntero();
-									
-									if (eleccion<1 || eleccion > opciones) {
-										println("Opción fuera de rango.\n");
-									}
-									}catch(InputMismatchException e) {
-										println("Se ha ingresado un tipo de dato incorrecto.\n");
-										leerCadena();
-										}
-								}while(eleccion<1 || eleccion>opciones);
-							
-							switch(eleccion) {
-							
-							case 1:
-								especie="Perro";
-								break;
-							case 2:
-								especie= "Gato";
-								break;
-							case 3:
-								especie ="Conejo";
-								break;
-							case 4:
-								especie="Hámster";
-								break;		
-							}
-							
-							println("\nSeleccione el género de su mascota: ");
-							println("1. Macho\n2. Hembra");
-							eleccion=0;
-							
-							do {		
-								try {
-									print("Ingrese su elección dentro del rango [1-2]: ");
-									eleccion=leerEntero();
-									
-									if (eleccion<1 || eleccion >2) {
-										println("Proporcione una respuesta válida.\n");
-									}
-									}catch(InputMismatchException e) {
-										println("Proporcione una respuesta válida.\n");
-										leerCadena();//CONSUMIR SALTO DE LÍNEA
-										}
-								}while(eleccion<1 || eleccion>2);
-							
-							switch(eleccion) {
-							
-							case 1:
-								sexo="Macho";
-								break;
-							case 2:
-								sexo="Hembra";
-								break;
-							}
-							
-							Mascota mascota = new Mascota(nombre,especie, edad,sexo);
+							Mascota mascota = obtenerDatosMascota(servicioSeleccionado); //DATOS DE LA MASCOTA.
+
 							//CREAR EL OBJETO DE TIPO CITA
 							Cita nuevaCita = new Cita(cliente,mascota,empleado_seleccionado,cupo_seleccionado,servicioSeleccionado);
 							
@@ -964,10 +792,9 @@ public static long leerEnteroLargo() {
 				
 							for (Cita cita : citasAgendadas) {
 								System.out.println(cita);
-								System.out.println("-----------------\n");
+								System.out.println("-------------------------------------\n");
 							}
 							println("\n¡Cita agendada exitosamente!");
-							
 							
 							println("\n¿Desea agendar otra cita?");
 							String respuesta;
@@ -998,6 +825,178 @@ public static long leerEnteroLargo() {
 		}while(repetir);
 		
 	}
+// función para obtener los datos del cliente
+
+public static Cliente obtenerDatosCliente() {
+    System.out.println("\nAntes de continuar, le informamos que para hacer uso del servicio seleccionado la persona encargada de la mascota debe ser mayor de edad.\n");
+	leerCadena();
+    String nombre = null;
+    int edad = 0;
+    long cedula = 0;
+
+    System.out.println("Proporcione la siguiente información. ");
+    System.out.print("Ingrese su nombre: ");
+    nombre = leerCadena();
+
+    while (edad <= 0) {
+        try {
+            System.out.print("Ingrese su edad: ");
+            edad = leerEntero();
+            if (edad <= 0) {
+                System.out.println("Proporcione una respuesta válida.\n");
+            }
+        } catch (RuntimeException e) {
+            System.out.println("Proporcione una respuesta válida.\n");
+        }
+    }
+
+    // si el usuario es menor de edad, se piden los datos de un adulto responsable
+    if (edad < 18) {
+        System.out.println("El interesado en hacer uso del servicio seleccionado es menor de edad.\n");
+        do {
+            System.out.println("Proporcione los datos de un adulto responsable: ");
+            System.out.print("Ingrese su nombre: ");
+            nombre = leerCadena();
+
+            try {
+                System.out.print("Ingrese su edad: ");
+                edad = leerEntero();
+
+                if (edad <= 0) {
+                    System.out.println("Proporcione una edad válida.\n");
+                }
+
+                if (edad > 0 && edad < 18) {
+                    System.out.println("La edad ingresada no corresponde a la de un adulto.\n");
+                }
+
+            } catch (RuntimeException e) {
+                System.out.println("Proporcione una respuesta válida.\n");
+            }
+        } while (edad < 18);
+    }
+
+    while (cedula <= 0) {
+        try {
+            System.out.print("Ingrese su número de identificación: ");
+            cedula = leerEnteroLargo();
+            if (cedula <= 0) {
+                System.out.println("Proporcione una respuesta válida.\n");
+                cedula = 0;
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Proporcione una respuesta válida.\n");
+            leerCadena();
+        }
+    }
+
+    Cliente cliente = new Cliente(nombre, edad, cedula);
+    return cliente;
+}
+	public static Mascota obtenerDatosMascota(int servicio) {
+		leerCadena();//CONSUMIR SALTO DE LÍNEA
+		
+		String nombre = null;
+		int edad = 0;
+		String especie = null;
+		String sexo = null;
+		
+		println("\nProporcione la siguiente información sobre su mascota.");
+		
+		print("Ingrese el nombre: ");
+		nombre= leerCadena();
+		
+		do {
+			try {
+				print("Ingrese la edad (meses): ");
+				edad= leerEntero();
+			
+				if (edad<=0) {
+					println("Proporcione una  respuesta válida.\n");
+					}
+				}catch(InputMismatchException e) {
+					println("proporcione una respuesta válida.\n");
+					leerCadena();
+					}		
+		}while(edad<=0);
+		
+		int eleccion=0;
+		int opciones=0;
+		
+		println("\nSeleccione la especie de su mascota.");
+		if (servicio==1 || servicio==3) {
+			opciones=2;
+			println("1. Perro \n2. Gato");
+		}
+		
+		if (servicio==2) {
+			opciones=4;
+			println("1. Perro \n2. Gato\n3. Conejo \n4. Hámster");
+		}
+
+		do {		
+			try {
+				print("Ingrese su elección dentro del rango [1-"+ opciones +"]: ");
+				eleccion=leerEntero();
+				
+				if (eleccion<1 || eleccion > opciones) {
+					println("Opción fuera de rango.\n");
+				}
+				}catch(InputMismatchException e) {
+					println("Se ha ingresado un tipo de dato incorrecto.\n");
+					leerCadena();
+					}
+			}while(eleccion<1 || eleccion>opciones);
+		
+		switch(eleccion) {
+		
+		case 1:
+			especie="Perro";
+			break;
+		case 2:
+			especie= "Gato";
+			break;
+		case 3:
+			especie ="Conejo";
+			break;
+		case 4:
+			especie="Hámster";
+			break;		
+		}
+		
+		println("\nSeleccione el género de su mascota: ");
+		println("1. Macho\n2. Hembra");
+		eleccion=0;
+		
+		do {		
+			try {
+				print("Ingrese su elección dentro del rango [1-2]: ");
+				eleccion=leerEntero();
+				
+				if (eleccion<1 || eleccion >2) {
+					println("Proporcione una respuesta válida.\n");
+				}
+				}catch(InputMismatchException e) {
+					println("Proporcione una respuesta válida.\n");
+					leerCadena();//CONSUMIR SALTO DE LÍNEA
+					}
+			}while(eleccion<1 || eleccion>2);
+		
+		switch(eleccion) {
+		
+		case 1:
+			sexo="Macho";
+			break;
+		case 2:
+			sexo="Hembra";
+			break;
+		}
+		
+		Mascota mascota = new Mascota(nombre,especie, edad,sexo);
+		
+		return mascota;	
+	}
+
 
 
 //>>--------------------------------------------------------------------------------------------------------------------------------------<<
@@ -1169,6 +1168,8 @@ public static long leerEnteroLargo() {
 			}
 		}
 	}
+
+	
 
 //>>--------------------------------------------------------------------------------------------------------------------------------------<<
 
@@ -1481,5 +1482,13 @@ public static void emergenciaVeterinaria() {
 		planificacionDieta();
 	}
 }
+	private static void salirDelSistema() {
 
+			
+			println("¡Vuelva pronto!");
+			
+			Serializador.serializarListas();
+			
+			System.exit(0);
+		}
 }

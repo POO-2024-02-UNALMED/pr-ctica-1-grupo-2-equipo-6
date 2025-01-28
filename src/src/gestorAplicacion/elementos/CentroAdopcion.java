@@ -15,14 +15,13 @@ public class CentroAdopcion implements Serializable {
 	private String nombre;
 	private List<Mascota> animalesHospitalizados;
 	private List<Empleado> veterinarios;
-	private static List<Cliente> clientes;
+	private static List<Cliente> clientes= new ArrayList<>();;
 	private String sede;
 	
 	public CentroAdopcion(String nombre) {
 		this.nombre = nombre;
 		this.animalesHospitalizados = new ArrayList<>();
 		this.veterinarios = new ArrayList<>();
-		CentroAdopcion.clientes = new ArrayList<>();
 	}
 	
 	//GETTERS Y SETTERS

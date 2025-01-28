@@ -1080,19 +1080,23 @@ public static long leerEnteroLargo() {
 				
 				Fallecido fallecido = new Fallecido(mascota, fecha, mensaje, cliente, tiempo, tipo);
 				
-				switch (tipo) {
-				case "Sepulcro" -> memorial.anadirSepulcro(fallecido);
-				case "Osario" -> memorial.anadirOsario(fallecido);
-				case "Cenizas" -> memorial.anadirCenizas(fallecido);
-				case "Arbol" -> memorial.anadirArbol(fallecido);
-				default -> System.out.println("De momento no contamos con este tipo de servicio.");
+				if (!memorial.anadirFallecido(fallecido, tipo)) {
+				    System.out.println("De momento no contamos con este tipo de servicio.");
+				}
+
 				
-					}
+				if(memorial.cupos(tipo)) {
+					memorial.anadirFallecido(fallecido, tipo);
+					System.out.println("Memorial añadido con éxito.");
+					System.out.println("Precio del servicio: $" + precio);
+				}
+				else {
+					System.out.println("No hay cupos disponibles para " + tipo + ".");
+				}
+				//System.out.println("Memorial añadido con éxito.");
+				//System.out.println("Precio del servicio: $" + precio);
 				
-				System.out.println("Memorial añadido con éxito.");
-				System.out.println("Precio del servicio: $" + precio);
-				
-				Producto servicioMemorial = new Producto("Memorial - " + tipo, precio, "Todos", "Servicio memorial", 1);
+				//Producto servicioMemorial = new Producto("Memorial - " + tipo, precio, "Todos", "Servicio memorial", 1);
 				//System.out.println("Se ha registrado el prodcuto: " + servicioMemorial);
 				}
 			

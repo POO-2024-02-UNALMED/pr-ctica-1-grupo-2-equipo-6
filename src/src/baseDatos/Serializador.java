@@ -40,9 +40,9 @@ public class Serializador {
             //metodos estaticos
             
             serializar(Main.centroAdopcions, "sedes");
-            serializar(Memorial.osarios, "osarios");
-            serializar(Memorial.cenizas, "cenizas");
-            serializar(Memorial.arboles, "arboles");
+            //serializar(Memorial.osarios, "osarios");
+            //serializar(Memorial.cenizas, "cenizas");
+            //serializar(Memorial.arboles, "arboles");
             serializar(Tienda.productos, "productos");
 
         }

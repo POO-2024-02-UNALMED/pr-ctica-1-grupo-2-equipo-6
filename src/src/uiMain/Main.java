@@ -49,9 +49,9 @@ public class Main implements Serializable {
 	public static void main(String[] args) {
 		centroAdopcions = Deserializador.deserializarCentrosAdopcion();
 		Tienda.productos = Deserializador.deserializarProductos();
-		Memorial.arboles = Deserializador.deserializarArboles();
-		Memorial.cenizas = Deserializador.deserializarCenizas();
-		Memorial.osarios = Deserializador.deserializarOsarios();
+		//Memorial.arboles = Deserializador.deserializarArboles();
+		//Memorial.cenizas = Deserializador.deserializarCenizas();
+		//Memorial.osarios = Deserializador.deserializarOsarios();
 		Scanner sc = new Scanner(System.in);
 		int opcion = 0;
 		
@@ -1031,8 +1031,6 @@ public static Cliente obtenerDatosCliente() {
 		String nombreSede  = Sedes.values()[sede-1].toString(); 
 		nombreSede = nombreSede.substring(0,1).toUpperCase() + nombreSede.substring(1).toLowerCase();
 		System.out.println("\nLa sede seleccionada es: " + nombreSede);
-		
-		Memorial memorial = new Memorial(centro);
 		
 		int opcion = 0;
 		while (opcion != 4) {

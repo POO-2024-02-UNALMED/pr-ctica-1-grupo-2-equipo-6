@@ -13,8 +13,7 @@ public class Memorial{
 	public static ArrayList<Fallecido> arboles = new ArrayList<> ();
 	public static ArrayList<Fallecido> cenizas = new ArrayList<> ();
 	
-	public Memorial (CentroAdopcion centro) {
-		this.centro = centro;
+	public Memorial () {
 	}
 	
 	public CentroAdopcion getCentro() {

@@ -31,7 +31,7 @@ public class Main implements Serializable {
 	static CentroAdopcion centro = new CentroAdopcion("POO");
 	private static Scanner scanner = new Scanner(System.in);
 	public static ArrayList<CentroAdopcion> centroAdopcions;
-	private static Memorial memorial = new Memorial(centro);
+	//private static Memorial memorial = new Memorial(centro);
 	
 	
 	public static void main(String[] args) {
@@ -1021,6 +1021,7 @@ public static long leerEnteroLargo() {
 
 	
 	public static void gestionarMemorial() {
+		final Memorial memorial = new Memorial();
 		
 		System.out.println("--------------------");
 		System.out.println("\n- Ingrese sus datos");
@@ -1036,7 +1037,7 @@ public static long leerEnteroLargo() {
 		
 		Cliente cliente = new Cliente(nombre, edad, cedula);
 		
-		System.out.println("\n¿En dónde desea que su mascota sea atendida? (1-4):");
+		/*System.out.println("\n¿En dónde desea que su mascota sea atendida? (1-4):");
 		centro.mostrarSedes();
 		System.out.print("Ingrese el número correspondiente a la sede: ");
 		int sede = sc.nextInt();
@@ -1044,13 +1045,13 @@ public static long leerEnteroLargo() {
 		while (sede < 1 || sede > Sedes.values().length) {
 			System.out.println("scanner inválida. Por favor, ingrese un número entre 1 y " + Sedes.values().length + ":");
 			sede = sc.nextInt();
-			sc.nextLine();
+			sc.nextLine(); 
 		}
 		
 		centro.setSede(Sedes.values()[sede-1].name());
 		String nombreSede  = Sedes.values()[sede-1].toString(); 
 		nombreSede = nombreSede.substring(0,1).toUpperCase() + nombreSede.substring(1).toLowerCase();
-		System.out.println("\nLa sede seleccionada es: " + nombreSede);
+		System.out.println("\nLa sede seleccionada es: " + nombreSede); */
 		
 		int opcion = 0;
 		while (opcion != 4) {
@@ -1097,7 +1098,7 @@ public static long leerEnteroLargo() {
 			        tiempo = "Forever";
 			        precio = 1000000;
 			    } else if (duracion == 2) {
-			        System.out.println("Ingrese el tiempo que desea usar nuestros servicios (En multiplos de 5):");
+			        System.out.println("Ingrese la cantidad de años que desea usar nuestros servicios (En multiplos de 5):");
 			        int anos = sc.nextInt();
 			        sc.nextLine();
 			        if (anos % 5 != 0) {
@@ -1183,6 +1184,7 @@ public static long leerEnteroLargo() {
 			}
 
 			case 4 -> System.out.println("Volviendo al menu principal...4");
+			default -> System.out.println("Opción no válida.");
 			}
 		}
 	}

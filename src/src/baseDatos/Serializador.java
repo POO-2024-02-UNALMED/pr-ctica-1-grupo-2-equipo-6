@@ -140,25 +140,22 @@ public class Serializador {
         
         //Agregar mascotas difuntas a los memoriales
         
-        Memorial memorial1 = new Memorial(centro1);
-        memorial1.anadirOsario(new Fallecido(mascotaF1, "2023-01-12", "Siempre en mis recuerdos.", null, "Forever", "Osario"));
-        memorial1.anadirArbol(new Fallecido(mascotaF2, "2024-11-24", null, null, "Forever", "Arbol"));
-        memorial1.anadirCenizas(new Fallecido(mascotaF3, "2001-06-01", "Siempre en mis recuerdos.", null, "30 años", "Cenizas"));
-        memorial1.anadirOsario(new Fallecido(mascotaF4, "2016-04-23", "Nunca te olvidare.", null, "Forever", "Osario"));
+        Memorial memorial = new Memorial();
+        memorial.anadirOsario(new Fallecido(mascotaF1, "2023-01-12", "Siempre en mis recuerdos.", null, "Forever", "Osario"));
+        memorial.anadirArbol(new Fallecido(mascotaF2, "2024-11-24", null, null, "Forever", "Arbol"));
+        memorial.anadirCenizas(new Fallecido(mascotaF3, "2001-06-01", "Siempre en mis recuerdos.", null, "30 años", "Cenizas"));
+        memorial.anadirOsario(new Fallecido(mascotaF4, "2016-04-23", "Nunca te olvidare.", null, "Forever", "Osario"));
         
-        Memorial memorial2 = new Memorial(centro2);
-        memorial2.anadirArbol(new Fallecido(mascotaF5, "2005-02-21", null, null, "45 años", "Arbol"));
-        memorial2.anadirCenizas(new Fallecido(mascotaF6, "2014-10-25", ":(", null, "Forever", "Cenizas"));
-        memorial2.anadirCenizas(new Fallecido(mascotaF7, "2025-01-28", "Gracias por tu compañia.", null, "Forever", "Cenizas"));
+        memorial.anadirArbol(new Fallecido(mascotaF5, "2005-02-21", null, null, "45 años", "Arbol"));
+        memorial.anadirCenizas(new Fallecido(mascotaF6, "2014-10-25", ":(", null, "Forever", "Cenizas"));
+        memorial.anadirCenizas(new Fallecido(mascotaF7, "2025-01-28", "Gracias por tu compañia.", null, "Forever", "Cenizas"));
         
-        Memorial memorial3 = new Memorial(centro3);
-        memorial3.anadirSepulcro(new Fallecido(mascotaF8, "2020-07-01", null, null, "Forever", "Sepulcro"));
-        memorial3.anadirSepulcro(new Fallecido(mascotaF9, "2018-12-09", "Siempre en mi corazon", null, "Forever", "Sepulcro"));
-        memorial3.anadirArbol(new Fallecido(mascotaF10, "2020-07-01", null, null, "Forever", "Arbol"));
+        memorial.anadirSepulcro(new Fallecido(mascotaF8, "2020-07-01", null, null, "Forever", "Sepulcro"));
+        memorial.anadirSepulcro(new Fallecido(mascotaF9, "2018-12-09", "Siempre en mi corazon", null, "Forever", "Sepulcro"));
+        memorial.anadirArbol(new Fallecido(mascotaF10, "2020-07-01", null, null, "Forever", "Arbol"));
         
-        Memorial memorial4 = new Memorial(centro4);
-        memorial4.anadirOsario(new Fallecido(mascotaF11, "2020-07-01", null, null, "Forever", "Osario"));
-        memorial4.anadirArbol(new Fallecido(mascotaF12, "2020-07-01", null, null, "Forever", "Arbol")); */
+        memorial.anadirOsario(new Fallecido(mascotaF11, "2020-07-01", null, null, "Forever", "Osario"));
+        memorial.anadirArbol(new Fallecido(mascotaF12, "2020-07-01", null, null, "Forever", "Arbol")); */
         
         try {
             // Define la ruta del archivo

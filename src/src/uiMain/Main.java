@@ -487,10 +487,10 @@ public static long leerEnteroLargo() {
 			switch (sedeSeleccionada) {
 				case 1:
 					if (servicioSeleccionado == 1) {
-						System.out.println("\nEl servicio de entrenamiento está disponible para perros y gatos.");
+						System.out.println("\nEl servicio de Entrenamiento tiene un costo de $80000 y solo está disponible para perros y gatos.");
 						String respuestata1;
 						do {
-							println("¿Su mascota pertenece a alguna de estas especies?");
+							println("¿Pertenece su mascota a alguna de estas especies?");
 							print("Responda si / no: ");
 							respuestata1= leerCadena();
 							
@@ -506,9 +506,9 @@ public static long leerEnteroLargo() {
 						break;
 					} else if (servicioSeleccionado == 2) {
 						String respuestata1;
-						System.out.println("\nEl servicio de veterinaria está disponible para perros, gatos, conejos y Aves.");
+						System.out.println("\nEl servicio de veterinaria tiene un costo de $50000 y solo está disponible para perros, gatos, conejos y Aves.");
 						do {
-							println("¿Su mascota pertenece a alguna de estas especies?");
+							println("¿Pertenece su mascota a alguna de estas especies?");
 							print("Responda si / no: ");
 							respuestata1= leerCadena();
 							
@@ -527,9 +527,9 @@ public static long leerEnteroLargo() {
 				case 2:
 					if (servicioSeleccionado == 1) {
 						String respuestata2;
-						System.out.println("\nEl servicio de peluquería está disponible para perros y gatos.");
+						System.out.println("\nEl servicio de Peluquería tiene un costo de $25000 y solo está disponible para perros y gatos.");
 						do {
-							println("¿Su mascota pertenece a alguna de estas especies?");
+							println("¿Pertenece su mascota a alguna de estas especies?");
 							print("Responda si / no: ");
 							respuestata2= leerCadena();
 							
@@ -548,9 +548,9 @@ public static long leerEnteroLargo() {
 				case 3:
 					if (servicioSeleccionado == 1) {
 						String respuestata3;
-						System.out.println("\nEl servicio de veterinaria está disponible para perros, gatos, conejos y Aves.");
+						System.out.println("\nEl servicio de Veterinaria tiene un costo de $50000 y solo está disponible para perros, gatos, conejos y Aves.");
 						do {
-							println("¿Su mascota pertenece a alguna de estas especies?");
+							println("¿Pertenece su mascota a alguna de estas especies?");
 							print("Responda si / no: ");
 							respuestata3= leerCadena();
 							
@@ -566,9 +566,9 @@ public static long leerEnteroLargo() {
 						break;
 					} else if (servicioSeleccionado == 2) {
 						String respuestata3;
-						System.out.println("\nEl servicio de entrenamiento está disponible para perros y gatos.");
+						System.out.println("\nEl servicio de Entrenamiento tiene un costo de $80000 y solo está disponible para perros y gatos.");
 						do {
-							println("¿Su mascota pertenece a alguna de estas especies?");
+							println("¿Pertenece su mascota a alguna de estas especies?");
 							print("Responda si / no: ");
 							respuestata3= leerCadena();
 							
@@ -587,9 +587,9 @@ public static long leerEnteroLargo() {
 				case 4:
 				String respuestata4;
 					if (servicioSeleccionado == 1) {
-						System.out.println("\nEl servicio de entrenamiento está disponible para perros y gatos.");
+						System.out.println("\nEl servicio de Entrenamiento tiene un costo de $80000 y solo está disponible para perros y gatos.");
 						do {
-							println("¿Su mascota pertenece a alguna de estas especies?");
+							println("¿Pertenece su mascota a alguna de estas especies?");
 							print("Responda si / no: ");
 							respuestata4= leerCadena();
 							
@@ -609,7 +609,7 @@ public static long leerEnteroLargo() {
 		
 			// si el servicioSeleccionado no está disponible para la especie, se termina el proceso
 			if (!servicioSeleccionadoDisponible) {
-				System.out.println("\nNos disculpamos, pero el servicioSeleccionado que desea no está disponible para su tipo de mascota. Agradecemos su comprensión.\n");
+				System.out.println("\nNos disculpamos, pero el servicio seleccionado que desea no está disponible para su tipo de mascota. Agradecemos su comprensión.\n");
 				repetir = false;
 				continue;
 			}
@@ -788,7 +788,7 @@ public static long leerEnteroLargo() {
 								}
 						
 								// mostrar los detalles de las citas agendadas
-							System.out.println("\n🗓️ DETALLES DE LAS CITAS AGENDADAS 🗓️");
+							System.out.println(ANSI_YELLOW+"\n🗓️ DETALLES DE LAS CITAS AGENDADAS 🗓️"+ANSI_RESET);
 				
 							for (Cita cita : citasAgendadas) {
 								System.out.println(cita);
@@ -996,8 +996,6 @@ public static Cliente obtenerDatosCliente() {
 		
 		return mascota;	
 	}
-
-
 
 //>>--------------------------------------------------------------------------------------------------------------------------------------<<
 
@@ -1322,6 +1320,11 @@ public static void emergenciaVeterinaria() {
 	centro.agregarVeterinario(new Empleado("Mariana", 32, 123456789, 321456789, null, Especialidad.VETERINARIO));
 	centro.agregarVeterinario(new Empleado("Jorge", 40, 987654321, 320765432, null, Especialidad.VETERINARIO));
 	centro.agregarVeterinario(new Empleado("Lucía", 28, 246810121, 310987654, null, Especialidad.VETERINARIO));
+	centro.agregarVeterinario(new Empleado("Carlos", 35, 112233445, 320123456, null, Especialidad.VETERINARIO));
+	centro.agregarVeterinario(new Empleado("Sofía", 29, 556677889, 310456789, null, Especialidad.VETERINARIO));
+	centro.agregarVeterinario(new Empleado("Andrés", 33, 667788990, 321987654, null, Especialidad.VETERINARIO));
+	centro.agregarVeterinario(new Empleado("Paula", 27, 778899001, 319876543, null, Especialidad.VETERINARIO));
+
 
 	//---------------------------------------------------
 	

@@ -240,7 +240,7 @@ public class CentroAdopcion implements Serializable {
 		}
 		else {
 			//Si existe, entonces se actualizan los datos.
-			clienteNuevo.actualizar_datos(cliente.getEdad(),cliente.getTelefono(), cliente.getDireccion());	
+			clienteNuevo.actualizar_Datos(cliente.getEdad(),cliente.getTelefono(), cliente.getDireccion());	
 		}
 		
 		return clienteNuevo;

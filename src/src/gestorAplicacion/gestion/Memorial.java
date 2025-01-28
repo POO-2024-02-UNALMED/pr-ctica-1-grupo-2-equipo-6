@@ -13,7 +13,8 @@ public class Memorial implements Serializable{
 	public static ArrayList<Fallecido> arboles = new ArrayList<> ();
 	public static ArrayList<Fallecido> cenizas = new ArrayList<> ();
 	
-	public Memorial () {
+	public Memorial (CentroAdopcion centro) {
+		this.centro = centro;
 	}
 	
 	public CentroAdopcion getCentro() {
@@ -125,9 +126,9 @@ public class Memorial implements Serializable{
 	        case "Cenizas" -> anadirCenizas(fallecido);
 	        case "Arbol" -> anadirArbol(fallecido);
 	        default -> {
-	            return false; // Indicate that the type is invalid.
+	            return false;
 	        }
 	    }
-	    return true; // Indicate success.
+	    return true;
 	}
 }

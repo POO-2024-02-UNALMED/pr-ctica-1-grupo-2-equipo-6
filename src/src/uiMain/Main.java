@@ -57,7 +57,7 @@ public class Main {
             System.out.println("2. (Funcionalidad 2)");
             System.out.println("3. Tienda UNamascota");
             System.out.println("4. Servicio memorial"); //memorial
-            System.out.println("5. (Planificacion de Dieta)");
+            System.out.println("5. Planificacion de Dieta");
             System.out.println("6. Salir");
             
             if (sc.hasNextInt()) {
@@ -1360,7 +1360,7 @@ public static void planificacionDieta(Cliente cliente) {
 			if (tipo.equalsIgnoreCase("Gato") || tipo.equalsIgnoreCase("Perro")) {
 				break;
 			} else {
-				System.out.println("Lo sentimos, la planiicacion de dieta solo esta disponible para gatos y perros.");
+				System.out.println("Lo sentimos, la planificacion de dieta solo esta disponible para gatos y perros.");
 				return;
 			 }
 		}
@@ -1371,19 +1371,43 @@ public static void planificacionDieta(Cliente cliente) {
 		System.out.println("Sexo (M/F):");
 		String sexo = "";
 		while (true) {//validar que el dato introducido sea valido.
-			sexo = Main.leerCadena();
-			if (sexo.equalsIgnoreCase("M") || sexo.equalsIgnoreCase("F")) {
+			
+			sexo = Main.leerCadena(); // Leer el valor del usuario
+		switch (sexo) {
+			case "m":
+				break; // Tamaño válido, salir del switch y del bucle
+			case "f":
 				break;
-			} else { System.out.println("Entrada no valida, intentalo de nuevo."); }
+			case "M":
+				break;
+			case "F":
+				break;
+			default:
+				System.out.println("Ingrese un valor M/F.");
+				continue; // Volver al inicio del bucle para pedir nuevamente
 		}
-		
+		break; // Salir del bucle si la entrada es válida
+
+		}
+
 		System.out.println("Tamaño (1-4): \n1. Miniatura \n2. Pequeño \n3. Mediano \n4. Grande");
-		int tamano = 3;
-		while (true) {//validar que el dato introducido sea valido.
-			tamano = Main.leerEntero();
-			if (tamano > 0 && tamano < 5) {
+		int tamano = 0;
+	while (true) {
+    tamano = Main.leerEntero(); // Leer el valor del usuario
+		switch (tamano) {
+			case 1:
+				break; // Tamaño válido, salir del switch y del bucle
+			case 2:
 				break;
-			} else { System.out.println("Entrada no valida, intentalo de nuevo."); }
+			case 3:
+				break;
+			case 4:
+				break;
+			default:
+				System.out.println("Entrada no válida. Por favor, ingrese un número entre 1 y 4.");
+				continue; // Volver al inicio del bucle para pedir nuevamente
+		}
+		break; // Salir del bucle si la entrada es válida
 		}
 		
 		System.out.println("Peso en kg:");
@@ -1413,8 +1437,7 @@ public static void planificacionDieta(Cliente cliente) {
 		System.out.println("\n¿Desea volver al menu principal o redirigirse a la tienda? [Menu/Tienda]: ");
 			String respuesta = " ";
 			while (true) {
-				respuesta = leerCadena();
-				respuesta.toLowerCase();
+				respuesta = leerCadena().toLowerCase();
 				if (respuesta.equals("menu")||respuesta.equals("tienda")) {
 					break; 
 				}else {

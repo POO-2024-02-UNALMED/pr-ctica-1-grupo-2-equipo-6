@@ -105,7 +105,7 @@ public String toString() {
     return "Nombre de la mascota: " + mascota.getNombre() + "\n" +
            "Peso Actual: " + mascota.getPeso() + " kg\n" +
            "Edad: " + mascota.getEdad() + " años\n" +
-           "Tamaño: " + mascota.getTamano() + "\n" +
+           "Tamaño: " + mascota.getTamanoString() + "\n" +
            "Peso ideal: " + this.pesoIdeal + " kg\n" +
            "Cantidad de Gramos de alimento diarios: " + this.gramosDiarios + " g\n" +
            estadoPeso + "\n\n" +
@@ -114,9 +114,9 @@ public String toString() {
            " Grasas: " + ((this.grasas / this.gramosDiarios) * 100) + "%\n" +
            " Carbohidratos: " + ((this.carbohidratos / this.gramosDiarios) * 100) + "%\n\n" +
            "Distribución en gramos de nutrientes:\n" +
-           " Proteínas: " + this.proteinas + "\n" +
-           " Grasas: " + this.grasas + "\n" +
-           " Carbohidratos: " + this.carbohidratos;
+           " Proteínas: " + this.proteinas + " g\n" +
+           " Grasas: " + this.grasas + " g\n" +
+           " Carbohidratos: " + this.carbohidratos + " g";
 }
 
 

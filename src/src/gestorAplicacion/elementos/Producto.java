@@ -27,6 +27,7 @@ public class Producto implements Serializable {
         this.nombre = nombre;
         this.precio = precio;
         this.cantidadUnidades = cantidadUnidades;
+        this.tipoUso = tipoUso;
     }
 
     //---> Metodos Getters And Setters <---

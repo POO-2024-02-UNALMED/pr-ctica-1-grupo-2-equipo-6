@@ -1,0 +1,17 @@
+Nombre de la mascota: Rocky
+Peso Actual: 20.0 kg
+Edad: 12 años
+Tamaño: Miniatura
+Peso ideal: 10.77 kg
+Cantidad de Gramos de alimento diarios: 107.69 g
+Debe bajar de peso.
+
+Distribución en porcentajes de nutrientes:
+ Proteínas: 50.0%
+ Grasas: 15.0%
+ Carbohidratos: 35.0%
+
+Distribución en gramos de nutrientes:
+ Proteínas: 53.85 g
+ Grasas: 16.15 g
+ Carbohidratos: 37.69 g

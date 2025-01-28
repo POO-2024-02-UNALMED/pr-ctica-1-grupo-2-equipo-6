@@ -1302,6 +1302,8 @@ public static void tienda() {
 								println("Por favor, ingrese el tipo del Mascota en minúsculas [perros, gatos, aves o conejos]");
 								continue;
 						}
+
+						break;
 					}
 					catch(InputMismatchException e) {
 						println("Por favor, coloque un tipo valido de Mascota");

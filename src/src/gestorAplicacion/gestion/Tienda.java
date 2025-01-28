@@ -186,9 +186,9 @@ public class Tienda implements Serializable{
                     if (puntos>=15) { // SI TIENE MÁS DE 15 PUNTOS ACOMULADOS, SE LE HACE UN DESCUENTO AUTOMÁTICAMENTE
                     	cliente.disminuir_Puntos(puntos); // SE RESTAN LOS 15 PUNTOS QUE SE USARON COMO DESCUENTO
                     	precio -= precio*unidades*0.1; // SE CALCULA EL PRECIO CON EL 10% DE DESCUENTO
-                    	 return "-------------------------------------------\n"+"✅ Has comprado "+unidades+" unidades de: "+nombre+" para "+tipo+"\n"+"Total a pagar: "+precio+" $"+"\n"+"✅Han sido descontados 15 puntos para un 10% de descuento\n"+"Puntos restantes en tu cartera de puntos: "+cliente.getPuntos()+"\n-------------------------------------------";
+                    	 return "-------------------------------------------\n"+"Has comprado "+unidades+" unidades de: "+nombre+" - Dirigido a "+tipo+"\n"+"Total a pagar: "+precio+" $"+"\n"+"Han sido descontados 15 puntos para un 10% de descuento\n"+"Puntos restantes en tu cartera de puntos: "+cliente.getPuntos()+"\n-------------------------------------------";
                     }else { // RETORNA ÚNICAMENTE EL PRECIO PORQUE NO TIENE LOS PUNTOS SUFUCIENTES
-                    	return "-------------------------------------------\n"+"✅ Has comprado "+unidades+" unidades de: "+nombre+" para "+tipo+"\n"+"Total a pagar: "+precio*unidades+" $"+"\n"+"No cuentas con los suficientes puntos como para un descuento\n"+"-------------------------------------------";
+                    	return "-------------------------------------------\n"+"Has comprado "+unidades+" unidades de: "+nombre+" para "+tipo+"\n"+"Total a pagar: "+precio*unidades+" $"+"\n"+"No cuentas con los suficientes puntos como para un descuento\n"+"-------------------------------------------";
                     }
                 }
                 else{

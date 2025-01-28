@@ -43,7 +43,7 @@ public class Main implements Serializable {
 	static CentroAdopcion centro = new CentroAdopcion("POO");
 	private static Scanner scanner = new Scanner(System.in);
 	public static ArrayList<CentroAdopcion> centroAdopcions;
-	//private static Memorial memorial = new Memorial(centro);
+	private static Memorial memorial = new Memorial(centro);
 	
 	
 	public static void main(String[] args) {

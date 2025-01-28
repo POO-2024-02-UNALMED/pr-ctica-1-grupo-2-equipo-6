@@ -1322,6 +1322,11 @@ public static void emergenciaVeterinaria() {
 	centro.agregarVeterinario(new Empleado("Mariana", 32, 123456789, 321456789, null, Especialidad.VETERINARIO));
 	centro.agregarVeterinario(new Empleado("Jorge", 40, 987654321, 320765432, null, Especialidad.VETERINARIO));
 	centro.agregarVeterinario(new Empleado("Lucía", 28, 246810121, 310987654, null, Especialidad.VETERINARIO));
+	centro.agregarVeterinario(new Empleado("Carlos", 35, 112233445, 320123456, null, Especialidad.VETERINARIO));
+	centro.agregarVeterinario(new Empleado("Sofía", 29, 556677889, 310456789, null, Especialidad.VETERINARIO));
+	centro.agregarVeterinario(new Empleado("Andrés", 33, 667788990, 321987654, null, Especialidad.VETERINARIO));
+	centro.agregarVeterinario(new Empleado("Paula", 27, 778899001, 319876543, null, Especialidad.VETERINARIO));
+
 
 	//---------------------------------------------------
 	

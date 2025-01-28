@@ -36,15 +36,13 @@ public class Cliente extends Persona implements Serializable {
 	
 	// - - - MÉTODOS - - -
 		
-	//MÉTODOS SETTER Y GETTER
-	
-	public void actualizar_datos(int edad, long telefono, String direccion) {
+	public void actualizar_Datos(int edad, long telefono, String direccion) {
 		this.setEdad(edad);
 		this.setTelefono(telefono);
 		this.setDireccion(direccion);
 		
 	}
-	
+	//MÉTODOS SETTER Y GETTER
 	public void agregarPuntos(int puntos) {
 		this.puntos+=puntos;
 	}

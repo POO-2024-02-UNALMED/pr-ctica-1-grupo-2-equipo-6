@@ -30,7 +30,7 @@ public abstract class Persona implements Serializable {
 		this.edad= edad;
 		this.cedula= cedula;
 	}
-	
+
 	//---> Metodos Getters And Setters <---
 	public void setNombre(String nombre) {
 		this.nombre= nombre;

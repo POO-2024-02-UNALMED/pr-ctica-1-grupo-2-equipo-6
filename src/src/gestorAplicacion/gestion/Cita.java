@@ -30,18 +30,18 @@ public class Cita implements Serializable{
     	this.cupo=cupo;
     	
     	if (servicio==1) {
-    		this.costo= 10000;//Costo de una cita de Entrenamiento
-    		this.cliente.agregarPuntos(3); //Por cita de entrenamiento gana 3 puntos
+    		this.costo= 80000;//Costo de una cita de Entrenamiento
+    		this.cliente.agregarPuntos(10); //Por cita de entrenamiento gana 10 puntos
     	}
     	
         if (servicio==2) {
-        	this.costo=20000; //COSTO DE UNA CITA DE VETERINARIA
-        	this.cliente.agregarPuntos(5);//Por cita de veterinaria gana 5 puntos
+        	this.costo=50000; //COSTO DE UNA CITA DE VETERINARIA
+        	this.cliente.agregarPuntos(8);//Por cita de veterinaria gana 8 puntos
     		}
         
         if (servicio==3) {
-        	this.costo=15000; //COSTO DE UNA CITA DE PELUQUERÍA
-        	this.cliente.agregarPuntos(4);//Por cita de peluqueria se gana 4 puntos.
+        	this.costo=25000; //COSTO DE UNA CITA DE PELUQUERÍA
+        	this.cliente.agregarPuntos(5);//Por cita de peluqueria se gana 5 puntos.
         }
     		
     	

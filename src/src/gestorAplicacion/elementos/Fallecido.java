@@ -23,7 +23,6 @@ public class Fallecido implements Serializable{
     
     //---> Constructor <---
     public Fallecido() {
-		flores.add("Sin Flores."); //Inician sin flores
     }
     
 	public Fallecido(Mascota mascota, String fecha, String mensaje, Cliente dueño, String tiempo, String tipo) {
@@ -33,7 +32,6 @@ public class Fallecido implements Serializable{
 		this.mensaje = mensaje;
 		this.tiempo = tiempo;
 		this.tipo = tipo;
-		flores.add("Sin Flores."); //Inician sin flores
 	}
 	
 	//---> Metodos Getters And Setters <---

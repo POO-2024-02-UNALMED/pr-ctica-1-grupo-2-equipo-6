@@ -114,7 +114,7 @@ public class Empleado extends Persona implements Serializable{
 }
     
     
-    public void actualizar_Agenda() {
+    public void actualizar_Datos() {
 		
     	for(ArrayList <Cupo> Array_dia : this.agenda_dias) {
     		Cupo.actualizarCupo(Array_dia);
@@ -126,7 +126,7 @@ public class Empleado extends Persona implements Serializable{
     public boolean tieneCupos() {
 
     	Boolean booleano = false;
-    	this.actualizar_Agenda();
+    	this.actualizar_Datos();
     	
     	for(ArrayList <Cupo> cupos_por_dia: this.agenda_dias) {
     		

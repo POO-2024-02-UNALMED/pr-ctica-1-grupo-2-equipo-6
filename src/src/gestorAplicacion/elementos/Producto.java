@@ -21,6 +21,7 @@ public class Producto implements Serializable {
     public Producto(String nombre, float precio, String tipoAnimal, String tipoUso, int cantidadUnidades){
         this(nombre, precio, tipoUso, cantidadUnidades);
         this.tipoAnimal = tipoAnimal;
+        this.tipoUso = tipoUso;
     }
     
     public Producto(String nombre, float precio, String tipoUso, int cantidadUnidades){

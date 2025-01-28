@@ -96,11 +96,11 @@ public class Fallecido implements Serializable{
 			
 			flores.clear(); // Cambia el "Sin Flores" por la flor que entra como parametro.
 			flores.add(flor);
-			return "Este memorial ahora cuenta con una "+flor+"."; 
+			return "Este memorial ahora cuenta con una: "+flor+"."; 
 		}
 		else if(flores.size()<=5) { // Si ya tiene una flor, se confirma que no execeda el maximo de 5.
 			flores.add(flor); // Se añade una flor al arreglo de flores. 
-			return "Pronto tendra las flores: "+flor+".";
+			return "Este memorial ahora cuenta con una: "+flor+".";
 		}
 		else {// Si excede el maximo de 5
 			return "Solo puede tener 5 tipos de flores.";
